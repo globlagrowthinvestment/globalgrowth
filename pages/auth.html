@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Portal</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <script>
+        function validateLogin(event) {
+            event.preventDefault();
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var errorMessage = document.getElementById("error-message");
+
+            if (username === "admin" && password === "admin") {
+                window.location.href = "app/dashboard.html";
+            } else {
+                errorMessage.textContent = "Invalid username or password.";
+                errorMessage.style.color = "red";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="row">
+        <div class="col-twelve">
+
+            <h1>Login Portal</h1>
+
+            <form onsubmit="validateLogin(event)">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <button type="submit">Login</button>
+                <p id="error-message"></p>
+            </form>
+
+        </div>
+    </div> 
+
+</body>
+</html>
