@@ -545,7 +545,7 @@ form,
 }
 
 .line-scale-pulse-out > div {
-  background-color: #ec008c;
+  background-color: #1974ca;
   width: 4px;
   height: 35px;
   border-radius: 2px;
@@ -835,8 +835,8 @@ button.btn--primary,
 input[type="submit"].btn--primary,
 input[type="reset"].btn--primary,
 input[type="button"].btn--primary {
-  background: #ec008c;
-  border-color: #ec008c;
+  background: #1f45c2;
+  border-color: #2a5cc9;
   color: #FFFFFF;
 }
 
@@ -850,8 +850,8 @@ button.btn--primary:focus,
 input[type="submit"].btn--primary:focus,
 input[type="reset"].btn--primary:focus,
 input[type="button"].btn--primary:focus {
-  background: #d3007d;
-  border-color: #d3007d;
+  background: #1e60ac;
+  border-color: #2660ca;
 }
 
 /* button modifiers
@@ -1352,8 +1352,8 @@ input::-moz-focus-inner {
 
 #mc-form input[type=submit] {
   color: #FFFFFF;
-  background: #ec008c;
-  border-color: #ec008c;
+  background: #2e57e0;
+  border-color: #3d72d4;
   padding: 0 25px;
   margin: 0;
   position: absolute;

@@ -202,6 +202,36 @@ button::-moz-focus-inner,
   border-style: none;
   padding: 0;
 }
+/* base.css or add this in a separate CSS file */
+
+button {
+  display: inline-block;
+  padding: 12px 24px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007BFF; /* Primary color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker shade of primary color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow on hover */
+}
+
+button:active {
+  background-color: #004085; /* Even darker shade for active state */
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Focus outline */
+}
 
 button:-moz-focusring,
 [type="button"]:-moz-focusring,
