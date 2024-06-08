@@ -220,7 +220,7 @@
                 min: 0,
                 max: 560,
                 callback: function(value, index, values) {
-                  return  value + '$' ;
+                  return  value + '' ;
                 },
                 autoSkip: true,
                 maxTicksLimit: 10,
