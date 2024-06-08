@@ -1,8 +1,3 @@
-/* ===================================================================
- * Count - Main JS
- *
- * ------------------------------------------------------------------- */
-
 (function($) {
 
     "use strict";
@@ -89,8 +84,8 @@
     * ------------------------------------------------------ */
     var ssFinalCountdown = function() {
 
-        var finalDate =  new Date("March 25, 2021 15:37:25").getTime();
-        //-date: "Mar 25 2021",
+        var today = new Date();
+        var finalDate = new Date(today.getTime() + (22 * 24 * 60 * 60 * 1000)); // 22 days from now
 
         $('.home-content__clock').countdown(finalDate)
         .on('update.countdown finish.countdown', function(event) {
