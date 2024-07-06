@@ -215,9 +215,10 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <button type="button" class="btn btn-primary btn-buy" onclick="location.href='{% url 'my_profile:invest' %}'">Invest</button>
-                    <button type="button" class="btn btn-secondary btn-withdraw" onclick="location.href='{% url 'dashboard:withdraw' %}'">Withdraw</button>
+                    <a href="{% url 'my_profile:invest' %}" class="btn btn-primary btn-buy">Invest</a>
+                    <a href="{% url 'dashboard:withdraw' %}" class="btn btn-secondary btn-withdraw">Withdraw</a>
                 </div>
+                
                 
             </header>
             
