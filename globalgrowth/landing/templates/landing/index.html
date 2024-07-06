@@ -1,0 +1,121 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>Global-growthInvestment - Home</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.css' %}">
+
+    <!-- script
+    ================================================== -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+
+    <!-- header 
+    ================================================== -->
+    <header>
+    <div class="row">
+        <div class="col-twelve">
+
+            <h1>GlobalGrowthInvestment</h1>
+
+            <p class="lead">
+                We are Digital financial agency, a state-of-the-art financial digital platform designed to be your steadfast companion on your transformative journey to financial freedom. Our unwavering mission is to simplify the intricate complexities of modern finance and empower you, our valued user, to take firm control of your money and unlock a world of boundless possibilities 
+                through successful investments.
+            </p>
+
+            <button onclick="window.location.href='pages/auth.html'">Authorize Me</button>
+
+        </div>
+    </div>   	
+    </header> <!-- end header -->
+
+
+    <!-- main content
+    ================================================== -->
+    <main>
+        <div class="row">
+            <div class="block-1-3 block-m-1-2 block-tab-full">
+                <div class="col-block entry">
+                    <div class="entry__thumb">
+                        <a href="welcome" title="static background">
+                            <img src="{% static 'images/globalgrowth.jpeg' %}" srcset="{% static 'images/people1.png' %} 1x, {% static 'images/1.png' %} 2x" alt="">
+                        </a>
+                    </div>
+                    <div class="entry__title">
+                        <h3>Readmore</h3>
+                    </div>
+                </div>
+
+                <div class="col-block entry">
+                    <div class="entry__thumb">
+                        <a href="welcome1.html" title="slideshow background">
+                            <img src="{% static 'images/globalgrowth.jpeg' %}" srcset="{% static 'images/1.png' %} 1x, {% static 'images/people1.png' %} 2x" alt="">
+                        </a>
+                    </div>
+                    <div class="entry__title">
+                        <h3>Readmore</h3>
+                    </div>
+                </div>
+            
+                <div class="col-block entry">
+                    <div class="entry__thumb">
+                        <a href="welcome2.html" title="particles background">
+                            <img src="{% static 'images/globalgrowth.jpeg' %}" srcset="{% static 'images/globalgrowth.jpeg' %} 1x, {% static 'images/globalgrowth.jpeg' %} 2x" alt="">
+                        </a>
+                    </div>
+                    <div class="entry__title">
+                        <h3>Readmore</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main> <!-- /main -->
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale-pulse-out">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

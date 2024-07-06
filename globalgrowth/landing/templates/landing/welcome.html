@@ -1,0 +1,204 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <!-- Basic page needs and meta tags -->
+    <meta charset="utf-8">
+    <title>Welcome page | globalgrowth</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.css' %}">
+
+    <!-- Scripts -->
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/pace.min.js' %}"></script>
+    
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Home Section -->
+    <main class="s-home s-home--static">
+        <div class="overlay"></div>
+
+        <div class="home-content">
+            <div class="home-logo">
+                <a href="login">
+                    <img src="{% static 'images/globalgrowth.jpeg' %}" srcset="{% static 'images/globalgrowth.jpeg' %} 1x, {% static 'images/1.png' %} 2x" alt="">
+                </a>
+            </div>
+
+            <div class="row home-content__main">
+                <div class="col-eight home-content__text pull-right">
+                    <h3>Welcome to GlobalGrowthInvestment</h3>
+                    <h1>
+                        We are currently working <br>
+                        on a final updates for a smooth experience on our<br> platform
+                    </h1>
+                    <p>
+                        We are Digital financial agency, a state-of-the-art financial digital platform designed to be your steadfast companion on your transformative journey to financial freedom. Our unwavering mission is to simplify the intricate complexities of modern finance and empower you, our valued user, to take firm control of your money and unlock a world of boundless possibilities through successful investments.
+                    </p>
+                    <div class="home-content__subscribe">
+                        <form id="mc-form" class="group" novalidate="true">
+                            <input type="email" value="" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
+                            <input type="submit" name="subscribe" value="Notify Me">
+                            <label for="mc-email" class="subscribe-message"></label>
+                        </form>
+                    </div>
+                    <a href="{% url 'auth_app:login' %}" class="btn">Login</a>
+                </div>
+
+                <div class="col-four home-content__counter">
+                    <h3>Launching In</h3>
+                    <div class="home-content__clock">
+                        <div class="top">
+                            <div class="time days">
+                                325
+                                <span>Days</span>
+                            </div>
+                        </div>
+                        <div class="time hours">
+                            09
+                            <span>H</span>
+                        </div>
+                        <div class="time minutes">
+                            54
+                            <span>M</span>
+                        </div>
+                        <div class="time seconds">
+                            30
+                            <span>S</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social links -->
+            <ul class="home-social">
+                <li><a href="#0"><i class="fab fa-facebook-f" aria-hidden="true"></i><span>Facebook</span></a></li>
+                <li><a href="#0"><i class="fab fa-discord" aria-hidden="true"></i><span>discord</span></a></li>
+                <li><a href="#0"><i class="fab fa-instagram" aria-hidden="true"></i><span>Instagram</span></a></li>
+                <li><a href="#0"><i class="fab fa-behance" aria-hidden="true"></i><span>Behance</span></a></li>
+                <li><a href="#0"><i class="fab fa-dribbble" aria-hidden="true"></i><span>Dribbble</span></a></li>
+            </ul>
+
+            <div class="row home-copyright">
+                <span>Copyright globalgrowthinvestment 2024</span>
+            </div>end home-copyright -->
+
+            <div class="home-content__line"></div>
+
+        </div> <!-- end home-content -->
+
+    </main> <!-- end s-home -->
+
+    <!-- info
+    ================================================== -->
+    <a class="info-toggle" href="#0">
+        <span class="info-menu-icon"></span>
+    </a>
+
+    <div class="s-info">
+
+        <div class="row info-wrapper">
+
+            <div class="col-seven tab-full info-main">
+                <h1>GlobalGrowthInvestment. where your financial aspirations become a reality.</h1>
+                <p>
+                    GlobalGrowthInvestment is a leading investment platform that empowers individuals and institutions to navigate the dynamic global financial landscape and achieve sustainable growth. Our team of seasoned financial experts leverages cutting-edge technology and in-depth market insights to offer a comprehensive suite of investment solutions tailored to our clients' unique goals and risk profiles.
+                </p>
+
+                <p>
+                    Trusted by a global network of individual and institutional investors, GlobalGrowthInvestment stands as a beacon of excellence in the investment management industry. Our unwavering dedication to ethical practices, transparency, and exceptional service has earned us a reputation for delivering consistent, market-leading returns and fostering long-term client relationships built on trust and mutual success.
+
+
+                </p>
+            </div>
+
+            <div class="col-four tab-full pull-right info-contact">
+
+                <div class="info-block">
+                    <h3>Start A Conversation</h3>
+                    <p>
+                        <a href="mailto:#0" class="info-email">mailus@globalgrowthinvestment.com</a><br>
+                        <a href="tel:+18587338912" class="'info-phone">+123456789</a>
+                    </p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Visit Our Office</h3>
+                    
+                    <p class="info-address">
+                        1600 Amphitheatre Parkway<br>
+                        Mountain View, CA<br>
+                        94043 US
+                    </p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Find Us On</h3>
+                    
+                    <ul class="info-social">
+                        <li>
+                            <a href="#0"><i class="fab fa-facebook" aria-hidden="true"></i>
+                            <span>Facebook</span></a>
+                        </li>
+                        <li>
+                            <a href="#0"><i class="fab fa-twitter" aria-hidden="true"></i>
+                            <span>Twiiter</span></a>
+                        </li>
+                        <li>
+                            <a href="#0"><i class="fab fa-instagram" aria-hidden="true"></i>
+                            <span>Instagram</span></a>
+                        </li>
+                        <li>
+                            <a href="#0"><i class="fab fa-behance" aria-hidden="true"></i>
+                            <span>Behance</span></a>
+                        </li>
+                        <li>
+                            <a href="#0"><i class="fab fa-dribbble" aria-hidden="true"></i>
+                            <span>Dribbble</span></a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>  <!-- end info contact -->
+
+        </div>  <!-- end info wrapper -->
+
+    </div> <!-- end s-info -->
+
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader">
+            <div class="line-scale-pulse-out">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

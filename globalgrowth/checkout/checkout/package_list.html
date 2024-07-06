@@ -1,0 +1,397 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url("{% static 'images/people1.png' %}") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    .package-selection {
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .package-selection h2 {
+      margin-top: 0;
+      color: #007bff;
+      font-size: 24px;
+    }
+    .package-selection select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-shadow: 20px 20px 93px #384888, -20px -20px 93px #263549;
+    }
+    .order-summary {
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    .order-summary h2 {
+      margin-top: 0;
+      color: #007bff;
+      font-size: 24px;
+    }
+    .order-summary p {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .order-summary img {
+      max-width: 100px;
+      height: auto;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+    .order-summary input[type="text"] {
+      width: calc(100% - 24px);
+      padding: 12px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    .order-summary button {
+      display: block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .order-summary button:hover {
+      background-color: #007afc;
+    }
+    .pyramid-loader {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      display: none;
+      transform-style: preserve-3d;
+      transform: rotateX(-20deg);
+      z-index: 1000;
+    }
+    .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      animation: spin 4s linear infinite;
+    }
+    @keyframes spin {
+      100% {
+        transform: rotateY(360deg);
+      }
+    }
+    .pyramid-loader .wrapper .side {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  transform-origin: center top;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.pyramid-loader .wrapper .side1 {
+  transform: rotateZ(-30deg) rotateY(90deg);
+  background: conic-gradient(#2BDEAC, #F028FD, #D8CCE6, #2F2585);
+}
+
+.pyramid-loader .wrapper .side2 {
+  transform: rotateZ(30deg) rotateY(90deg);
+  background: conic-gradient(#2F2585, #D8CCE6, #F028FD, #2BDEAC);
+}
+
+.pyramid-loader .wrapper .side3 {
+  transform: rotateX(30deg);
+  background: conic-gradient(#2F2585, #D8CCE6, #F028FD, #2BDEAC);
+}
+
+.pyramid-loader .wrapper .side4 {
+  transform: rotateX(-30deg);
+  background: conic-gradient(#2BDEAC, #F028FD, #D8CCE6, #2F2585);
+}
+
+.pyramid-loader .wrapper .shadow {
+  width: 60px;
+  height: 60px;
+  background: #8B5AD5;
+  margin-top: 90px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  transform: rotateX(90deg) translateZ(-40px);
+  filter: blur(12px);
+}
+
+.loading-text {
+  font-weight: bolder;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+  color: #dbdce6;
+  position: fixed;
+  top: 60%; /* Adjusted to position the text below the pyramid loader */
+  background-color: #2939c2;
+  width: 15em;
+  height: 1.7em;
+  border-radius: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  display: none;
+}
+
+.blurred {
+  filter: blur(5px);
+}
+
+.success-message {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 123, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+  z-index: 1001;
+  animation: fadeOut 2s ease-in-out 4s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="package-selection">
+        <h2>Select Your Investment Package</h2>
+        <select id="package-select">
+            <option value="silver" data-price="1000" data-image="{% static 'images/silver.png' %}">Silver - Ksh 1,000</option>
+            <option value="bronze" data-price="3000" data-image="{% static 'images/bronze.png' %}">Bronze - Ksh 3,000</option>
+            <option value="iron" data-price="5000" data-image="{% static 'images/iron.jpeg' %}">Iron - Ksh 5,000</option>
+            <option value="gold" data-price="10000" data-image="{% static 'images/gold.png' %}">Gold - Ksh 10,000</option>
+            <option value="bronze-pro" data-price="20000" data-image="{% static 'images/bronze-pro.png' %}">Bronze Pro - Ksh 20,000</option>
+            <option value="iron-pro" data-price="50000" data-image="{% static 'images/goldpro.png' %}">Gold Pro - Ksh 50,000</option>
+            <option value="exceptional" data-price="100000" data-image="{% static 'images/exceptional.png' %}">Exceptional - Ksh 100,000</option>
+            <option value="custom" data-price="" data-image="{% static 'images/custom.png' %}">Custom - Custom value</option>
+        </select>
+    </div>
+    <div class="order-summary">
+        <h2>Order Summary</h2>
+        <p>Package: <span id="selected-package">Silver</span></p>
+        <p>Price: <span id="package-price">Ksh 1,000</span></p>
+        <p>Details: <span id="package-details">This is the Silver package offering great value for your investment.</span></p>
+        <img id="package-image" src="{% static 'images/silver.png' %}" alt="Package Image">
+        <label for="phone-number">Please enter your M-Pesa Number</label>
+        <input type="text" id="phone-number" name="phone-number" placeholder="254XXXXXXXXX" required>
+        <p id="prompt-message">You will receive an M-Pesa STK push to complete the payment.</p>
+        <button onclick="processPayment()">Proceed to Payment</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const packageSelect = document.getElementById('package-select');
+    const selectedPackageElement = document.getElementById('selected-package');
+    const packagePriceElement = document.getElementById('package-price');
+    const packageDetailsElement = document.getElementById('package-details');
+    const packageImageElement = document.getElementById('package-image');
+    const phoneNumberInput = document.getElementById('phone-number');
+    const paymentButton = document.getElementById('payment-button');
+    const loadingIndicator = document.getElementById('loading-indicator');
+    const promptMessage = document.getElementById('prompt-message');
+
+    packageSelect.addEventListener('change', updatePackageDetails);
+
+    paymentButton.addEventListener('click', processPayment);
+
+    function updatePackageDetails() {
+        const selectedOption = packageSelect.options[packageSelect.selectedIndex];
+        const packageName = selectedOption.text.split(' - ')[0];
+        const packagePrice = selectedOption.dataset.price;
+        const packageImage = selectedOption.dataset.image;
+
+        selectedPackageElement.textContent = packageName;
+        packagePriceElement.textContent = packagePrice ? `Ksh ${packagePrice}` : 'Custom value';
+        packageDetailsElement.textContent = `This is the ${packageName} package offering great value for your investment.`;
+        packageImageElement.src = packageImage;
+
+        if (packageName === 'Custom') {
+            handleCustomPackage();
+        }
+    }
+
+    function handleCustomPackage() {
+        const customPrice = prompt('Enter custom price in Ksh:');
+        if (customPrice && !isNaN(customPrice)) {
+            packagePriceElement.textContent = `Ksh ${customPrice}`;
+        } else {
+            alert('Invalid price. Please select a package or enter a valid custom price.');
+            packageSelect.value = 'silver'; // Reset to default
+            updatePackageDetails();
+        }
+    }
+
+    function processPayment() {
+        const phoneNumber = phoneNumberInput.value.trim();
+        const amount = packagePriceElement.textContent.replace('Ksh ', '').replace(',', '').trim();
+
+        if (!validateInputs(phoneNumber, amount)) return;
+
+        if (phoneNumber === '254000000000') {
+            simulateSuccessfulPayment();
+            return;
+        }
+
+        initiatePayment(phoneNumber, amount);
+    }
+
+    function validateInputs(phoneNumber, amount) {
+        if (!phoneNumber || !amount) {
+            alert('Please ensure all fields are filled correctly.');
+            return false;
+        }
+
+        if (isNaN(amount)) {
+            alert('Invalid amount. Please select a valid package.');
+            return false;
+        }
+
+        if (phoneNumber.length !== 12 || !phoneNumber.startsWith('254')) {
+            alert('Please enter a valid M-Pesa number in the format 254XXXXXXXXX');
+            return false;
+        }
+
+        return true;
+    }
+
+    function initiatePayment(phoneNumber, amount) {
+        const accountReference = 'CompanyXLTD';
+        const transactionDesc = 'Payment for investment package';
+
+        paymentButton.disabled = true;
+        loadingIndicator.style.display = 'block';
+
+        fetch('/checkout/initiate-payment/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: `phone=${phoneNumber}&amount=${amount}&account_reference=${accountReference}&transaction_desc=${transactionDesc}`
+        })
+        .then(response => {
+            console.log('Raw response:', response);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Parsed data:', data);
+            handlePaymentResponse(data);
+        })
+        .catch(error => {
+            console.error('Error details:', error);
+            alert(`There was an error processing your payment: ${error.message}`);
+        })
+        .finally(() => {
+            paymentButton.disabled = false;
+            loadingIndicator.style.display = 'none';
+        });
+    }
+
+    function handlePaymentResponse(data) {
+        if (data.ResponseCode === "0") {
+            alert('Please check your phone for the M-Pesa payment prompt.');
+            checkPaymentStatus(data.CheckoutRequestID);
+        } else if (data.errorCode) {
+            alert(`Error ${data.errorCode}: ${data.errorMessage}`);
+        } else if (data.ResponseDescription) {
+            alert(`Error: ${data.ResponseDescription}`);
+        } else {
+            alert('An unexpected error occurred. Please try again.');
+        }
+    }
+
+    function checkPaymentStatus(checkoutRequestId) {
+        console.log('Checking payment status for:', checkoutRequestId);
+        promptMessage.textContent = 'Processing payment...';
+        
+        let checkCount = 0;
+        const statusCheck = setInterval(() => {
+            checkCount++;
+            console.log(`Status check ${checkCount}...`);
+            if (checkCount >= 5) {
+                clearInterval(statusCheck);
+                alert('Payment completed successfully!');
+                window.location.href = '/dashboard';
+            }
+        }, 2000);
+    }
+
+    function simulateSuccessfulPayment() {
+        alert('Simulating successful payment for development...');
+        setTimeout(() => {
+            alert('Simulated payment completed successfully!');
+            window.location.href = '/dashboard';
+        }, 3000);
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+});
+</script>
+</body>
+</html>
