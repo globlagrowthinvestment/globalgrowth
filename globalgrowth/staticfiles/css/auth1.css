@@ -1,0 +1,50 @@
+
+body, html {
+    height: 100%;
+}
+
+body {
+    background-image: url("{% static 'images/people1.png' %}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: #fff;
+   
+}
+
+.nav-link:hover {
+    color: #ccc;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #262829; /* Dark grey */
+}
+
+.navbar-toggler {
+    
+    border-radius: 10px;
+}
+
+.navbar-toggler-icon {
+    background-color: #020202;
+    border-radius: 3px;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #343a40; /* Dark grey */
+    color: #fff;
+    padding: 20px 0;
+}
+
+/* Custom Styles */
+/* Add your custom CSS styles here */

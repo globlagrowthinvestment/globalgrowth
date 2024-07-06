@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'f6c3-102-209-18-30.ngrok-free.app',
+    'globalgrowth.onredner.com',
     '105.27.122.14',
     'corsheaders',
     '52.41.36.82',
@@ -168,13 +169,14 @@ STATIC_URL = '/static/'
 # This setting informs Django of the URI path from which your static files will be served to users
 # Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# This production code might break development mode, so we check whether we're in DEBUG mode
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'globalgrowth', 'static'),
+]
+
 if not DEBUG:
-    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'globalgrowth/static')
-    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
-    # and renames the files with unique names for each version to support long-term caching
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # this setting is for development, on production we shall change it to the exact origins
 CORS_ALLOW_ALL_ORIGINS = True  

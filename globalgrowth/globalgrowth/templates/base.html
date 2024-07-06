@@ -6,8 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GlobalGrowthInvestment</title>
-    <link rel="stylesheet" href="{% static 'css2/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css2/css/auth1.css' %}">
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/auth1.css' %}">
+<img src="{% static 'images/people1.png' %}" alt="People">
     <style>
         body {
             background-image: url("{% static 'images/people1.png' %}");
@@ -53,6 +54,6 @@
     {% block content %}
     {% endblock %}
 
-    <script src="{% static 'js2/js/bootstrap.bundle.min.js' %}"></script>
+    
 </body>
 </html>
