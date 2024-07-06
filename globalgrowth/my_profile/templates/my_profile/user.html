@@ -1,0 +1,260 @@
+{% load static %}
+{% load gravatar_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Global Growth</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar for large screens -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
+            <div class="p-4">
+                <h2 class="text-2xl font-semibold">Global Growth</h2>
+            </div>
+            <nav class="flex-1 px-2 py-4">
+                <a href="{% url 'dashboard:dashboard' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-tie mr-3"></i>Profile
+                </a>
+                <a href="{% url 'my_profile:payment_agents' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                </a>
+                <a href="{% url 'my_profile:referral' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-plus mr-eferral3"></i> Referral
+                </a>
+                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-book mr-3"></i> Guide
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-cog mr-3"></i> Settings
+                </a>
+                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </nav>
+            <div class="p-4">
+                <p class="text-sm">© 2024 Global Growth</p>
+            </div>
+        </aside>
+
+        <!-- Mobile sidebar -->
+        <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+            <div class="flex justify-between items-center p-4">
+                <h2 class="text-2xl font-semibold">Global Growth</h2>
+                <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="px-2 py-4">
+                <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+                <a href="{% url 'my_profile:profile' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-tie mr-3"></i> My Profile
+                </a>
+                <a href="{% url 'my_profile:payment_agents' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                </a>
+                <a href="{% url 'my_profile:referral' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-plus mr-3"></i> Referral
+                </a>
+                <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                </a>
+                <a href="{% url 'my_profile:guide' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-book mr-3"></i> Guide
+                </a>
+                <a href="#" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-cog mr-3"></i> Settings
+                </a>
+                <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top bar -->
+            <header class="flex justify-between items-center p-4 bg-white shadow-md">
+                <div class="flex items-center">
+                    <div class="md:hidden mr-4">
+                        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <h1 class="text-xl font-semibold">Welcome, {{ user.username }}!</h1>
+                </div>
+                    <div class="flex items-center">
+                        <span class="mr-4 text-sm text-gray-600">Last login: {{ user.last_login|date:"F j, Y, g:i a" }}</span>
+                        <div class="relative">
+                            <img src="{{ gravatar_url }}" alt="Profile" class="h-8 w-8 rounded-full">
+                            <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
+                        </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+                <div class="container mx-auto px-6 py-8">
+                    <!-- Account Details -->
+                    <section class="bg-white shadow-md rounded-lg p-6 mb-6">
+                        <h2 class="text-2xl font-semibold mb-4">Account Details</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p><strong>Username:</strong> {{ user.username }}</p>
+                                <p><strong>Email:</strong> {{ user.email }}</p>
+                                <p><strong>Phone Number:</strong> {{ user.profile.phone_number }}</p>
+                            </div>
+                            <div>
+                                <p><strong>Account Type:</strong> {{ user.profile.account_type }}</p>
+                                <p><strong>Member Since:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+                                <p><strong>Last Profile Update:</strong> {{ user.profile.last_updated|date:"F j, Y" }}</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Account Settings -->
+                    <section class="bg-white shadow-md rounded-lg p-6 mb-6">
+                        <h2 class="text-2xl font-semibold mb-4">Account Settings</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p><strong>Language:</strong> {{ user.profile.language }}</p>
+                                <p><strong>Time Zone:</strong> {{ user.profile.time_zone }}</p>
+                                <p><strong>Currency:</strong> {{ user.profile.preferred_currency }}</p>
+                            </div>
+                            <div>
+                                <p><strong>Notifications:</strong> {% if user.profile.notifications_enabled %}Enabled{% else %}Disabled{% endif %}</p>
+                                <p><strong>Newsletter Subscription:</strong> {% if user.profile.newsletter_subscribed %}Subscribed{% else %}Unsubscribed{% endif %}</p>
+                                <p><strong>Two-Factor Authentication:</strong> {% if user.profile.two_factor_enabled %}Enabled{% else %}Disabled{% endif %}</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Security Settings -->
+                    <section class="bg-white shadow-md rounded-lg p-6 mb-6">
+                        <h2 class="text-2xl font-semibold mb-4">Security Settings</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p><strong>Last Password Change:</strong> {{ user.profile.last_password_change|date:"F j, Y, g:i a" }}</p>
+                                <p><strong>Password Strength:</strong> <span class="text-green-600">Strong</span></p>
+                                <p><strong>Login Alerts:</strong> {% if user.profile.login_alerts_enabled %}Enabled{% else %}Disabled{% endif %}</p>
+                            </div>
+                            <div>
+                                <p><strong>Authorized Devices:</strong> {{ user.profile.authorized_devices_count }}</p>
+                                <p><strong>Last Security Audit:</strong> {{ user.profile.last_security_audit|date:"F j, Y" }}</p>
+                                <p><strong>Account Recovery Email:</strong> {{ user.profile.recovery_email }}</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Communication Preferences -->
+                    <section class="bg-white shadow-md rounded-lg p-6 mb-6">
+                        <h2 class="text-2xl font-semibold mb-4">Communication Preferences</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p><strong>Email Notifications:</strong> {% if user.profile.email_notifications %}Enabled{% else %}Disabled{% endif %}</p>
+                                <p><strong>SMS Notifications:</strong> {% if user.profile.sms_notifications %}Enabled{% else %}Disabled{% endif %}</p>
+                                <p><strong>Push Notifications:</strong> {% if user.profile.push_notifications %}Enabled{% else %}Disabled{% endif %}</p>
+                            </div>
+                            <div>
+                                <p><strong>Marketing Communications:</strong> {% if user.profile.marketing_communications %}Subscribed{% else %}Unsubscribed{% endif %}</p>
+                                <p><strong>Product Updates:</strong> {% if user.profile.product_updates %}Subscribed{% else %}Unsubscribed{% endif %}</p>
+                                <p><strong>Community Announcements:</strong> {% if user.profile.community_announcements %}Subscribed{% else %}Unsubscribed{% endif %}</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Account Activity -->
+                    <section class="bg-white shadow-md rounded-lg p-6">
+                        <h2 class="text-2xl font-semibold mb-4">Recent Account Activity</h2>
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-auto">
+                                <thead>
+                                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                        <th class="py-3 px-6 text-left">Date</th>
+                                        <th class="py-3 px-6 text-left">Activity</th>
+                                        <th class="py-3 px-6 text-left">IP Address</th>
+                                        <th class="py-3 px-6 text-center">Device</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for activity in recent_activities %}
+                                    <tr class="text-gray-700">
+                                        <td class="py-3 px-6 text-left whitespace-nowrap">{{ activity.date }}</td>
+                                        <td class="py-3 px-6 text-left">{{ activity.description }}</td>
+                                        <td class="py-3 px-6 text-left">{{ activity.ip_address }}</td>
+                                        <td class="py-3 px-6 text-center">{{ activity.device }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+        <div class="flex justify-between items-center p-4">
+            <h2 class="text-2xl font-semibold">Global Growth</h2>
+            <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="px-2 py-4">
+            <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+            </a>
+            <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-user-tie mr-3"></i> My Profile
+            </a>
+            <a href="{% url 'my_profile:payment_agents' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+            </a>
+            <a href="{% url 'my_profile:referral' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-user-plus mr-3"></i> Referral
+            </a>
+            <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+            </a>
+            <a href="#" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-book mr-3"></i> Guide
+            </a>
+            <a href="#" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-cog mr-3"></i> Settings
+            </a>
+            <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-sign-out-alt mr-3"></i> Logout
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const closeSidebar = document.getElementById('close-sidebar');
+
+        sidebarToggle.addEventListener('click', () => {
+            mobileSidebar.classList.toggle('-translate-x-full');
+        });
+
+        closeSidebar.addEventListener('click', () => {
+            mobileSidebar.classList.add('-translate-x-full');
+        });
+    </script>
+</body>
+</html>

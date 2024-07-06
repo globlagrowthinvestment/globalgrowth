@@ -1,0 +1,73 @@
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar for large screens -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
+            <div class="p-4">
+                <h2 class="text-2xl font-semibold">Global Growth</h2>
+            </div>
+            <nav class="flex-1 px-2 py-4">
+                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+                <a href="{% url 'my_profile:profile' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-tie mr-3"></i>Profile
+                </a>
+                <a href="{% url 'my_profile:payment_agents' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                </a>
+                <a href="{% url 'my_profile:referral' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-plus mr-3"></i> Referral
+                </a>
+                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                </a>
+                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-book mr-3"></i> Guide
+                </a>
+                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-cog mr-3"></i> Settings
+                </a>
+                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </nav>
+            <div class="p-4">
+                <p class="text-sm">© 2024 Global Growth</p>
+            </div>
+        </aside>
+        <!--mobile screen view-->
+        <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+            <div class="flex justify-between items-center p-4">
+                <h2 class="text-2xl font-semibold">Global Growth</h2>
+                <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="px-2 py-4">
+                <a href="{% url 'dashboard:dashboard' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+                <a href="{% url 'my_profile:profile' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-tie mr-3"></i> My Profile
+                </a>
+                <a href="{% url 'my_profile:payment_agents' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                </a>
+                <a href="{% url 'my_profile:referral' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-plus mr-3"></i> Referral
+                </a>
+                <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                </a>
+                <a href="{% url 'my_profile:guide' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-book mr-3"></i> Guide
+                </a>
+                <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-cog mr-3"></i> Settings
+                </a>
+                <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </nav>
+        </div>
+        

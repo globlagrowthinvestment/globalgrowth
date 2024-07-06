@@ -1,0 +1,216 @@
+{% load static %}
+{% load gravatar_filters %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints - Global Growth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1E40AF;
+            --secondary-color: #F06292;
+            --background-color: #F3F4F6;
+        }
+        body {
+            background: linear-gradient(to right, #4c4c4c, #333333);
+            min-height: 100vh;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .paybill-section { background-color: var(--secondary-color); }
+        .paybill-number { letter-spacing: 0.3rem; }
+        .sidebar-link:hover { background-color: rgba(255, 255, 255, 0.1); }
+        .social-icon { transition: transform 0.3s ease; }
+        .social-icon:hover { transform: scale(1.2); }
+    </style>
+</head>
+<body class="font-sans text-gray-800">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
+            <div class="p-4">
+                <h2 class="text-2xl font-semibold">Global Growth</h2>
+            </div>
+            <nav class="flex-1 px-2 py-4 space-y-2">
+                <a href="{% url 'my_profile:dashboard1' %}" class="sidebar-link flex items-center px-4 py-2 rounded transition duration-200">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+                <a href="{% url 'my_profile:profile' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-tie mr-3"></i> Profile
+                </a>
+                <a href="{% url 'my_profile:payment_agents' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                </a>
+                <a href="{% url 'my_profile:referral' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-plus mr-3"></i> Referral
+                </a>
+                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                </a>
+                <a href="#" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-book mr-3"></i> Guide
+                </a>
+                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-cog mr-3"></i> Settings
+                </a>
+                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </nav>
+            <div class="p-4 flex justify-center space-x-4">
+                <a href="#" class="social-icon text-white"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon text-white"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon text-white"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="p-4">
+                <p class="text-sm">© 2024 Global Growth</p>
+            </div>
+        </aside>
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top bar -->
+            <header class="flex justify-between items-center p-4 bg-white shadow-md">
+                <div class="flex items-center">
+                    <button id="sidebar-toggle" class="md:hidden text-gray-500 hover:text-gray-600 mr-4">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="text-xl font-semibold">Welcome, {{ user.username }}!</h1>
+                </div>
+                <div class="flex items-center">
+                    <span class="hidden md:inline mr-4 text-sm text-gray-600">Last login: {{ user.last_login|date:"F j, Y, g:i a" }}</span>
+                    <img src="{{ gravatar_url }}" alt="Profile" class="h-8 w-8 rounded-full">
+                </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4 md:p-6">
+                <div class="max-w-3xl mx-auto">
+                    <div class="paybill-section text-center py-4 rounded-t-lg mb-6">
+                        <h1 class="text-white text-xl md:text-2xl font-bold">KENYA PAYMENT METHOD</h1>
+                    </div>
+                    <div class="bg-white glass-effect rounded-lg p-4 md:p-6 mb-6">
+                        <!-- Payment logos and information -->
+                        <div class="grid grid-cols-2 gap-4 items-center justify-items-center mb-6">
+                            <img src="{% static 'images/mpesa.png' %}" alt="Mpesa" class="h-12 md:h-16">
+                            <img src="{% static 'images/airtel_money.png' %}" alt="Airtel Money" class="h-12 md:h-16">
+                            <img src="{% static 'images/equity.png' %}" alt="Equity" class="h-12 md:h-16">
+                            <img src="{% static 'images/eqitel.png' %}" alt="Equitel" class="h-12 md:h-16">
+                        </div>
+                        
+                        <div class="text-center mb-6">
+                            <h2 class="text-lg md:text-xl font-bold">PAYBILL</h2>
+                            <p class="text-2xl md:text-4xl font-bold paybill-number">247247</p>
+                        </div>
+                        
+                        <!-- Equity Till No. -->
+                        <div class="bg-red-700 text-white text-center p-4 rounded-lg mb-6">
+                            <h2 class="text-lg md:text-xl font-bold">EQUITY TILL NO./ ACCOUNT NO.</h2>
+                            <p class="text-xl md:text-4xl font-bold paybill-number">0701905540</p>
+                        </div>
+                        
+                        <!-- Account Name -->
+                        <div class="text-center mb-6">
+                            <h2 class="text-lg md:text-xl font-bold">ACCOUNT NAME</h2>
+                            <p class="text-xl md:text-2xl font-bold">Globalgrowth Investment</p>
+                        </div>
+                        
+                        <!-- Deposit Instructions -->
+                        <div class="bg-white glass-effect p-4 md:p-6 rounded-lg mb-6">
+                            <h2 class="text-lg md:text-xl font-bold mb-4">How to deposit money from Mpesa to your GlobalGrowth account</h2>
+                            <ol class="list-decimal list-inside text-gray-700 space-y-2 text-sm md:text-base">
+                                <li>Using your phone, go to the Safaricom SIM tool kit menu.</li>
+                                <li>Click on M-Pesa.</li>
+                                <li>Tap on "Lipa na M-PESA" then the "PayBill" option.</li>
+                                <li>Tap "Enter business no."</li>
+                                <li>Key in the PayBill number 247247 as the business number for GlobalGrowth Investment.</li>
+                                <li>Click on "Account number".</li>
+                                <li>Key in the GlobalGrowth Investment Account Number: 0701905540</li>
+                                <li>Enter the Amount you wish to spend for the package.</li>
+                                <li>Key in your M-pesa Pin.</li>
+                                <li>A confirmation SMS from M-pesa and Equity Account "Global Growth Investment" will be sent to your safaricom line.</li>
+                                <li>Copy the M-pesa message, go to your Global Growth Investment Account Profile and paste the Mpesa Message for Admin approval. Refresh your Account in one minute time and confirm your deposit on the deposit balance section.</li>
+                            </ol>
+                        </div>
+                        
+                        <!-- Proceed to Payment Button -->
+                        <div class="text-center">
+                            <a href="/invest"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+                                Proceed to Buy package
+                            </button></a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- Footer with social icons for mobile -->
+            <footer class="bg-gray-800 text-white p-4">
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Mobile sidebar -->
+    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden z-50">
+        <!-- Mobile sidebar content -->
+        <div class="flex justify-between items-center p-4">
+            <h2 class="text-2xl font-semibold">Global Growth</h2>
+            <button id="close-sidebar" class="text-white">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="px-2 py-4">
+                <a href="{% url 'dashboard:dashboard' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+                <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-tie mr-3"></i> My Profile
+                </a>
+                <a href="{% url 'my_profile:payment_agents' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                </a>
+                <a href="{% url 'my_profile:referral' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-plus mr-3"></i> Referral
+                </a>
+                <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                </a>
+                <a href="#" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-book mr-3"></i> Guide
+                </a>
+                <a href="#" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-cog mr-3"></i> Settings
+                </a>
+                <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </nav>
+        </div>
+
+        <script>
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const closeSidebar = document.getElementById('close-sidebar');
+
+        sidebarToggle.addEventListener('click', () => {
+            mobileSidebar.classList.toggle('-translate-x-full');
+        });
+
+        closeSidebar.addEventListener('click', () => {
+            mobileSidebar.classList.add('-translate-x-full');
+        });
+        </script>
+        
+    </body>
+    </html>

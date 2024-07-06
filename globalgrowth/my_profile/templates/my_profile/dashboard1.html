@@ -1,0 +1,946 @@
+{% load static %}
+{% load gravatar_filters %}
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Global Growth</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/dashboard1.css' %}">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        .main-content {
+            position: relative;
+            z-index: 1;
+        }
+        .btn-buy {
+          margin-left: 10px;
+          background-color: #28a745; /* Green background */
+          border-color: #28a745; /* Green border */
+          color: #fff; /* White text */
+          padding: 8px 16px; /* Reduced padding */
+          border-radius: 8px; /* Reduced border-radius */
+          font-size: 14px; /* Reduced font-size */
+        }
+        
+        .btn-buy:hover {
+          background-color: #218838; /* Darker green on hover */
+          border-color: #1e7e34;
+        }
+        
+        .btn-withdraw {
+          margin-left: 10px;
+          background-color: #dc3545; /* Red background */
+          border-color: #dc3545; /* Red border */
+          color: #fff; /* White text */
+          padding: 8px 16px; /* Reduced padding */
+          border-radius: 8px; /* Reduced border-radius */
+          font-size: 14px; /* Reduced font-size */
+        }
+        .mobile-sidebar{
+            z-index: 99999;
+        }
+        /* Ensure text wraps properly and elements don't overflow */
+.flex-col {
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .profit-chart {
+        height: auto;
+        min-height: 200px;
+    }
+
+    #profit,
+    #profitChangePercent {
+        font-size: 2xl; /* Adjust font size for smaller screens */
+    }
+
+    .text-right {
+        text-align: left;
+        margin-top: 10px;
+    }
+
+    .flex.items-center.justify-end {
+        justify-content: flex-start;
+    }
+
+    .flex-col.md\\:flex-row {
+        flex-direction: column;
+    }
+
+    .mb-6.md\\:mr-4 {
+        margin-bottom: 10px;
+    }
+
+    .md\\:mb-0 {
+        margin-bottom: 0;
+    }
+}
+
+/* Additional responsive tweaks */
+@media (max-width: 640px) {
+    .profit-chart {
+        padding: 10px;
+    }
+
+    #profit,
+    #profitChangePercent {
+        font-size: 1.5rem; /* Smaller font size for very small screens */
+    }
+}
+@keyframes gradientBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+:root {
+    font-size: 14px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .dashboard-card {
+    font-size: 1rem;
+  }
+
+  .dashboard-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .dashboard-card p {
+    font-size: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .dashboard-card {
+      min-height: 150px;
+    }
+  }
+
+
+        
+    </style>
+    
+</head>
+<body class="bg-gray-100">
+    <body class="bg-gray-100 p-4 md:p-8">
+        <div class="animated-bg"></div>
+        <div class="pattern-overlay"></div>
+    
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar for large screens -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
+            <div class="p-4">
+                <h2 class="text-2xl font-semibold">Global Growth</h2>
+            </div>
+            <nav class="flex-1 px-2 py-4">
+                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+                <a href="{% url 'my_profile:profile' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-tie mr-3"></i>Profile
+                </a>
+                <a href="{% url 'my_profile:payment_agents' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                </a>
+                <a href="{% url 'my_profile:referral' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-plus mr-3"></i> Referral
+                </a>
+                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                </a>
+                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-book mr-3"></i> Guide
+                </a>
+                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-cog mr-3"></i> Settings
+                </a>
+                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </nav>
+            <div class="p-4">
+                <p class="text-sm">© 2024 Global Growth</p>
+            </div>
+        </aside>
+       
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top bar -->
+            <header class="flex justify-between items-center p-4 bg-white  shadow-md">
+                <div class="flex items-center">
+                    <div class="md:hidden mr-4">
+                        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button type="button" class="btn btn-primary btn-buy" onclick="location.href='{% url 'my_profile:invest' %}'">Invest</button>
+                    <button type="button" class="btn btn-secondary btn-withdraw" onclick="location.href='{% url 'dashboard:withdraw' %}'">Withdraw</button>
+                </div>
+                
+            </header>
+            
+            <!-- Main content area -->
+
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+                
+                <div class="container mx-auto px-6 py-8">
+                    <h1 class="text-xl font-semibold">Hi, {{ user.username }}!</h1>
+
+                    <div class="mt-4">
+                        <video src="{% static 'media/dash1.mp4' %}" class="w-full h-auto rounded-lg max-w-4xl mx-auto" autoplay loop muted></video>
+                    </div>
+                    <div class="container mx-auto px-4 py-6 max-w-7xl">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <!-- Today's Sign-ups -->
+                            <div class="bg-green-600 shadow-md rounded-lg p-6 dashboard-card flex flex-col justify-between">
+                                <h3 class="text-lg font-semibold text-white">Today's Sign-ups</h3>
+                                <p class="text-4xl font-bold text-white" id="today-signups">0</p>
+                            </div>
+                        
+                            <!-- Total Investments -->
+                            <div class="bg-blue-600 shadow-md rounded-lg p-6 dashboard-card flex flex-col justify-between">
+                                <h3 class="text-lg font-semibold text-white">Total Investments</h3>
+                                <p class="text-4xl font-bold text-white" id="total-investments">Ksh 1,500,000</p>
+                            </div>
+                        
+                            <!-- Referrals -->
+                            <div class="bg-yellow-600 shadow-md rounded-lg p-6 dashboard-card flex flex-col justify-between">
+                                <h3 class="text-lg font-semibold text-white">Overall Referrals</h3>
+                                <p class="text-4xl font-bold text-white" id="referrals">10</p>
+                            </div>
+                        
+                            <!-- Complaints -->
+                            <div class="bg-red-600 shadow-md rounded-lg p-6 dashboard-card flex flex-col justify-between">
+                                <h3 class="text-lg font-semibold text-white">Complaints</h3>
+                                <p class="text-4xl font-bold text-white" id="complaints">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Geographical Investment Metrics -->
+                    <div class="card mb-8 bg-yellow-100 shadow-md rounded-lg p-6 mb-8">
+                        <div class="card-body">
+                            <h3 class="card-title text-center mb-4">Geographical Investment Metrics</h3>
+                            <div class="row align-items-center mb-4">
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="region-select">Region:</label>
+                                        <select id="region-select" class="form-select">
+                                            <option value="mombasa">Mombasa</option>
+                                            <option value="nairobi">Nairobi</option>
+                                            <option value="kisumu">Kisumu</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-md-end">
+                                    <span class="fs-5">Total Pool: <span id="total-pool" class="fw-bold text-primary">Ksh 700,000</span></span>
+                                </div>
+                            </div>
+                            <div style="height: 300px;">
+                                <canvas id="geographicChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Real time market analysis -->
+<div class="bg-gray-100">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gradient-to-br from-white to-gray-100 shadow-lg rounded-lg p-6 border border-gray-200">
+            <h3 class="text-xl font-semibold mb-4 text-gray-800">Real Time Investment Trend</h3>
+            <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+                <div class="mb-4 md:mb-0 md:mr-4">
+                    <p class="text-sm text-gray-500 mb-1">Current Index Value</p>
+                    <p class="text-3xl font-bold text-green-600" id="profit">Ksh 50,000</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-gray-500 mb-1">Change</p>
+                    <div class="flex items-center justify-end">
+                        <i id="profitChangeIcon" class="fas fa-arrow-up text-green-600 mr-2"></i>
+                        <span id="profitChangePercent" class="text-lg font-semibold text-green-600">5.2%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profit-chart h-48 bg-white rounded-lg shadow-inner p-2">
+                <svg id="profitChartSvg" class="w-full h-full overflow-visible">
+                    <defs>
+                        <linearGradient id="chartGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#10B981" />
+                            <stop offset="100%" stop-color="#3B82F6" />
+                            <animate attributeName="x1" from="0%" to="100%" dur="20s" repeatCount="indefinite" />
+                            <animate attributeName="x2" from="100%" to="200%" dur="20s" repeatCount="indefinite" />
+                        </linearGradient>
+                    </defs>
+                    <path class="chart-path" stroke="url(#chartGradient)" stroke-width="3" fill="none" />
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    
+                    
+<body class="bg-gray-100 p-4 md:p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white shadow-lg rounded-xl p-6 relative overflow-hidden" id="risk-assessment">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 opacity-20 blur-xl"></div>
+            <div class="relative z-0">
+                <h3 class="text-2xl font-bold mb-6 text-gray-800">Market Volatility Assessment</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-8">
+                    <div id="bronze-package" class="package-card bg-amber-100 p-4 rounded-lg shadow-md">
+                        <h4 class="font-bold text-amber-800 mb-2">Bronze</h4>
+                        <p class="volatility-score text-3xl font-bold text-amber-600">0%</p>
+                    </div>
+                    <div id="silver-package" class="package-card bg-gray-100 p-4 rounded-lg shadow-md">
+                        <h4 class="font-bold text-gray-800 mb-2">Silver</h4>
+                        <p class="volatility-score text-3xl font-bold text-gray-600">0%</p>
+                    </div>
+                    <div id="gold-package" class="package-card bg-yellow-100 p-4 rounded-lg shadow-md">
+                        <h4 class="font-bold text-yellow-800 mb-2">Gold</h4>
+                        <p class="volatility-score text-3xl font-bold text-yellow-600">0%</p>
+                    </div>
+                    <div id="pro-package" class="package-card bg-indigo-100 p-4 rounded-lg shadow-md">
+                        <h4 class="font-bold text-indigo-800 mb-2">Pro</h4>
+                        <p class="volatility-score text-3xl font-bold text-indigo-600">0%</p>
+                    </div>
+                    <div id="iron-package" class="package-card bg-slate-100 p-4 rounded-lg shadow-md">
+                        <h4 class="font-bold text-slate-800 mb-2">Iron</h4>
+                        <p class="volatility-score text-3xl font-bold text-slate-600">0%</p>
+                    </div>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700 mb-4 overflow-hidden">
+                    <div id="overall-volatility-bar" class="h-4 rounded-full bg-blue-600 transition-all duration-500 ease-in-out" style="width: 0%"></div>
+                </div>
+                <p class="text-lg text-gray-700 mb-6">Real Time Market Volatility: <span id="overall-volatility" class="font-bold">0%</span></p>
+                <button id="refresh-volatility" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 shadow-md hover:shadow-lg">
+                    Refresh Assessment
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mt-8 mb-8">
+        <div class="card-body">
+            <h3 class="card-title mb-4">Performance Dashboard</h3>
+            <div class="row align-items-center mb-4">
+                <div class="col-md-6">
+                    <div class="btn-group" role="group" aria-label="Chart period">
+                        <button id="yearlyBtn" class="btn btn-outline-primary chart-btn">Yearly</button>
+                        <button id="monthlyBtn" class="btn btn-outline-primary chart-btn">Monthly</button>
+                        <button id="weeklyBtn" class="btn btn-outline-primary chart-btn">Weekly</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <label class="input-group-text" for="datasetToggle">View:</label>
+                        <select id="datasetToggle" class="form-select">
+                            <option value="all">All Metrics</option>
+                            <option value="investments">Investments</option>
+                            <option value="revenue">Revenue</option>
+                            <option value="profit">Profit</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 400px;">
+                <canvas id="performanceChart"></canvas>
+            </div>
+            <div id="chartLegend" class="d-flex justify-content-center flex-wrap mt-4"></div>
+        </div>
+    </div>
+        <!-- Dashboard cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gradient-to-br from-purple-100 to-purple-200 shadow-md rounded-lg p-6 dashboard-card">
+                <h3 class="text-lg font-semibold mb-2 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                    </svg>
+                    Active Users
+                </h3>
+                <p class="text-3xl font-bold text-purple-600" id="active-users">
+                    1,234
+                    <span class="text-sm ml-2 animate-pulse">●</span>
+                </p>
+            </div>
+            <div class="bg-gradient-to-br from-indigo-100 to-indigo-200 shadow-md rounded-lg p-6 dashboard-card">
+                <h3 class="text-lg font-semibold mb-2 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
+                    </svg>
+                    Average ROI
+                </h3>
+                <p class="text-3xl font-bold text-indigo-600" id="average-roi">
+                    12.5%
+                    <span class="text-sm ml-2 animate-pulse">●</span>
+                </p>
+            </div>
+            <div class="bg-gradient-to-br from-teal-100 to-teal-200 shadow-md rounded-lg p-6 dashboard-card">
+                <h3 class="text-lg font-semibold mb-2 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+                    </svg>
+                    Total Transactions
+                </h3>
+                <p class="text-3xl font-bold text-teal-600" id="total-transactions">
+                    5,678
+                    <span class="text-sm ml-2 animate-pulse">●</span>
+                </p>
+            </div>
+        </div>
+        <!-- Recent activities -->
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 shadow-md rounded-lg p-6 mb-8">
+            <h3 class="text-lg font-semibold mb-4">Recent Activities</h3>
+            <ul class="space-y-4" id="recent-activities">
+                <!-- Recent activities will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+    
+<div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+    <div class="flex justify-between items-center p-4">
+        <h2 class="text-2xl font-semibold">Global Growth</h2>
+        <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <nav class="px-2 py-4">
+        <a href="{% url 'dashboard:dashboard' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+            <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+        </a>
+        <a href="{% url 'my_profile:profile' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+            <i class="fas fa-user-tie mr-3"></i> My Profile
+        </a>
+        <a href="{% url 'my_profile:payment_agents' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+            <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+        </a>
+        <a href="{% url 'my_profile:referral' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+            <i class="fas fa-user-plus mr-3"></i> Referral
+        </a>
+        <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+            <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+        </a>
+        <a href="{% url 'my_profile:guide' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+            <i class="fas fa-book mr-3"></i> Guide
+        </a>
+        <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+            <i class="fas fa-cog mr-3"></i> Settings
+        </a>
+        <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+            <i class="fas fa-sign-out-alt mr-3"></i> Logout
+        </a>
+    </nav>
+</div>
+
+<script>
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const closeSidebar = document.getElementById('close-sidebar');
+
+    sidebarToggle.addEventListener('click', () => {
+        mobileSidebar.classList.toggle('-translate-x-full');
+    });
+
+    closeSidebar.addEventListener('click', () => {
+        mobileSidebar.classList.add('-translate-x-full');
+    });
+    //section for the volatility
+    document.addEventListener('DOMContentLoaded', function() {
+    const packages = ['bronze', 'silver', 'gold', 'pro', 'iron'];
+    const volatilityLevels = ['Low', 'Moderate', 'High', 'Extreme'];
+    const volatilityColors = ['text-green-600', 'text-yellow-600', 'text-orange-600', 'text-red-600'];
+
+    function getRandomVolatility() {
+        return Math.floor(Math.random() * 100);
+    }
+
+    function getVolatilityLevel(volatility) {
+        if (volatility < 25) return 0;
+        if (volatility < 50) return 1;
+        if (volatility < 75) return 2;
+        return 3;
+    }
+
+    function updatePackageVolatility(packageId, volatility) {
+        const packageElement = document.getElementById(`${packageId}-package`);
+        const scoreElement = packageElement.querySelector('.volatility-score');
+        const levelIndex = getVolatilityLevel(volatility);
+
+        scoreElement.textContent = `${volatility}%`;
+        scoreElement.className = `volatility-score text-2xl font-bold ${volatilityColors[levelIndex]}`;
+
+        // Add a subtle animation
+        packageElement.style.transform = 'scale(1.05)';
+        setTimeout(() => {
+            packageElement.style.transform = 'scale(1)';
+        }, 300);
+    }
+
+    function updateOverallVolatility(volatilities) {
+        const overallVolatility = Math.floor(volatilities.reduce((a, b) => a + b, 0) / volatilities.length);
+        const overallBar = document.getElementById('overall-volatility-bar');
+        const overallText = document.getElementById('overall-volatility');
+
+        overallBar.style.width = `${overallVolatility}%`;
+        overallText.textContent = `${overallVolatility}%`;
+
+        const levelIndex = getVolatilityLevel(overallVolatility);
+        overallBar.className = `h-2.5 rounded-full ${volatilityColors[levelIndex].replace('text', 'bg')}`;
+        overallText.className = volatilityColors[levelIndex];
+    }
+
+    function updateMarketVolatility() {
+        const volatilities = packages.map(getRandomVolatility);
+
+        packages.forEach((pkg, index) => {
+            updatePackageVolatility(pkg, volatilities[index]);
+        });
+
+        updateOverallVolatility(volatilities);
+    }
+
+    // Initial update
+    updateMarketVolatility();
+
+    // Add click event for refresh button
+    document.getElementById('refresh-volatility').addEventListener('click', function() {
+        this.classList.add('animate-pulse');
+        updateMarketVolatility();
+        setTimeout(() => {
+            this.classList.remove('animate-pulse');
+        }, 500);
+    });
+
+    // Add hover effects for package cards
+    packages.forEach(pkg => {
+        const card = document.getElementById(`${pkg}-package`);
+        card.addEventListener('mouseenter', () => {
+            card.classList.add('shadow-lg', 'transition', 'duration-300');
+        });
+        card.addEventListener('mouseleave', () => {
+            card.classList.remove('shadow-lg');
+        });
+    });
+});
+///section for profit chart javascript)
+const TOTAL_POINTS = 100;
+const UPDATE_INTERVAL = 1000; // milliseconds (1 second)
+let data = Array(TOTAL_POINTS).fill(0).map(() => Math.random() * 100);
+let profit = 198000;
+let change = 5.2;
+
+const profitElement = document.getElementById('profit');
+const profitChangeIconElement = document.getElementById('profitChangeIcon');
+const profitChangePercentElement = document.getElementById('profitChangePercent');
+const svgElement = document.getElementById('profitChartSvg');
+const pathElement = svgElement.querySelector('path');
+
+function formatCurrency(value) {
+    return new Intl.NumberFormat('en-KE', { style: 'currency', currency: 'KES' }).format(value);
+}
+
+function updateChart() {
+    const width = svgElement.clientWidth;
+    const height = svgElement.clientHeight;
+    const padding = 10;
+    const maxValue = Math.max(...data);
+    const minValue = Math.min(...data);
+    const yRange = maxValue - minValue;
+    const xStep = (width - padding * 2) / (TOTAL_POINTS - 1);
+
+    const points = data
+        .map((d, i) => [
+            i * xStep + padding,
+            height - (((d - minValue) / yRange) * (height - padding * 2) + padding),
+        ])
+        .map(point => point.join(','))
+        .join(' ');
+
+    pathElement.setAttribute('d', `M ${points}`);
+
+    // Add data points
+    svgElement.querySelectorAll('circle').forEach(circle => circle.remove());
+    data.forEach((d, i) => {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', i * xStep + padding);
+        circle.setAttribute('cy', height - (((d - minValue) / yRange) * (height - padding * 2) + padding));
+        circle.setAttribute('r', '3');
+        circle.setAttribute('fill', '#10B981');
+        circle.setAttribute('class', 'data-point');
+        svgElement.appendChild(circle);
+    });
+}
+
+function updateData() {
+    const newPoint = data[data.length - 1] + (Math.random() - 0.5) * 5;
+    data = [...data.slice(1), newPoint];
+
+    profit = Math.max(0, profit + (Math.random() - 0.5) * 500);
+    change = ((profit - 20000) / 20000) * 100;
+
+    profitElement.textContent = formatCurrency(profit);
+    profitChangePercentElement.textContent = `${Math.abs(change).toFixed(2)}%`;
+
+    if (change >= 0) {
+        profitChangeIconElement.className = 'fas fa-arrow-up text-green-600 mr-2';
+        profitChangePercentElement.className = 'text-lg font-semibold text-green-600';
+    } else {
+        profitChangeIconElement.className = 'fas fa-arrow-down text-red-600 mr-2';
+        profitChangePercentElement.className = 'text-lg font-semibold text-red-600';
+    }
+
+    updateChart();
+}
+
+// Add interactivity
+svgElement.addEventListener('mousemove', (event) => {
+    const rect = svgElement.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const dataIndex = Math.floor((x / rect.width) * TOTAL_POINTS);
+    if (dataIndex >= 0 && dataIndex < TOTAL_POINTS) {
+        const dataPoint = data[dataIndex];
+        const tooltip = document.getElementById('chartTooltip') || document.createElement('div');
+        tooltip.id = 'chartTooltip';
+        tooltip.style.position = 'absolute';
+        tooltip.style.left = `${event.clientX}px`;
+        tooltip.style.top = `${event.clientY - 30}px`;
+        tooltip.style.background = 'rgba(0, 0, 0, 0.8)';
+        tooltip.style.color = 'white';
+        tooltip.style.padding = '5px 10px';
+        tooltip.style.borderRadius = '4px';
+        tooltip.style.fontSize = '12px';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.textContent = `Value: ${dataPoint.toFixed(2)}`;
+        document.body.appendChild(tooltip);
+    }
+});
+
+svgElement.addEventListener('mouseleave', () => {
+    const tooltip = document.getElementById('chartTooltip');
+    if (tooltip) tooltip.remove();
+});
+
+// Initial update
+updateChart();
+
+// Start the animation
+setInterval(updateData, UPDATE_INTERVAL);
+
+// Handle window resize
+window.addEventListener('resize', updateChart);
+// section for the active user, roi, and investments
+function updateDashboard() {
+            // Update Active Users
+            const activeUsers = document.getElementById('active-users');
+            let currentActiveUsers = parseInt(activeUsers.textContent.replace(',', ''));
+            currentActiveUsers += Math.floor(Math.random() * 21) - 10; // Random change between -10 and 10
+            activeUsers.textContent = currentActiveUsers.toLocaleString();
+
+            // Update Average ROI
+            const averageROI = document.getElementById('average-roi');
+            let currentROI = parseFloat(averageROI.textContent);
+            currentROI += (Math.random() - 0.5) * 0.2; // Random change between -0.1 and 0.1
+            averageROI.textContent = currentROI.toFixed(1) + '%';
+
+            // Update Total Transactions
+            const totalTransactions = document.getElementById('total-transactions');
+            let currentTransactions = parseInt(totalTransactions.textContent.replace(',', ''));
+            currentTransactions += Math.floor(Math.random() * 11); // Random increase between 0 and 10
+            totalTransactions.textContent = currentTransactions.toLocaleString();
+
+            // Update Recent Activities
+            const recentActivities = document.getElementById('recent-activities');
+            const activities = ['New user sign up', 'Deposit made', 'Withdrawal processed', 'Package purchased', 'ROI paid out'];
+            const newActivity = activities[Math.floor(Math.random() * activities.length)];
+            const listItem = document.createElement('li');
+            listItem.className = 'flex items-center text-sm';
+            listItem.innerHTML = `
+                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                ${newActivity}
+                <span class="ml-auto text-gray-500">${new Date().toLocaleTimeString()}</span>
+            `;
+            recentActivities.insertBefore(listItem, recentActivities.firstChild);
+            if (recentActivities.children.length > 5) {
+                recentActivities.removeChild(recentActivities.lastChild);
+            }
+        }
+
+        // Update dashboard every 3 seconds
+        setInterval(updateDashboard, 3000);
+
+// javascriot for sign up
+/// Get the element where the sign-ups will be displayed
+// Get the element where the sign-ups will be displayed
+const todaySignupsElement = document.getElementById('today-signups');
+
+// Get the current sign-ups count from local storage, or set it to 3 if not found
+let signupsCount = localStorage.getItem('signupsCount') || 3;
+
+// Update the display with the initial count
+todaySignupsElement.textContent = signupsCount;
+
+// Function to update the sign-ups count
+function updateSignupsCount() {
+    // Increment the sign-ups count by 1 every 30 seconds (2 per hour)
+    signupsCount++;
+
+    // Update the display
+    todaySignupsElement.textContent = signupsCount;
+
+    // Save the updated count to local storage
+    localStorage.setItem('signupsCount', signupsCount);
+
+    // Call the function again after 30 seconds
+    setTimeout(updateSignupsCount, 30000);
+}
+
+// Start the sign-ups count animation
+updateSignupsCount();
+//// Section for geographical areas
+document.addEventListener('DOMContentLoaded', () => {
+    const app = {
+        elements: {
+            regionSelect: document.getElementById('region-select'),
+            totalPoolElement: document.getElementById('total-pool'),
+            ctx: document.getElementById('geographicChart').getContext('2d'),
+            realTimeDataElement: document.createElement('div')
+        },
+        data: {
+            mombasa: { totalPool: 'Ksh 708,500', values: [65, 59, 80, 81, 56, 55, 40] },
+            nairobi: { totalPool: 'Ksh 300,000', values: [28, 48, 40, 19, 86, 27, 90] },
+            kisumu: { totalPool: 'Ksh 450,000', values: [38, 48, 77, 9, 100, 27, 40] }
+        },
+        chart: null,
+        currentRegion: 'nairobi',
+        daysOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        weatherIcons: ['☀️', '🌤️', '☁️', '🌧️', '⛈️', '❄️', '🌪️'],
+
+        init() {
+            this.createChart();
+            this.setupEventListeners();
+            this.startRealTimeSimulation();
+            this.setupRealTimeDataAnalysis();
+        },
+
+        createChart() {
+            const gradient = this.createGradient();
+            this.chart = new Chart(this.elements.ctx, {
+                type: 'line',
+                data: this.getChartData(gradient),
+                options: this.getChartOptions()
+            });
+        },
+
+        createGradient() {
+            const gradient = this.elements.ctx.createLinearGradient(0, 0, 0, 500); // Adjusted gradient for larger chart height
+            gradient.addColorStop(0, 'rgba(54, 162, 235, 0.5)');
+            gradient.addColorStop(0.5, 'rgba(255, 206, 86, 0.5)');
+            gradient.addColorStop(1, 'rgba(75, 192, 192, 0.5)');
+            return gradient;
+        },
+
+        getChartData(gradient) {
+            return {
+                labels: this.daysOfWeek,
+                datasets: [{
+                    label: 'Investment Pool',
+                    backgroundColor: gradient,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(255, 99, 132, 1)',
+                    data: this.data[this.currentRegion].values,
+                    fill: true,
+                    tension: 0.4,
+                    pointStyle: 'star',
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            };
+        },
+
+        getChartOptions() {
+            return {
+                responsive: true,
+                maintainAspectRatio: false, // Ensure the chart takes up the full container
+                title: {
+                    display: true,
+                    text: 'Weekly Investment Metrics',
+                    fontSize: 18,
+                    fontColor: '#333'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: (tooltipItem, data) => {
+                            let label = data.datasets[tooltipItem.datasetIndex].label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += 'Ksh ' + tooltipItem.yLabel.toFixed(2);
+                            return label + ' ' + this.weatherIcons[tooltipItem.index];
+                        }
+                    }
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Day of Week',
+                            fontColor: '#333'
+                        },
+                        gridLines: {
+                            color: 'rgba(200, 200, 200, 0.1)'
+                        },
+                        ticks: {
+                            callback: (value, index) => {
+                                return this.daysOfWeek[index] + ' ' + this.weatherIcons[index];
+                            }
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Investment (Ksh)',
+                            fontColor: '#333'
+                        },
+                        gridLines: {
+                            color: 'rgba(200, 200, 200, 0.1)'
+                        },
+                        ticks: {
+                            callback: (value) => {
+                                return 'Ksh ' + value.toLocaleString();
+                            }
+                        }
+                    }]
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeInOutQuart'
+                }
+            };
+        },
+
+        setupEventListeners() {
+            this.elements.regionSelect.addEventListener('change', () => this.updateRegion());
+        },
+
+        updateRegion() {
+            this.currentRegion = this.elements.regionSelect.value;
+            this.elements.totalPoolElement.textContent = this.data[this.currentRegion].totalPool;
+            this.chart.data.datasets[0].data = this.data[this.currentRegion].values;
+            this.chart.update();
+        },
+
+        startRealTimeSimulation() {
+            setInterval(() => this.simulateDataChange(), 2000);
+        },
+
+        simulateDataChange() {
+            const regionData = this.data[this.currentRegion].values;
+            regionData.forEach((value, index) => {
+                const change = Math.floor(Math.random() * 10 - 5);
+                regionData[index] = Math.max(0, Math.min(100, value + change));
+            });
+            this.chart.update();
+            this.updateRealTimeData();
+        },
+    };
+
+    app.init();
+});
+/// javascript for the totoal investemnt section included hapa
+// Get the element where the total investments will be displayed
+const totalInvestmentsElement = document.getElementById('total-investments');
+
+// Initialize the total investments
+let totalInvestments = 30000;
+
+// Function to update the total investments
+function updateTotalInvestments() {
+  // Increment the total investments by 1,000 every hour
+  totalInvestments += 1000;
+  totalInvestmentsElement.textContent = `Ksh ${totalInvestments.toLocaleString()}`;
+
+  // Add the blinking blue color effect
+  totalInvestmentsElement.classList.add('blink-blue');
+  setTimeout(() => {
+    totalInvestmentsElement.classList.remove('blink-blue');
+  }, 1000);
+}
+
+// Update the total investments every hour
+setInterval(updateTotalInvestments, 3600000); // 1 hour = 3600000 milliseconds
+
+// refferal section code js:
+// Function to increment the referrals
+    function incrementReferrals() {
+        const referralsElement = document.getElementById('referrals');
+        let currentReferrals = parseInt(referralsElement.textContent, 10);
+
+        currentReferrals += 10;  // Increment by 10
+        referralsElement.textContent = currentReferrals;  // Update the displayed value
+    }
+
+    // Set an interval to call the incrementReferrals function every hour (3600000 milliseconds)
+    setInterval(incrementReferrals, 3600000);
+
+    // Optional: Call the function immediately if you want the first increment to happen right away
+    incrementReferrals();
+</script>
+<script src="{% static 'js/dashboard1.js' %}"></script>
+<script src="{% static 'js/performance-chart.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/investment-growth-chart.js' %}"></script>
+<script src="{% static 'js/geographic_chart.js' %}"></script>
+</body>
+</html>

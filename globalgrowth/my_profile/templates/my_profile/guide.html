@@ -1,0 +1,144 @@
+{% load static %}
+{% load gravatar_filters %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide - Global Growth</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar for large screens -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
+            <div class="p-4">
+                <h2 class="text-2xl font-semibold">Global Growth</h2>
+            </div>
+            <nav class="flex-1 px-2 py-4">
+                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+                <a href="{% url 'my_profile:profile' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-tie mr-3"></i>Profile
+                </a>
+                <a href="{% url 'my_profile:payment_agents' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                </a>
+                <a href="{% url 'my_profile:referral' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-plus mr-3"></i> Referral
+                </a>
+                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                </a>
+                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-book mr-3"></i> Guide
+                </a>
+                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-cog mr-3"></i> Settings
+                </a>
+                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </nav>
+            <div class="p-4">
+                <p class="text-sm">© 2024 Global Growth</p>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top bar -->
+            <header class="flex justify-between items-center p-4 bg-white shadow-md">
+                <div class="flex items-center">
+                    <div class="md:hidden mr-4">
+                        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <h1 class="text-xl font-semibold">Welcome, {{ user.username }}!</h1>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-4 text-sm text-gray-600">Last login: {{ user.last_login|date:"F j, Y, g:i a" }}</span>
+                    <div class="relative">
+                        <img src="{{ gravatar_url }}" alt="Profile" class="h-8 w-8 rounded-full">
+                        <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+                <div class="container mx-auto px-6 py-8">
+                    <div class="bg-gradient-to-b shadow-md rounded-lg p-6">
+                        <img src="{% static 'images/globalgrowth.jpeg' %}" alt="Global Growth">
+                        <div class="container">
+                            <div class="main-content">
+                                <div class="info-main">
+                                    <h1>GlobalGrowthInvestment: Where Your Financial Aspirations Become Reality</h1>
+                                    <p>
+                                        Welcome to GlobalGrowthInvestment, your gateway to a world of innovative investment opportunities. As a cutting-edge investment platform, we are dedicated to empowering individuals and institutions to navigate the complex global financial landscape and achieve sustainable growth.
+                                    </p>
+                                    <p>
+                                        Our team of seasoned financial experts harnesses the power of advanced technology and in-depth market insights to offer a comprehensive suite of investment solutions. Each package is meticulously tailored to align with our clients' unique goals and risk profiles, ensuring a personalized approach to wealth management.
+                                    </p>
+                                    <h2>Our Investment Packages</h2>
+                                    <p>
+                                        At GlobalGrowthInvestment, we understand that every investor has unique needs and aspirations. That's why we offer a diverse range of investment packages designed to cater to various risk appetites and financial goals:
+                                    </p>
+                                    <ul>
+                                        <li><strong>Silver:</strong> Perfect for new investors looking to dip their toes into the world of finance.</li>
+                                        <li><strong>Iron:</strong> A well-rounded package that balances risk and reward for steady, long-term growth.</li>
+                                        <li><strong>Bronze:</strong> Tailored for those seeking high-growth opportunities and willing to embrace higher risk.</li>
+                                        <li><strong>Gold:</strong> A package that spreads investments across various international markets to maximize potential returns.</li>
+                                        <li><strong>Bronze Pro:</strong> Focused on socially responsible and environmentally sustainable investments.</li>
+                                        <li><strong>Gold Pro:</strong> Investment on premium Gold package gives you an opportunity to attain financial freedom.</li>
+                                        <li><strong>Exceptional:</strong> Exceptional package that symbolizes the dynamicness of our platform</li>
+                                        <li><strong>Custom:</strong> Focused on investing, we give you an opportunity to invest in your own customized portfolio, tailored to your specific needs and goals.</li>
+                                    </ul>
+                                    <h2>Why Choose GlobalGrowthInvestment?</h2>
+                                    <p>
+                                        At GlobalGrowthInvestment, we pride ourselves on our commitment to excellence, transparency, and client-centric approach. Here are some of the key reasons why you should choose us:
+                                    </p>
+                                    <ul>
+                                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Experienced team of financial experts with a proven track record</li>
+                                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Innovative investment strategies tailored to your risk profile and goals</li>
+                                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Cutting-edge technology and data analytics for informed decision-making</li>
+                                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Transparent and secure investment processes</li>
+                                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Comprehensive client support and regular performance updates</li>
+                                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> Competitive returns and potential for long-term wealth generation</li>
+                                    </ul>
+                                    <h2>Get Started with GlobalGrowthInvestment</h2>
+                                    <p>
+                                        Ready to embark on your journey to financial success? Sign up with GlobalGrowthInvestment today and let our experts guide you towards your investment goals. Visit our website or contact our team to learn more about our investment packages and how we can help you achieve your financial aspirations.
+                                    </p>
+                                    <div class="text-center mt-6">
+                                        <a href="{% url 'my_profile:profile' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                                            Get Started
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Toggle sidebar for small screens
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.querySelector('aside');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
+
