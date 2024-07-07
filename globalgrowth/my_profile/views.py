@@ -153,3 +153,6 @@ def invest(request):
 def referral(request):
     return render(request, 'my_profile/referral.html')
 
+def payment_agent(request):
+    return render(request, 'my_profile/payment_agent.html')
+
