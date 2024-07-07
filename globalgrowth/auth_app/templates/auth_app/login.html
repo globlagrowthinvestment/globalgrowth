@@ -77,7 +77,7 @@
             color: #764ba2;
         }
         .btn-primary {
-            background-color: #764ba2;
+            background-color: #6086c0;
             border: none;
             border-radius: 30px;
             padding: 12px 20px;
@@ -134,9 +134,11 @@
             margin: 0 10px;
             color: #fff;
             transition: all 0.3s ease;
+            cursor: not-allowed;
+            opacity: 0.6;
         }
         .social-btn:hover {
-            transform: translateY(-3px);
+            transform: none;
         }
         .facebook { background-color: #3b5998; }
         .google { background-color: #db4a39; }
@@ -174,9 +176,9 @@
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>
                 <div class="social-login">
-                    <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-btn google"><i class="fab fa-google"></i></a>
-                    <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-btn facebook" onclick="disabledSocialLogin(event)"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-btn google" onclick="disabledSocialLogin(event)"><i class="fab fa-google"></i></a>
+                    <a href="#" class="social-btn twitter" onclick="disabledSocialLogin(event)"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
             <div class="card-footer">
@@ -196,6 +198,12 @@
                 passwordInput.type = 'password';
                 passwordToggle.classList.replace('fa-eye', 'fa-eye-slash');
             }
+        }
+
+        function disabledSocialLogin(event) {
+            event.preventDefault();
+            console.log("Social login is currently disabled");
+            // You can add a visual notification here if desired
         }
     </script>
 </body>
