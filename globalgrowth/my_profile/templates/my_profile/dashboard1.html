@@ -215,10 +215,9 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <a href="{% url 'my_profile:invest' %}" class="btn btn-primary btn-buy">Invest</a>
-                    <a href="#" class="btn btn-secondary btn-withdraw">Withdraw</a>
+                    <button type="button" class="btn btn-primary btn-buy" onclick="location.href='{% url 'my_profile:invest' %}'">Invest</button>
+                    <button type="button" class="btn btn-secondary btn-withdraw" onclick="location.href='{% url 'my_profile:profile' %}'">Withdraw</button>
                 </div>
-                
                 
             </header>
             
@@ -243,7 +242,7 @@
                             <!-- Total Investments -->
                             <div class="bg-blue-600 shadow-md rounded-lg p-6 dashboard-card flex flex-col justify-between">
                                 <h3 class="text-lg font-semibold text-white">Total Investments</h3>
-                                <p class="text-4xl font-bold text-white" id="total-investments">Ksh 1,500,000</p>
+                                <p class="text-4xl font-bold text-white" id="total-investments">Ksh 300,000</p>
                             </div>
                         
                             <!-- Referrals -->
@@ -901,42 +900,65 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 /// javascript for the totoal investemnt section included hapa
 // Get the element where the total investments will be displayed
-const totalInvestmentsElement = document.getElementById('total-investments');
+// Function to format the currency in Kenyan Shillings
+function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-KE', {
+                style: 'currency',
+                currency: 'KES',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
 
-// Initialize the total investments
-let totalInvestments = 30000;
+        // Function to update the investment value
+        function updateInvestment() {
+            const investmentElement = document.getElementById('total-investments');
+            let currentAmount = parseFloat(localStorage.getItem('investmentAmount')) || 300000;
+            let lastUpdateTime = parseInt(localStorage.getItem('lastUpdateTime')) || Date.now();
 
-// Function to update the total investments
-function updateTotalInvestments() {
-  // Increment the total investments by 1,000 every hour
-  totalInvestments += 1000;
-  totalInvestmentsElement.textContent = `Ksh ${totalInvestments.toLocaleString()}`;
+            const hourlyIncrease = 5000; // Total increase per hour
+            const updateInterval = 10000; // Update every 10 seconds
+            
+            function updateDisplay() {
+                const now = Date.now();
+                const elapsedHours = (now - lastUpdateTime) / 3600000; // Convert to hours
+                currentAmount += hourlyIncrease * elapsedHours;
+                
+                localStorage.setItem('investmentAmount', currentAmount.toString());
+                localStorage.setItem('lastUpdateTime', now.toString());
+                
+                investmentElement.textContent = formatCurrency(Math.round(currentAmount));
+                lastUpdateTime = now;
+            }
 
-  // Add the blinking blue color effect
-  totalInvestmentsElement.classList.add('blink-blue');
-  setTimeout(() => {
-    totalInvestmentsElement.classList.remove('blink-blue');
-  }, 1000);
-}
+            // Update immediately and then every 10 seconds
+            updateDisplay();
+            setInterval(updateDisplay, updateInterval);
+        }
 
+        // Run the update function when the page loads
+        window.onload = updateInvestment;
 // Update the total investments every hour
 setInterval(updateTotalInvestments, 3600000); // 1 hour = 3600000 milliseconds
 
 // refferal section code js:
 // Function to increment the referrals
-    function incrementReferrals() {
-        const referralsElement = document.getElementById('referrals');
-        let currentReferrals = parseInt(referralsElement.textContent, 10);
+// Get the referrals element
+// Function to increment the referrals count
+// Get the referrals element
+const referralsElement = document.getElementById('referrals');
 
-        currentReferrals += 10;  // Increment by 10
-        referralsElement.textContent = currentReferrals;  // Update the displayed value
-    }
+// Function to increment the referrals count
+function incrementReferrals() {
+  let currentReferrals = parseInt(referralsElement.textContent);
+  currentReferrals++;
+  referralsElement.textContent = currentReferrals;
+}
 
-    // Set an interval to call the incrementReferrals function every hour (3600000 milliseconds)
-    setInterval(incrementReferrals, 3600000);
+// Set an interval to call the incrementReferrals function every 2 minutes
+setInterval(incrementReferrals, 120000);
 
-    // Optional: Call the function immediately if you want the first increment to happen right away
-    incrementReferrals();
+
 </script>
 <script src="{% static 'js/dashboard1.js' %}"></script>
 <script src="{% static 'js/performance-chart.js' %}"></script>
