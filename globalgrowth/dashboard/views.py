@@ -24,7 +24,7 @@ def withdraw(request):
     context = {
         # 'data': data,
     }
-    return render(request, 'dashboard/withdraw.html', context)
+    return render(request, 'my_profile/payment_agent.html', context)
 
 @login_required(login_url='auth_app:login')
 def complains(request):
