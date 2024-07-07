@@ -1,311 +1,363 @@
-
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Global Growth Investment</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="{% static 'css/dashboard-css/vendors/feather/feather.css' %}">
-  <link rel="stylesheet" href="{% static 'css/dashboard-css/vendors/ti-icons/css/themify-icons.css' %}">
-  <link rel="stylesheet" href="{% static 'css/dashboard-css/vendors/css/vendor.bundle.base.css' %}">
-  <!-- endinject -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  
-  
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="{% static 'css/dashboard1.css' %}">
-
-  <!-- Plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="{% static 'css/dashboard-css/vertical-layout-light/style.css' %}">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="{% static 'css/dashboard-css/images/favicon.png' %}" />
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide - Global Growth</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-<body>
-  <body class="bg-gray-100">
-    <body class="bg-gray-100 p-4 md:p-8">
-        <div class="animated-bg"></div>
-        <div class="pattern-overlay"></div>
-    
-    <div class="flex h-screen bg-gray-100">
-        <!-- Sidebar for large screens -->
-        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
-            <div class="p-4">
-                <h2 class="text-2xl font-semibold">Global Growth</h2>
-            </div>
-            <nav class="flex-1 px-2 py-4">
-                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
-                </a>
-                <a href="{% url 'my_profile:profile' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-user-tie mr-3"></i>Profile
-                </a>
-                <a href="{% url 'my_profile:payment_agents' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
-                </a>
-                <a href="{% url 'my_profile:referral' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-user-plus mr-3"></i> Referral
-                </a>
-                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
-                </a>
-                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-book mr-3"></i> Guide
-                </a>
-                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-cog mr-3"></i> Settings
-                </a>
-                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
-                </a>
-            </nav>
-            <div class="p-4">
-                <p class="text-sm">© 2024 Global Growth</p>
-            </div>
-        </aside>
-       
+      :root {
+          --primary-color: #4CAF50;
+          --secondary-color: #FFC107;
+          --tertiary-color: #2196F3;
+          --background-color: #f0f4f8;
+          --card-color: #ffffff;
+          --text-color: #333333;
+      }
 
-        <!-- Main content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top bar -->
-            <header class="flex justify-between items-center p-4 bg-white  shadow-md">
-                <div class="flex items-center">
-                    <div class="md:hidden mr-4">
-                        <button id="sidebar-toggle" class="text-white hover:text-gray-200">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
-                        </button>
-                    
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <button type="button" class="btn btn-primary btn-buy" onclick="location.href='{% url 'my_profile:invest' %}'">Invest</button>
-                    <button type="button" class="btn btn-secondary btn-withdraw" onclick="location.href='{% url 'dashboard:withdraw' %}'">Withdraw</button>
-                </div>
-                
-            </header>
-            
-    
-    
-    
-    <!-- partial -->
-    
-      <!-- partial -->
-      <div class="main-panel">          
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="card-body">
-                      <h4 class="card-title">Silver Package</h4>
-                      <p class="card-description">Invest with Ksh 1,000 & get returns of Ksh 1,500</p>
-                      <div class="template-demo">
-                        <!---
-                        <button type="button" class="btn btn-primary">Primary</button>
-                        <button type="button" class="btn btn-secondary">Secondary</button>
-                        -->
-                        <a href="{% url 'my_profile:instructions' %}" class="btn btn-success">Buy</a>
-                        <button type="button" class="btn btn-warning">Enquiry</button>
-                        <button type="button" class="btn btn-info">Read Guide</button>
-                        <!--
-                        <button type="button" class="btn btn-danger">Danger</button>
-                        <button type="button" class="btn btn-light">Test</button>
-                        <button type="button" class="btn btn-dark">Dark</button>-->
-                        
-                      </div>
-                    </div>
+      body {
+          font-family: 'Poppins', sans-serif;
+          background-color: var(--background-color);
+          margin: 0;
+          padding: 0;
+          color: var(--text-color);
+      }
+
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+      }
+
+      .header {
+          background-color: var(--card-color);
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+          padding: 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 30px;
+      }
+
+      .header h1 {
+          font-size: 28px;
+          font-weight: 600;
+          color: var(--primary-color);
+      }
+
+      .btn {
+          padding: 12px 24px;
+          border: none;
+          border-radius: 50px;
+          cursor: pointer;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          transition: all 0.3s ease;
+          font-size: 14px;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+
+      .btn-primary {
+          background-color: var(--primary-color);
+          color: white;
+      }
+
+      .btn-primary:hover {
+          background-color: #45a049;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+      }
+
+      .btn-secondary {
+          background-color: var(--secondary-color);
+          color: var(--text-color);
+      }
+
+      .btn-secondary:hover {
+          background-color: #e6ac00;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+      }
+
+      .packages-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 30px;
+      }
+
+      .package-card {
+          background-color: var(--card-color);
+          border-radius: 20px;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+          padding: 30px;
+          transition: all 0.3s ease;
+      }
+
+      .package-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      }
+
+      .package-title {
+          font-size: 24px;
+          color: var(--primary-color);
+          margin-bottom: 15px;
+          font-weight: 600;
+      }
+
+      .package-description {
+          color: #666;
+          margin-bottom: 25px;
+          font-size: 16px;
+          line-height: 1.6;
+      }
+
+      .package-actions {
+          display: flex;
+          justify-content: space-between;
+          gap: 10px;
+      }
+
+      .btn-success {
+          background-color: var(--primary-color);
+          color: white;
+          flex: 1;
+      }
+
+      .btn-success:hover {
+          background-color: #45a049;
+      }
+
+      .btn-warning {
+          background-color: var(--secondary-color);
+          color: var(--text-color);
+          flex: 1;
+      }
+
+      .btn-warning:hover {
+          background-color: #e6ac00;
+      }
+
+      .btn-info {
+          background-color: var(--tertiary-color);
+          color: white;
+          flex: 1;
+      }
+
+      .btn-info:hover {
+          background-color: #1976D2;
+      }
+
+      @media (max-width: 768px) {
+          .package-actions {
+              flex-direction: column;
+          }
+
+          .btn {
+              width: 100%;
+              margin-bottom: 10px;
+          }
+      }
+  </style>
+  <!-- plugins:css -->
+
+</head>
+<body class="bg-gray-100">
+  <div class="flex h-screen bg-gray-100">
+      <!-- Sidebar for large screens -->
+      <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
+          <div class="p-4">
+              <h2 class="text-2xl font-semibold">Global Growth</h2>
+          </div>
+          <nav class="flex-1 px-2 py-4">
+              <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                  <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+              </a>
+              <a href="{% url 'my_profile:profile' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                  <i class="fas fa-user-tie mr-3"></i>Profile
+              </a>
+              <a href="{% url 'my_profile:payment_agents' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                  <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+              </a>
+              <a href="{% url 'my_profile:referral' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                  <i class="fas fa-user-plus mr-3"></i> Referral
+              </a>
+              <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                  <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+              </a>
+              <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 bg-blue-700 rounded transition duration-200">
+                  <i class="fas fa-book mr-3"></i> Guide
+              </a>
+              <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                  <i class="fas fa-cog mr-3"></i> Settings
+              </a>
+              <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                  <i class="fas fa-sign-out-alt mr-3"></i> Logout
+              </a>
+          </nav>
+          <div class="p-4">
+              <p class="text-sm">© 2024 Global Growth</p>
+          </div>
+      </aside>
+
+      <!-- Main content -->
+      <div class="flex-1 flex flex-col overflow-hidden">
+          <!-- Top bar -->
+          <header class="flex justify-between items-center p-4 bg-white shadow-md">
+              <div class="flex items-center">
+                  <div class="md:hidden mr-4">
+                      <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
+                          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                          </svg>
+                      </button>
                   </div>
-                  <div class="col-md-6">
-                    <div class="card-body">
-                      <h4 class="card-title">Iron Package</h4>
-                      <p class="card-description">Invest with Ksh 3,000 & get returns profit of Ksh 4,000</p>
-                      <div class="template-demo">
-                        <!---
-                        <button type="button" class="btn btn-primary">Primary</button>
-                        <button type="button" class="btn btn-secondary">Secondary</button>
-                        -->
-                        <a href="{% url 'checkout:package_list' %}" class="btn btn-success">Buy</a>
-                        <button type="button" class="btn btn-warning">Enquiry</button>
-                        <button type="button" class="btn btn-info">Read Guide</button>
-                        <!--
-                        <button type="button" class="btn btn-danger">Danger</button>
-                        <button type="button" class="btn btn-light">Test</button>
-                        <button type="button" class="btn btn-dark">Dark</button>-->
-                        
-                      </div>
-                    </div>
+                  <h1 class="text-xl font-semibold">, {{ user.username }}!</h1>
+              </div>
+              <div class="flex items-center">
+                  <span class="mr-4 text-sm text-gray-600">Last login: {{ user.last_login|date:"F j, Y, g:i a" }}</span>
+                  <div class="relative">
+                      <img src="{{ gravatar_url }}" alt="Profile" class="h-8 w-8 rounded-full">
+                      <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
                   </div>
+              </div>
+          </header>
+
+          <!-- Scrollable content area -->
+          <div class="flex-1 overflow-y-auto p-4">
+              <div class="container mx-auto">
+                  <div class="packages-grid">
+              <div class="package-card">
+                <h2 class="package-title">Silver Package</h2>
+                <p class="package-description">Invest with Ksh 1,000 & get returns of Ksh 1,500</p>
+                <div class="package-actions">
+                  <a href="{% url 'my_profile:instructions' %}" class="btn btn-success">Buy Now</a>
+                  <button class="btn btn-warning">Enquire</button>
+                  <button class="btn btn-info">Read Guide</button>
+                </div>
+              </div>
+              <div class="package-card">
+                <h2 class="package-title">Iron Package</h2>
+                <p class="package-description">Invest with Ksh 3,000 & get returns of Ksh 4,000</p>
+                <div class="package-actions">
+                  <a href="{% url 'my_profile:instructions' %}" class="btn btn-success">Buy Now</a>
+                  <button class="btn btn-warning">Enquire</button>
+                  <button class="btn btn-info">Read Guide</button>
+                </div>
+              </div>
+              <div class="package-card">
+                <h2 class="package-title">Bronze Package</h2>
+                <p class="package-description">Invest with Ksh 5,000 & get returns of Ksh 8,000</p>
+                <div class="package-actions">
+                  <a href="{% url 'my_profile:instructions' %}" class="btn btn-success">Buy Now</a>
+                  <button class="btn btn-warning">Enquire</button>
+                  <button class="btn btn-info">Read Guide</button>
+                </div>
+              </div>
+              <div class="package-card">
+                <h2 class="package-title">Gold Package</h2>
+                <p class="package-description">Invest with Ksh 10,000 & get returns of Ksh 15,000</p>
+                <div class="package-actions">
+                  <a href="{% url 'my_profile:instructions' %}" class="btn btn-success">Buy Now</a>
+                  <button class="btn btn-warning">Enquire</button>
+                  <button class="btn btn-info">Read Guide</button>
+                </div>
+              </div>
+              <div class="package-card">
+                <h2 class="package-title">Bronze Pro Package</h2>
+                <p class="package-description">Invest with Ksh 20,000 & get returns of Ksh 27,000</p>
+                <div class="package-actions">
+                  <a href="{% url 'my_profile:instructions' %}" class="btn btn-success">Buy Now</a>
+                  <button class="btn btn-warning">Enquire</button>
+                  <button class="btn btn-info">Read Guide</button>
+                </div>
+              </div>
+              <div class="package-card">
+                <h2 class="package-title">Gold Pro Package</h2>
+                <p class="package-description">Invest with Ksh 50,000 & get returns of Ksh 70,000</p>
+                <div class="package-actions">
+                  <a href="{% url 'my_profile:instructions' %}" class="btn btn-success">Buy Now</a>
+                  <button class="btn btn-warning">Enquire</button>
+                  <button class="btn btn-info">Read Guide</button>
+                </div>
+              </div>
+              <div class="package-card">
+                <h2 class="package-title">Exceptional Package</h2>
+                <p class="package-description">Invest with Ksh 100,000 & get returns of Ksh 150,000</p>
+                <div class="package-actions">
+                  <a href="{% url 'my_profile:instructions' %}" class="btn btn-success">Buy Now</a>
+                  <button class="btn btn-warning">Enquire</button>
+                  <button class="btn btn-info">Read Guide</button>
+                </div>
+              </div>
+              <div class="package-card">
+                <h2 class="package-title">Custom Package</h2>
+                <p class="package-description">Invest with custom amount above <strong>Ksh 50,000</strong></p>
+                <div class="package-actions">
+                  <a href="{% url 'my_profile:instructions' %}" class="btn btn-success">Buy Now</a>
+                  <button class="btn btn-warning">Enquire</button>
+                  <button class="btn btn-info">Read Guide</button>
                 </div>
               </div>
             </div>
-            <div class="content-wrapper">
-              <div class="row">
-                <div class="col-12 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="card-body">
-                          <h4 class="card-title">Bronze Package</h4>
-                          <p class="card-description">Invest with Ksh 5,000 & get returns of Ksh 8,000</p>
-                          <div class="template-demo">
-                            
-                            <a href="{% url 'checkout:package_list' %}" class="btn btn-success">Buy</a>
-                            <button type="button" class="btn btn-warning">Enquiry</button>
-                            <button type="button" class="btn btn-info">Read Guide</button>
-                          
-                            
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="card-body">
-                          <h4 class="card-title">Gold Package</h4>
-                          <p class="card-description">Invest with Ksh 10,000 & get returns profit of Ksh 15,000</p>
-                          <div class="template-demo">
-                          
-                            <a href="{% url 'checkout:package_list' %}" class="btn btn-success">Buy</a>
-                            <button type="button" class="btn btn-warning">Enquiry</button>
-                            <button type="button" class="btn btn-info">Read Guide</button>
-                            
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="content-wrapper">
-                  <div class="row">
-                    <div class="col-12 grid-margin stretch-card">
-                      <div class="card">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="card-body">
-                              <h4 class="card-title">Bronze Pro Package</h4>
-                              <p class="card-description">Invest with Ksh 20,000 & get returns of Ksh 27,000</p>
-                              <div class="template-demo">
-                                <!---
-                                <button type="button" class="btn btn-primary">Primary</button>
-                                <button type="button" class="btn btn-secondary">Secondary</button>
-                                -->
-                                <a href="{% url 'checkout:package_list' %}" class="btn btn-success">Buy</a>
-                                <button type="button" class="btn btn-warning">Enquiry</button>
-                                <button type="button" class="btn btn-info">Read Guide</button>
-                                <!--
-                                <button type="button" class="btn btn-danger">Danger</button>
-                                <button type="button" class="btn btn-light">Test</button>
-                                <button type="button" class="btn btn-dark">Dark</button>-->
-                                
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="card-body">
-                              <h4 class="card-title">Gold Pro</h4>
-                              <p class="card-description">Invest with Ksh 50,000 & get returns profit of Ksh 70,000</p>
-                              <div class="template-demo">
-                                <!---
-                                <button type="button" class="btn btn-primary">Primary</button>
-                                <button type="button" class="btn btn-secondary">Secondary</button>
-                                -->
-                                <a href="{% url 'checkout:package_list' %}" class="btn btn-success">Buy</a>
-                                <button type="button" class="btn btn-warning">Enquiry</button>
-                                <button type="button" class="btn btn-info">Read Guide</button>
-                                <!--
-                                <button type="button" class="btn btn-danger">Danger</button>
-                                <button type="button" class="btn btn-light">Test</button>
-                                <button type="button" class="btn btn-dark">Dark</button>-->
-                                
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="content-wrapper">
-                      <div class="row">
-                        <div class="col-12 grid-margin stretch-card">
-                          <div class="card">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <div class="card-body">
-                                  <h4 class="card-title">Exceptional Package</h4>
-                                  <p class="card-description">Invest with <strong>Ksh 100,000</strong> & get returns of <strong>Ksh 150,000</strong></p>
-                                  <div class="template-demo">
-                                    <!---
-                                    <button type="button" class="btn btn-primary">Primary</button>
-                                    <button type="button" class="btn btn-secondary">Secondary</button>
-                                    -->
-                                    <a href="{% url 'checkout:package_list' %}" class="btn btn-success">Buy</a>
-                                    <button type="button" class="btn btn-warning">Enquiry</button>
-                                    <button type="button" class="btn btn-info">Read Guide</button>
-                                    <!--
-                                    <button type="button" class="btn btn-danger">Danger</button>
-                                    <button type="button" class="btn btn-light">Test</button>
-                                    <button type="button" class="btn btn-dark">Dark</button>-->
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="card-body">
-                                  <h4 class="card-title">Custom Package</h4>
-                                  <p class="card-description">Invest with any custom amount above Ksh 50,000</p>
-                                  <div class="template-demo">
-                                    <!---
-                                    <button type="button" class="btn btn-primary">Primary</button>
-                                    <button type="button" class="btn btn-secondary">Secondary</button>
-                                    -->
-                                    <a href="{% url 'checkout:package_list' %}" class="btn btn-success">Buy</a>
-                                    <button type="button" class="btn btn-warning">Enquiry</button>
-                                    <button type="button" class="btn btn-info">Read Guide</button>
-                                    <!--
-                                    <button type="button" class="btn btn-danger">Danger</button>
-                                    <button type="button" class="btn btn-light">Test</button>
-                                    <button type="button" class="btn btn-dark">Dark</button>-->
-                                    
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-        <!-- partial:../../partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024 <a href="https://www.globalgrowthinvestment.com" target="_blank">Globalgrowthinvestment </a>All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Made with<i class="ti-heart text-danger ml-1"></i></span>
           </div>
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.globalgrowthinvestment.com" target="_blank">GlobalgrowthInvestment Engineers</a></span> 
-          </div>
-        </footer> 
-        <!-- partial -->
+  
+    <!-- Mobile sidebar -->
+    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+      <div class="flex justify-between items-center p-4">
+          <h2 class="text-2xl font-semibold">Global Growth</h2>
+          <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
+              <i class="fas fa-times"></i>
+          </button>
       </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
+      <nav class="px-2 py-4">
+          <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+              <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+          </a>
+          <a href="{% url 'my_profile:profile' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+              <i class="fas fa-user-tie mr-3"></i> My Profile
+          </a>
+          <a href="{% url 'my_profile:payment_agents' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+              <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+          </a>
+          <a href="{% url 'my_profile:referral' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+              <i class="fas fa-user-plus mr-3"></i> Referral
+          </a>
+          <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+              <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+          </a>
+          <a href="{% url 'my_profile:guide' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+              <i class="fas fa-book mr-3"></i> Guide
+          </a>
+          <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+              <i class="fas fa-cog mr-3"></i> Settings
+          </a>
+          <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+              <i class="fas fa-sign-out-alt mr-3"></i> Logout
+          </a>
+      </nav>
   </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <!-- endinject -->
+</div>
+  <script>
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const closeSidebar = document.getElementById('close-sidebar');
+
+    sidebarToggle.addEventListener('click', () => {
+        mobileSidebar.classList.toggle('-translate-x-full');
+    });
+
+    closeSidebar.addEventListener('click', () => {
+        mobileSidebar.classList.add('-translate-x-full');
+    });
+    </script>
 </body>
 
 </html>
