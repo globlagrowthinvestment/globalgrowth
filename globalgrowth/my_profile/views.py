@@ -156,3 +156,5 @@ def referral(request):
 def payment_agent(request):
     return render(request, 'my_profile/payment_agent.html')
 
+def instructions(request):
+    return render(request, 'my_profile/instructions.html')
