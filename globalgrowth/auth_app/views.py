@@ -14,7 +14,7 @@ def register_view(request):
             form.save()
             print("Form saved successfully")
             messages.success(request, 'User registered successfully!')
-            return redirect('auth_app:login')
+            return redirect('auth_app/login.html')
     else:
         form = RegisterForm()
     return render(request, 'auth_app/register.html', {'form': form})
