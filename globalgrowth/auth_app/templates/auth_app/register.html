@@ -92,6 +92,17 @@
         .alert {
             border-radius: 8px;
         }
+        .password-requirements {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
     </style>
 </head>
 <body>
@@ -99,9 +110,7 @@
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Create Your Account</h4>
-                <p>Use a password with different combinations</p>
-                <p>for security purposes</p>
-
+                <p>Use a strong password for security purposes</p>
             </div>
             <div class="card-body">
                 {% if messages %}
@@ -111,7 +120,7 @@
                     {% endfor %}
                 </div>
                 {% endif %}
-                <form method="post">
+                <form method="post" id="registrationForm">
                     {% csrf_token %}
                     <div class="form-group">
                         <input type="text" class="form-control" id="username" name="username" placeholder=" " required>
@@ -124,10 +133,15 @@
                     <div class="form-group">
                         <input type="password" class="form-control" id="password1" name="password1" placeholder=" " required>
                         <label for="password1" class="form-label">Password</label>
+                        <div class="password-requirements">
+                            Password must be at least 8 characters long and include uppercase, lowercase, number, or special character.
+                        </div>
+                        <div class="invalid-feedback" id="password1Feedback"></div>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control" id="password2" name="password2" placeholder=" " required>
                         <label for="password2" class="form-label">Confirm Password</label>
+                        <div class="invalid-feedback" id="password2Feedback"></div>
                     </div>
                     <div class="form-group">
                         <select id="country" name="country" class="form-control" required>
@@ -148,12 +162,63 @@
                     <button type="submit" class="btn btn-primary">Register</button>
                     <div>
                         <p>Already have an account? <a href="{% url 'auth_app:login' %}">Login</a></p>
-
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const password1 = document.getElementById('password1');
+            const password2 = document.getElementById('password2');
+            const password1Feedback = document.getElementById('password1Feedback');
+            const password2Feedback = document.getElementById('password2Feedback');
+
+            function validatePassword(password) {
+                const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                return regex.test(password);
+            }
+
+            function showError(element, feedback, message) {
+                element.classList.add('is-invalid');
+                feedback.textContent = message;
+                feedback.style.display = 'block';
+            }
+
+            function clearError(element, feedback) {
+                element.classList.remove('is-invalid');
+                feedback.style.display = 'none';
+            }
+
+            password1.addEventListener('input', function() {
+                if (!validatePassword(this.value)) {
+                    showError(this, password1Feedback, 'Password does not meet the requirements.');
+                } else {
+                    clearError(this, password1Feedback);
+                }
+            });
+
+            password2.addEventListener('input', function() {
+                if (this.value !== password1.value) {
+                    showError(this, password2Feedback, 'Passwords do not match.');
+                } else {
+                    clearError(this, password2Feedback);
+                }
+            });
+
+            form.addEventListener('submit', function(e) {
+                if (!validatePassword(password1.value)) {
+                    e.preventDefault();
+                    showError(password1, password1Feedback, 'Password does not meet the requirements.');
+                }
+                if (password1.value !== password2.value) {
+                    e.preventDefault();
+                    showError(password2, password2Feedback, 'Passwords do not match.');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
