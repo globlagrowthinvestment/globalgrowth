@@ -14,11 +14,10 @@ def register_view(request):
             form.save()
             print("Form saved successfully")
             messages.success(request, 'User registered successfully!')
-            return redirect('auth_app:login')
+            return redirect(reverse('auth_app:login') + '?registration_success=true')
     else:
         form = RegisterForm()
     return render(request, 'auth_app/register.html', {'form': form})
-
 
 
 def login_view(request):
