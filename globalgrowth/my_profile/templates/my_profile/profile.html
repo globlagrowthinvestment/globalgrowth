@@ -109,14 +109,11 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         <div id="account-balance" class="bg-yellow-100 shadow-md rounded-lg p-6">
-                            <h3 class="text-lg font-semibold mb-2">Account Balance2</h3>
+                            <h3 class="text-lg font-semibold mb-2">Account Balance</h3>
                             <p class="text-3xl font-bold text-green-600">Ksh <span id="balance-amount">{{ balance|default:"0.00" }}</span></p>
                         </div>
                         <!--Added this code line to see refelction on total deposts in dahsbaord-->
-                        <div class="bg-green-500 shadow-md rounded-lg p-6">
-                            <h3 class="text-lg font-semibold mb-2">Account balance</h3>
-                            <p class="text-3xl font-bold text-blue-600">Ksh <span id="total-deposits-amount">{{ total_deposits|default:"0.00" }}</span></p>
-                        </div>
+                        
                         <!--INitial totoal depost code does not be changed-->
                         <div class="bg-green-500 shadow-md rounded-lg p-6">
                             <h3 class="text-lg font-semibold mb-2">Total Deposits</h3>
