@@ -92,24 +92,16 @@
         .alert {
             border-radius: 8px;
         }
-        .password-container {
-            position: relative;
+        .password-requirements {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 5px;
         }
-        .password-toggle {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-        .success-message {
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-            color: #155724;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid transparent;
-            border-radius: 4px;
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
         }
     </style>
 </head>
@@ -130,25 +122,43 @@
                 {% endif %}
                 <form method="post" id="registrationForm">
                     {% csrf_token %}
-                    {% for field in form %}
-                        <div class="form-group {% if field.name == 'password1' or field.name == 'password2' %}password-container{% endif %}">
-                            {{ field }}
-                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                            {% if field.name == 'password1' or field.name == 'password2' %}
-                                <i class="password-toggle fas fa-eye-slash" id="toggle{{ field.name }}"></i>
-                            {% endif %}
-                            {% if field.help_text %}
-                                <div class="password-requirements">{{ field.help_text }}</div>
-                            {% endif %}
-                            {% if field.errors %}
-                                <div class="invalid-feedback">
-                                    {% for error in field.errors %}
-                                        {{ error }}
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="username" name="username" placeholder=" " required>
+                        <label for="username" class="form-label">Username</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" name="email" placeholder=" " required>
+                        <label for="email" class="form-label">Email</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password1" name="password1" placeholder=" " required>
+                        <label for="password1" class="form-label">Password</label>
+                        <div class="password-requirements">
+                            Password must be at least 8 characters long and include uppercase, lowercase, number, orspecial character.
                         </div>
-                    {% endfor %}
+                        <div class="invalid-feedback" id="password1Feedback"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder=" " required>
+                        <label for="password2" class="form-label">Confirm Password</label>
+                        <div class="invalid-feedback" id="password2Feedback"></div>
+                    </div>
+                    <div class="form-group">
+                        <select id="country" name="country" class="form-control" required>
+                            <option value="" disabled selected>Select Country</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Tanzania">Tanzania</option>
+                            <option value="Rwanda">Rwanda</option>
+                            <option value="Nigeria">Nigeria</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="Ethiopia">Ethiopia</option>
+                        </select>
+                        <label for="country" class="form-label">Country</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder=" " required>
+                        <label for="phone" class="form-label">Phone Number</label>
+                    </div>
                     <button type="submit" class="btn btn-primary">Register</button>
                     <div>
                         <p>Already have an account? <a href="{% url 'auth_app:login' %}">Login</a></p>
@@ -161,34 +171,53 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('registrationForm');
-            const password1 = document.getElementById('id_password1');
-            const password2 = document.getElementById('id_password2');
-            const togglePassword1 = document.getElementById('togglepassword1');
-            const togglePassword2 = document.getElementById('togglepassword2');
+            const password1 = document.getElementById('password1');
+            const password2 = document.getElementById('password2');
+            const password1Feedback = document.getElementById('password1Feedback');
+            const password2Feedback = document.getElementById('password2Feedback');
 
-            function togglePasswordVisibility(passwordField, toggleIcon) {
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    toggleIcon.classList.remove('fa-eye-slash');
-                    toggleIcon.classList.add('fa-eye');
+            function validatePassword(password) {
+                const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                return regex.test(password);
+            }
+
+            function showError(element, feedback, message) {
+                element.classList.add('is-invalid');
+                feedback.textContent = message;
+                feedback.style.display = 'block';
+            }
+
+            function clearError(element, feedback) {
+                element.classList.remove('is-invalid');
+                feedback.style.display = 'none';
+            }
+
+            password1.addEventListener('input', function() {
+                if (!validatePassword(this.value)) {
+                    showError(this, password1Feedback, 'Password does not meet the requirements.');
                 } else {
-                    passwordField.type = 'password';
-                    toggleIcon.classList.remove('fa-eye');
-                    toggleIcon.classList.add('fa-eye-slash');
+                    clearError(this, password1Feedback);
                 }
-            }
+            });
 
-            if (togglePassword1) {
-                togglePassword1.addEventListener('click', function() {
-                    togglePasswordVisibility(password1, this);
-                });
-            }
+            password2.addEventListener('input', function() {
+                if (this.value !== password1.value) {
+                    showError(this, password2Feedback, 'Passwords do not match.');
+                } else {
+                    clearError(this, password2Feedback);
+                }
+            });
 
-            if (togglePassword2) {
-                togglePassword2.addEventListener('click', function() {
-                    togglePasswordVisibility(password2, this);
-                });
-            }
+            form.addEventListener('submit', function(e) {
+                if (!validatePassword(password1.value)) {
+                    e.preventDefault();
+                    showError(password1, password1Feedback, 'Password does not meet the requirements.');
+                }
+                if (password1.value !== password2.value) {
+                    e.preventDefault();
+                    showError(password2, password2Feedback, 'Passwords do not match.');
+                }
+            });
         });
     </script>
 </body>
