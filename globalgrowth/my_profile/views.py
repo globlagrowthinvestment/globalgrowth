@@ -21,7 +21,7 @@ from django.utils import timezone
 
 
 
-@login_required
+
 def profile(request):
     user_profile, created = UserProfile.objects.get_or_create(user=request.user)
     
@@ -133,28 +133,34 @@ def complaints(request):
     complaints = Complaint.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'my_profile/complaints.html', {'complaints': complaints})
 
-
+@login_required
 def submit_complaint(request):
     # Your submit complaint view logic here
     pass
-
+@login_required
 def guide(request):
     return render(request, 'my_profile/guide.html')
 
+@login_required
 def dashboard1(request):
     return render(request, 'my_profile/dashboard1.html')
 
+@login_required
 def instructions(request):
     return render(request, 'my_profile/instructions.html')
 
+@login_required
 def invest(request):
     return render(request, 'my_profile/invest.html')
 
+@login_required
 def referral(request):
     return render(request, 'my_profile/referral.html')
 
+@login_required
 def payment_agent(request):
     return render(request, 'my_profile/payment_agent.html')
 
+@login_required
 def instructions(request):
     return render(request, 'my_profile/instructions.html')
