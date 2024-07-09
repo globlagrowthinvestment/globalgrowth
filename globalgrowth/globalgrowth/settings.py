@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'checkout',
     'my_profile',
     'guide',
+    'referrals',
 ]
 
 

@@ -93,10 +93,9 @@
                         <h2 class="text-3xl font-bold mb-6 text-purple-800">Your Referral Link</h2>
                         <div class="mb-6 flex">
                             <input type="text" id="referralLink" value="{{ referral_link }}" class="w-full p-3 border rounded-lg bg-white shadow-inner text-gray-800" readonly>
-                            
+                            <button onclick="copyReferralLink()" class="ml-2 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Copy</button>
                         </div>
                         <p class="text-gray-700 mb-6">Share this link with your friends and earn rewards when they <strong>Buy</strong> a package</p>
-                        
                         <h3 class="text-2xl font-semibold mb-4 text-purple-800">Share on Social Media</h3>
                         <div class="flex space-x-6">
                             <a href="https://www.facebook.com/sharer/sharer.php?u={{ referral_link|urlencode }}" target="_blank" class="text-blue-600 hover:text-blue-800 transition duration-200">
@@ -119,6 +118,7 @@
                                     <tr class="bg-purple-200 text-purple-800 uppercase text-sm leading-normal">
                                         <th class="py-3 px-6 text-left">Username</th>
                                         <th class="py-3 px-6 text-left">Date Joined</th>
+                                        <th class="py-3 px-6 text-left">Status</th>
                                         <th class="py-3 px-6 text-right">Reward Earned</th>
                                     </tr>
                                 </thead>
@@ -126,10 +126,13 @@
                                     {% for referral in referrals %}
                                     <tr class="border-b border-purple-100 hover:bg-purple-50">
                                         <td class="py-3 px-6 text-left whitespace-nowrap">
-                                            {{ referral.username }}
+                                            {{ referral.referred_username }}
                                         </td>
                                         <td class="py-3 px-6 text-left">
                                             {{ referral.date_joined|date:"M d, Y" }}
+                                        </td>
+                                        <td class="py-3 px-6 text-left">
+                                            {{ referral.status }}
                                         </td>
                                         <td class="py-3 px-6 text-right">
                                             Ksh {{ referral.reward_earned }}
@@ -137,7 +140,7 @@
                                     </tr>
                                     {% empty %}
                                     <tr>
-                                        <td colspan="3" class="py-3 px-6 text-center">No referrals yet</td>
+                                        <td colspan="4" class="py-3 px-6 text-center">No referrals yet</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -146,8 +149,6 @@
                     </div>
                 </div>
             </main>
-        </div>
-    </div>
 
     <!-- Mobile sidebar -->
     <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
@@ -199,12 +200,12 @@
         });
 
         function copyReferralLink() {
-            var copyText = document.getElementById("referralLink");
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            document.execCommand("copy");
-            alert("Copied the referral link: " + copyText.value);
-        }
+    var copyText = document.getElementById("referralLink");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    alert("Copied the referral link: " + copyText.value);
+}
     </script>
 </body>
 </html>
