@@ -93,7 +93,7 @@
                     <!-- Complaint Submission -->
                     <div class="bg-violet-50 p-6 rounded-lg shadow-md mb-8">
                         <h2 class="text-xl font-semibold mb-4">Submit a Complaint</h2>
-                        <form action="#" method="post">
+                        <form action="{% url 'my_profile:complaints' %}" method="post">
                             {% csrf_token %}
                             <div class="mb-4">
                                 <label for="subject" class="block text-gray-700 font-bold mb-2">Subject</label>
@@ -123,10 +123,10 @@
                                             <p class="text-gray-600">{{ complaint.description }}</p>
                                             <p class="text-sm text-gray-500 mt-2">Submitted on: {{ complaint.created_at|date:"F d, Y" }}</p>
                                             <p class="text-sm font-semibold mt-1 
-                                                {% if complaint.status == 'Open' %}text-yellow-600
-                                                {% elif complaint.status == 'In Progress' %}text-blue-600
+                                                {% if complaint.status == 'Pending' %}text-blue-600
                                                 {% elif complaint.status == 'Resolved' %}text-green-600
-                                                {% else %}text-red-600{% endif %}">
+                                                {% elif complaint.status == 'Closed' %}text-yellow-800
+                                                {% else %}text-gray-600{% endif %}">
                                                 Status: {{ complaint.status }}
                                             </p>
                                         </li>

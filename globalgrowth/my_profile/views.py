@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Sum
 
-from .forms import WithdrawalRequestForm
+from .forms import ComplaintForm, WithdrawalRequestForm
 from .models import UserProfile, Transaction, MpesaMessage, MpesaTransaction
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -132,6 +132,25 @@ def complaints(request):
 
     complaints = Complaint.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'my_profile/complaints.html', {'complaints': complaints})
+
+# complains section:
+@login_required
+def complaints(request):
+    if request.method == 'POST':
+        form = ComplaintForm(request.POST)
+        if form.is_valid():
+            complaint = form.save(commit=False)
+            complaint.user = request.user
+            complaint.status = 'Pending'  # Set initial status to Pending
+            complaint.save()
+            messages.success(request, 'Your complaint has been submitted successfully.')
+            return redirect(reverse('my_profile:complaints'))
+    else:
+        form = ComplaintForm()
+
+    user_complaints = Complaint.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'my_profile/complaints.html', {'form': form, 'complaints': user_complaints})
+
 
 @login_required
 def submit_complaint(request):

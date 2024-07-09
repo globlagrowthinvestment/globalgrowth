@@ -1,7 +1,7 @@
 # admin.py
 
 from django.contrib import admin
-from .models import UserProfile, Transaction, MpesaMessage
+from .models import Complaint, UserProfile, Transaction, MpesaMessage
 
 
 @admin.register(UserProfile)
@@ -53,3 +53,23 @@ class MpesaMessageAdmin(admin.ModelAdmin):
         self.message_user(request, "Selected messages have been marked as verified and balances updated.")
 
     mark_as_verified.short_description = "Mark selected messages as verified"
+
+# complains section
+@admin.register(Complaint)
+class ComplaintAdmin(admin.ModelAdmin):
+    list_display = ('subject', 'user', 'status', 'created_at')
+    list_filter = ('status',)
+    search_fields = ('subject', 'description', 'user__username')
+    actions = ['mark_as_pending', 'mark_as_resolved', 'mark_as_closed']
+
+    def mark_as_pending(self, request, queryset):
+        queryset.update(status='Pending')
+    mark_as_pending.short_description = "Mark selected complaints as Pending"
+
+    def mark_as_resolved(self, request, queryset):
+        queryset.update(status='Resolved')
+    mark_as_resolved.short_description = "Mark selected complaints as Resolved"
+
+    def mark_as_closed(self, request, queryset):
+        queryset.update(status='Closed')
+    mark_as_closed.short_description = "Mark selected complaints as Closed"
