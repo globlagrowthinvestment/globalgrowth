@@ -1,0 +1,198 @@
+{% load static %}
+{% load gravatar_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Agents - Global Growth</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+        .trust-badge {
+            transition: transform 0.3s ease-in-out;
+        }
+        .trust-badge:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
+            <div class="p-4">
+                <h2 class="text-2xl font-semibold">Global Growth</h2>
+            </div>
+            <nav class="flex-1 px-2 py-4">
+                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+                <a href="{% url 'my_profile:profile' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-tie mr-3"></i>Profile
+                </a>
+                <a href="{% url 'my_profile:payment_agents' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                </a>
+                <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-plus mr-3"></i> Referral
+                </a>
+                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                </a>
+                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-book mr-3"></i> Guide
+                </a>
+                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-cog mr-3"></i> Settings
+                </a>
+                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </nav>
+            <div class="p-4">
+                <p class="text-sm">© 2024 Global Growth</p>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top bar -->
+            <header class="flex justify-between items-center p-4 bg-white shadow-md">
+                <div class="flex items-center">
+                    <div class="md:hidden mr-4">
+                        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <h1 class="text-xl font-semibold">Payment Agents</h1>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-4 text-sm text-gray-600">Last login: {{ user.last_login|date:"F j, Y, g:i a" }}</span>
+                    <div class="relative">
+                        <img src="{{ gravatar_url }}" alt="Profile" class="h-8 w-8 rounded-full">
+                        <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+                <div class="container mx-auto px-6 py-8">
+                    <!-- Swift payment message -->
+                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
+                        <p class="font-bold">Swift Payments</p>
+                        <p>Our payments are processed quickly and securely, typically taking less than 2 minutes to complete.</p>
+                    </div>
+
+                    <!-- Trust badges -->
+                    <div class="flex flex-wrap justify-center mb-8">
+                        <div class="trust-badge bg-white shadow-md rounded-lg p-4 m-2 text-center">
+                            <i class="fas fa-shield-alt text-3xl text-blue-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Secure Transactions</p>
+                        </div>
+                        <div class="trust-badge bg-white shadow-md rounded-lg p-4 m-2 text-center">
+                            <i class="fas fa-user-shield text-3xl text-green-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Verified Agents</p>
+                        </div>
+                        <div class="trust-badge bg-white shadow-md rounded-lg p-4 m-2 text-center">
+                            <i class="fas fa-comment-dots text-3xl text-purple-500 mb-2"></i>
+                            <p class="text-sm font-semibold">24/7 Support</p>
+                        </div>
+                        <div class="trust-badge bg-white shadow-md rounded-lg p-4 m-2 text-center">
+                            <i class="fas fa-money-bill-wave text-3xl text-yellow-500 mb-2"></i>
+                            <p class="text-sm font-semibold">Best Rates</p>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-semibold mb-4">Withdrawal Requests</h2>
+
+                   <!-- Display Withdrawal Requests -->
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border-collapse border border-gray-300 rounded-lg overflow-hidden">
+                            <thead class="bg-gray-200 text-gray-700">
+                                <tr>
+                                    <th class="py-3 px-6 text-left">Amount</th>
+                                    <th class="py-3 px-6 text-left">MPESA Number</th>
+                                    <th class="py-3 px-6 text-left">Requested At</th>
+                                    <th class="py-3 px-6 text-center">Approved</th>
+                                    <th class="py-3 px-6 text-center">Paid</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 divide-y divide-gray-300">
+                                {% if withdrawal_requests %}
+                                    {% for withdrawal in withdrawal_requests %}
+                                        <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                            <td class="py-4 px-6 whitespace-nowrap">{{ withdrawal.amount }}</td>
+                                            <td class="py-4 px-6">{{ withdrawal.mpesa_number }}</td>
+                                            <td class="py-4 px-6">{{ withdrawal.requested_at }}</td>
+                                            <td class="py-4 px-6 text-center">
+                                                <span class="inline-block bg-green-500 text-white rounded-full px-3 py-1 text-xs font-semibold leading-tight">
+                                                    {% if withdrawal.is_approved %}Approved{% else %}Pending{% endif %}
+                                                </span>
+                                            </td>
+                                            <td class="py-4 px-6 text-center">
+                                                <span class="inline-block bg-blue-500 text-white rounded-full px-3 py-1 text-xs font-semibold leading-tight">
+                                                    {% if withdrawal.is_paid %}Paid{% else %}Pending{% endif %}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td class="py-4 px-6 text-center text-gray-500" colspan="5">No withdrawal requests found.</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+
+                    <!-- Withdrawal Form -->
+                    <div id="withdrawal-form" class="mt-8 bg-white shadow-md rounded-lg p-6">
+                        <form action="{% url 'withdrawals:request_withdrawal' %}" method="post" class="mt-8 bg-white shadow-md rounded-lg p-6">
+                            {% csrf_token %}
+                            <h3 class="text-xl font-semibold mb-4">Request Withdrawal</h3>
+                            <div class="mb-4">
+                                <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Amount:</label>
+                                <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="mpesa_number" class="block text-gray-700 text-sm font-bold mb-2">MPESA Number:</label>
+                                <input type="tel" id="mpesa_number" name="mpesa_number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                            </div>
+                            <button type="submit" id="submit-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200">
+                                Request Withdrawal
+                            </button>
+                        </form>
+                    </div>
+
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Toggle sidebar
+        document.getElementById('sidebar-toggle').addEventListener('click', function () {
+            let sidebar = document.querySelector('.md:flex');
+            sidebar.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

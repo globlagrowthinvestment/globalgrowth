@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'my_profile',
     'guide',
     'referrals',
+    'withdrawals.apps.WithdrawalsConfig'
 ]
 
 
@@ -101,6 +102,12 @@ WSGI_APPLICATION = 'globalgrowth.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:
+""" DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+} """
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
@@ -108,6 +115,7 @@ DATABASES = {
         conn_max_age=600
     )
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -187,4 +195,12 @@ CORS_ALLOW_CREDENTIALS = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+
+# Email configuration for Gmail SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True  
+EMAIL_HOST_USER = 'anomalous254@gmail.com'  # Replace with your Gmail address
+EMAIL_HOST_PASSWORD = 'your_password'  # Replace with your Gmail  App Password
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

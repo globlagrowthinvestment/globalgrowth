@@ -16,12 +16,14 @@ from .models import Complaint
 #from .forms import WithdrawalRequestForm
 from .models import WithdrawalRequest
 from django.utils import timezone
+from withdrawals.models import Withdrawals
+from django.contrib.auth.decorators import login_required
 
 
 
 
 
-
+@login_required
 def profile(request):
     user_profile, created = UserProfile.objects.get_or_create(user=request.user)
     
@@ -48,10 +50,13 @@ def profile(request):
     
     # Calculate the balance including only approved transactions
     total_deposits = Transaction.objects.filter(user=request.user, amount__gt=0, status='Approved').aggregate(Sum('amount'))['amount__sum'] or Decimal(0)
+    print(total_deposits)
     total_withdrawals = abs(Transaction.objects.filter(user=request.user, amount__lt=0, status='Approved').aggregate(Sum('amount'))['amount__sum'] or Decimal(0))
+    print(total_withdrawals)
     balance = total_deposits - total_withdrawals
 
     recent_transactions = Transaction.objects.filter(user=request.user).order_by('-date')[:5]
+    print(recent_transactions)
     
     for transaction in recent_transactions:
         if transaction.status == 'Approved':
