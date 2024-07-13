@@ -278,9 +278,9 @@
         </nav>
     </div>
 
-                    <h2 class="text-2xl font-semibold mb-4 mt-8">Withdrawal Requests</h2>
-
-                    <!-- Display Withdrawal Requests -->
+    
+    <!-- Display Withdrawal Requests -->
+    <h2 class="text-2xl font-semibold mb-4 mt-8">Withdrawal Requests</h2>
                     <div class="overflow-x-auto">
                         <table class="min-w-full bg-white border-collapse border border-gray-300 rounded-lg overflow-hidden">
                             <thead class="bg-gray-200 text-gray-700">
@@ -319,8 +319,9 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
 
-                    <!-- Withdrawal Form (initially hidden) -->
+                    <!-- Withdrawal Form (initially hidden) appear after user ameclick select agent button -->
                     <div id="withdrawal-form" class="mt-8 bg-white shadow-md rounded-lg p-6 hidden">
                         <form action="{% url 'withdrawals:request_withdrawal' %}" method="post">
                             {% csrf_token %}

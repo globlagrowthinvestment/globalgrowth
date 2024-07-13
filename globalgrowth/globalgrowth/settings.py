@@ -103,6 +103,7 @@ WSGI_APPLICATION = 'globalgrowth.wsgi.application'
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:
 """
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -110,7 +111,6 @@ DATABASES = {
     }
 } 
 """
-
 
 DATABASES = {
     'default': dj_database_url.config(
