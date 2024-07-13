@@ -115,10 +115,172 @@
                             <p class="text-sm font-semibold">Best Rates</p>
                         </div>
                     </div>
+                    <h2 class="text-2xl font-semibold mb-4">Payment Agents</h2>
+                    
+                    <!-- Search and filter options -->
+                    <div class="mb-6">
+                        <input type="text" id="agent-search" placeholder="Search agents..." class="w-full p-2 border rounded-lg">
+                        <div class="mt-2">
+                            <label class="inline-flex items-center mr-4">
+                                <input type="checkbox" class="form-checkbox" id="filter-online">
+                                <span class="ml-2">Online Only</span>
+                            </label>
+                            <select id="sort-agents" class="p-2 border rounded-lg">
+                                <option value="name">Sort by Name</option>
+                                <option value="rating">Sort by Rating</option>
+                                <option value="transactions">Sort by Transactions</option>
+                            </select>
+                        </div>
+                    </div>
 
-                    <h2 class="text-2xl font-semibold mb-4">Withdrawal Requests</h2>
+                    <div id="agent-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Payment Agent 1 -->
+                        <div class="bg-white shadow-md rounded-lg p-6">
+                            <div class="flex items-center">
+                                <img src="{% static 'api/placeholder/agent2.jpg' %}" alt="John Doe" class="w-16 h-16 rounded-full mr-4">
+                                <div>
+                                    <h3 class="text-lg font-semibold">Fast Pesa</h3>
+                                    <div class="flex items-center">
+                                        <span class="text-green-500 mr-2 blink">
+                                            <i class="fas fa-circle text-xs"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-600">Online</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mt-4">Experienced agent specializing in fast international transfers. 5+ years of service.</p>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div>
+                                    <span class="text-yellow-500"><i class="fas fa-star"></i> 4.8</span>
+                                    <span class="text-sm text-gray-600">(120 reviews)</span>
+                                </div>
+                                <span class="text-sm text-gray-600">1000+ transactions</span>
+                            </div>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mt-4 select-agent" data-agent-id="1" data-agent-name="Fast Pesa">
+                                Select Agent
+                            </button>
+                        </div>
 
-                   <!-- Display Withdrawal Requests -->
+                        <!-- Payment Agent 2 -->
+                        <div class="bg-white shadow-md rounded-lg p-6">
+                            <div class="flex items-center">
+                                <img src="{% static 'api/placeholder/agent3.jpg' %}" alt="Jane Smith" class="w-16 h-16 rounded-full mr-4">
+                                <div>
+                                    <h3 class="text-lg font-semibold">BanSec Transfers</h3>
+                                    <div class="flex items-center">
+                                        <span class="text-green-500 mr-2 blink">
+                                            <i class="fas fa-circle text-xs"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-600">Online</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mt-4">Crypto expert with a focus on secure and anonymous transactions. Available 24/7.</p>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div>
+                                    <span class="text-yellow-500"><i class="fas fa-star"></i> 4.9</span>
+                                    <span class="text-sm text-gray-600">(85 reviews)</span>
+                                </div>
+                                <span class="text-sm text-gray-600">750+ transactions</span>
+                            </div>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mt-4 select-agent" data-agent-id="2" data-agent-name="BanSec Transfers">
+                                Select Agent
+                            </button>
+                        </div>
+
+                        <!-- Payment Agent 3 -->
+                        <div class="bg-white shadow-md rounded-lg p-6">
+                            <div class="flex items-center">
+                                <img src="{% static 'api/placeholder/agent1.jpg' %}" alt="Alex Johnson" class="w-16 h-16 rounded-full mr-4">
+                                <div>
+                                    <h3 class="text-lg font-semibold">Swift Securities</h3>
+                                    <div class="flex items-center">
+                                        <span class="text-green-500 mr-2 blink">
+                                            <i class="fas fa-circle text-xs"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-600">Online</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mt-4">Specializes in large volume transfers. Excellent rates for transactions over $10,000.</p>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div>
+                                    <span class="text-yellow-500"><i class="fas fa-star"></i> 4.7</span>
+                                    <span class="text-sm text-gray-600">(200 reviews)</span>
+                                </div>
+                                <span class="text-sm text-gray-600">1500+ transactions</span>
+                            </div>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mt-4 select-agent" data-agent-id="3" data-agent-name="Swift Securities">
+                                Select Agent
+                            </button>
+                        </div>
+
+                        <!-- Payment Agent 4 -->
+                        <div class="bg-white shadow-md rounded-lg p-6">
+                            <div class="flex items-center">
+                                <img src="{% static 'api/placeholder/agent4.jpg' %}" alt="Angeline " class="w-16 h-16 rounded-full mr-4">
+                                <div>
+                                    <h3 class="text-lg font-semibold">Ether agencies</h3>
+                                    <div class="flex items-center">
+                                        <span class="text-green-500 mr-2 blink">
+                                            <i class="fas fa-circle text-xs"></i>
+                                        </span>
+                                        <span class="text-sm text-gray-600">Online</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mt-4">New agent offering competitive rates. First-time customers receive a 5% bonus on their transfer.</p>
+                            <div class="mt-4 flex justify-between items-center">
+                                <div>
+                                    <span class="text-yellow-500"><i class="fas fa-star"></i> 4.6</span>
+                                    <span class="text-sm text-gray-600">(50 reviews)</span>
+                                </div>
+                                <span class="text-sm text-gray-600">300+ transactions</span>
+                            </div>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mt-4 select-agent" data-agent-id="4" data-agent-name="Ether agencies">
+                                Select Agent
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Mobile sidebar -->
+    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+        <div class="flex justify-between items-center p-4">
+            <h2 class="text-2xl font-semibold">Global Growth</h2>
+            <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="px-2 py-4">
+            <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+            </a>
+            <a href="{% url 'my_profile:profile' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-user-tie mr-3"></i> My Profile
+            </a>
+            <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+            </a>
+            <a href="{% url 'referrals:referrals' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-user-plus mr-3"></i> Referral
+            </a>
+            <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+            </a>
+            <a href="{% url 'my_profile:guide' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-book mr-3"></i> Guide
+            </a>
+            <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-cog mr-3"></i> Settings
+            </a>
+            <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-sign-out-alt mr-3"></i> Logout
+            </a>
+        </nav>
+    </div>
+
+                    <h2 class="text-2xl font-semibold mb-4 mt-8">Withdrawal Requests</h2>
+
+                    <!-- Display Withdrawal Requests -->
                     <div class="overflow-x-auto">
                         <table class="min-w-full bg-white border-collapse border border-gray-300 rounded-lg overflow-hidden">
                             <thead class="bg-gray-200 text-gray-700">
@@ -158,14 +320,12 @@
                         </table>
                     </div>
 
-
-
-
-                    <!-- Withdrawal Form -->
-                    <div id="withdrawal-form" class="mt-8 bg-white shadow-md rounded-lg p-6">
-                        <form action="{% url 'withdrawals:request_withdrawal' %}" method="post" class="mt-8 bg-white shadow-md rounded-lg p-6">
+                    <!-- Withdrawal Form (initially hidden) -->
+                    <div id="withdrawal-form" class="mt-8 bg-white shadow-md rounded-lg p-6 hidden">
+                        <form action="{% url 'withdrawals:request_withdrawal' %}" method="post">
                             {% csrf_token %}
                             <h3 class="text-xl font-semibold mb-4">Request Withdrawal</h3>
+                            <p id="selected-agent" class="mb-4 text-gray-700"></p>
                             <div class="mb-4">
                                 <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Amount:</label>
                                 <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
@@ -174,13 +334,12 @@
                                 <label for="mpesa_number" class="block text-gray-700 text-sm font-bold mb-2">MPESA Number:</label>
                                 <input type="tel" id="mpesa_number" name="mpesa_number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                             </div>
+                            <input type="hidden" id="selected-agent-id" name="selected_agent_id">
                             <button type="submit" id="submit-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200">
                                 Request Withdrawal
                             </button>
                         </form>
                     </div>
-
-
                 </div>
             </main>
         </div>
@@ -188,10 +347,72 @@
 
     <!-- Scripts -->
     <script>
-        // Toggle sidebar
-        document.getElementById('sidebar-toggle').addEventListener('click', function () {
-            let sidebar = document.querySelector('.md:flex');
-            sidebar.classList.toggle('hidden');
+        console.log("Script started");
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOMContentLoaded event fired");
+    
+            // Function to safely get an element and log if it's not found
+            function safeGetElement(id) {
+                const element = document.getElementById(id);
+                if (!element) {
+                    console.error(`Element with id "${id}" not found`);
+                }
+                return element;
+            }
+    
+            // Sidebar toggle for mobile
+            const sidebarToggle = safeGetElement('sidebar-toggle');
+            const mobileSidebar = safeGetElement('mobile-sidebar');
+            const closeSidebar = safeGetElement('close-sidebar');
+    
+            if (sidebarToggle && mobileSidebar) {
+                sidebarToggle.addEventListener('click', () => {
+                    mobileSidebar.classList.toggle('-translate-x-full');
+                });
+            }
+    
+            if (closeSidebar && mobileSidebar) {
+                closeSidebar.addEventListener('click', () => {
+                    mobileSidebar.classList.add('-translate-x-full');
+                });
+            }
+    
+            // Agent selection and withdrawal form display
+            const agentButtons = document.querySelectorAll('.select-agent');
+            const withdrawalForm = safeGetElement('withdrawal-form');
+            const selectedAgentText = safeGetElement('selected-agent');
+            const selectedAgentIdInput = safeGetElement('selected-agent-id');
+    
+            console.log("Number of agent buttons found:", agentButtons.length);
+    
+            agentButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    console.log("Agent button clicked");
+                    event.preventDefault();
+    
+                    const agentId = this.getAttribute('data-agent-id');
+                    const agentName = this.getAttribute('data-agent-name');
+                    
+                    console.log("Selected agent:", agentName, "ID:", agentId);
+    
+                    if (selectedAgentText && selectedAgentIdInput && withdrawalForm) {
+                        // Update the form
+                        selectedAgentText.textContent = `Selected Agent: ${agentName}`;
+                        selectedAgentIdInput.value = agentId;
+                        
+                        // Show the withdrawal form
+                        withdrawalForm.classList.remove('hidden');
+                        
+                        // Scroll to the form
+                        withdrawalForm.scrollIntoView({ behavior: 'smooth' });
+    
+                        console.log("Withdrawal form should now be visible");
+                    } else {
+                        console.error("One or more form elements are missing");
+                    }
+                });
+            });
         });
     </script>
 </body>
