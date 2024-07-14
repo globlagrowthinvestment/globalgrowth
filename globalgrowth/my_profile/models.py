@@ -86,5 +86,3 @@ class Complaint(models.Model):
 
     def __str__(self):
         return f"{self.subject} - {self.status}"
-    
-    
