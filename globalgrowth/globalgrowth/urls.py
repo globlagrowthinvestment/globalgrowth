@@ -26,6 +26,7 @@ urlpatterns = [
     path('guide/', include('guide.urls')),
     path('profile/', include('my_profile.urls')),
     path('withdraw/', include('withdrawals.urls')),
+     path('account/', include('user_account.urls')),
     path('', include('referrals.urls')),  # Added this line
 
 

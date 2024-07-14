@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="bg-white shadow-md rounded-lg p-6 mb-8">
+    <h2 class="text-2xl font-semibold mb-4">Investment Growth</h2>
+    <canvas id="investmentGrowthChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var ctx = document.getElementById('investmentGrowthChart').getContext('2d');
+        
+        var labels = {{ labels|safe }};
+        var data = {{ data|safe }};
+        
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Investment Growth (Ksh)',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

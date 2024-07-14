@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'my_profile',
     'guide',
     'referrals',
-    'withdrawals.apps.WithdrawalsConfig'
+    'withdrawals.apps.WithdrawalsConfig',
+    'user_account.apps.UserAccountConfig'
 ]
 
 
@@ -103,16 +104,14 @@ WSGI_APPLICATION = 'globalgrowth.wsgi.application'
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:
 
-"""
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-} 
+}  """
 
-
-"""
+ 
 
 
 DATABASES = {
