@@ -277,74 +277,75 @@
             </a>
         </nav>
     </div>
-
-    
-    <!-- Display Withdrawal Requests -->
-    <h2 class="text-2xl font-semibold mb-4 mt-8">Withdrawal Requests</h2>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full bg-white border-collapse border border-gray-300 rounded-lg overflow-hidden">
-                            <thead class="bg-gray-200 text-gray-700">
-                                <tr>
-                                    <th class="py-3 px-6 text-left">Amount</th>
-                                    <th class="py-3 px-6 text-left">MPESA Number</th>
-                                    <th class="py-3 px-6 text-left">Requested At</th>
-                                    <th class="py-3 px-6 text-center">Approved</th>
-                                    <th class="py-3 px-6 text-center">Paid</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-gray-600 divide-y divide-gray-300">
-                                {% if withdrawal_requests %}
-                                    {% for withdrawal in withdrawal_requests %}
-                                        <tr class="hover:bg-gray-50 transition-colors duration-200">
-                                            <td class="py-4 px-6 whitespace-nowrap">{{ withdrawal.amount }}</td>
-                                            <td class="py-4 px-6">{{ withdrawal.mpesa_number }}</td>
-                                            <td class="py-4 px-6">{{ withdrawal.requested_at }}</td>
-                                            <td class="py-4 px-6 text-center">
-                                                <span class="inline-block bg-green-500 text-white rounded-full px-3 py-1 text-xs font-semibold leading-tight">
-                                                    {% if withdrawal.is_approved %}Approved{% else %}Pending{% endif %}
-                                                </span>
-                                            </td>
-                                            <td class="py-4 px-6 text-center">
-                                                <span class="inline-block bg-blue-500 text-white rounded-full px-3 py-1 text-xs font-semibold leading-tight">
-                                                    {% if withdrawal.is_paid %}Paid{% else %}Pending{% endif %}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                {% else %}
-                                    <tr>
-                                        <td class="py-4 px-6 text-center text-gray-500" colspan="5">No withdrawal requests found.</td>
-                                    </tr>
-                                {% endif %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <div id="withdrawal-form" class="mt-8 bg-white shadow-md rounded-lg p-6 hidden">
+        <form action="{% url 'withdrawals:request_withdrawal' %}" method="post">
+            {% csrf_token %}
+            <h3 class="text-xl font-semibold mb-4">Request Withdrawal</h3>
+            <p id="selected-agent" class="mb-4 text-gray-700"></p>
+            <div class="mb-4">
+                <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Amount:</label>
+                <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            </div>
+            <div class="mb-4">
+                <label for="mpesa_number" class="block text-gray-700 text-sm font-bold mb-2">MPESA Number:</label>
+                <input type="tel" id="mpesa_number" name="mpesa_number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            </div>
+            <input type="hidden" id="selected-agent-id" name="selected_agent_id">
+            <button type="submit" id="submit-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200">
+                Request Withdrawal
+            </button>
+        </form>
+    </div>
+     <!-- Display Withdrawal Requests -->
+     <h2 class="text-2xl font-semibold mb-4 mt-8">Withdrawal Requests</h2>
+     <div class="overflow-x-auto">
+         <table class="min-w-full bg-white border-collapse border border-gray-300 rounded-lg overflow-hidden">
+             <thead class="bg-gray-200 text-gray-700">
+                 <tr>
+                     <th class="py-3 px-6 text-left">Amount</th>
+                     <th class="py-3 px-6 text-left">MPESA Number</th>
+                     <th class="py-3 px-6 text-left">Requested At</th>
+                     <th class="py-3 px-6 text-center">Approved</th>
+                     <th class="py-3 px-6 text-center">Paid</th>
+                 </tr>
+             </thead>
+             <tbody class="text-gray-600 divide-y divide-gray-300">
+                 {% if withdrawal_requests %}
+                     {% for withdrawal in withdrawal_requests %}
+                         <tr class="hover:bg-gray-50 transition-colors duration-200">
+                             <td class="py-4 px-6 whitespace-nowrap">{{ withdrawal.amount }}</td>
+                             <td class="py-4 px-6">{{ withdrawal.mpesa_number }}</td>
+                             <td class="py-4 px-6">{{ withdrawal.requested_at }}</td>
+                             <td class="py-4 px-6 text-center">
+                                 <span class="inline-block bg-green-500 text-white rounded-full px-3 py-1 text-xs font-semibold leading-tight">
+                                     {% if withdrawal.is_approved %}Approved{% else %}Pending{% endif %}
+                                 </span>
+                             </td>
+                             <td class="py-4 px-6 text-center">
+                                 <span class="inline-block bg-blue-500 text-white rounded-full px-3 py-1 text-xs font-semibold leading-tight">
+                                     {% if withdrawal.is_paid %}Paid{% else %}Pending{% endif %}
+                                 </span>
+                             </td>
+                         </tr>
+                     {% endfor %}
+                 {% else %}
+                     <tr>
+                         <td class="py-4 px-6 text-center text-gray-500" colspan="5">No withdrawal requests found.</td>
+                     </tr>
+                 {% endif %}
+             </tbody>
+         </table>
+     </div>
+ </div>
 
                     <!-- Withdrawal Form (initially hidden) appear after user ameclick select agent button -->
-                    <div id="withdrawal-form" class="mt-8 bg-white shadow-md rounded-lg p-6 hidden">
-                        <form action="{% url 'withdrawals:request_withdrawal' %}" method="post">
-                            {% csrf_token %}
-                            <h3 class="text-xl font-semibold mb-4">Request Withdrawal</h3>
-                            <p id="selected-agent" class="mb-4 text-gray-700"></p>
-                            <div class="mb-4">
-                                <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Amount:</label>
-                                <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="mpesa_number" class="block text-gray-700 text-sm font-bold mb-2">MPESA Number:</label>
-                                <input type="tel" id="mpesa_number" name="mpesa_number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                            </div>
-                            <input type="hidden" id="selected-agent-id" name="selected_agent_id">
-                            <button type="submit" id="submit-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200">
-                                Request Withdrawal
-                            </button>
-                        </form>
-                    </div>
+                    
                 </div>
-            </main>
+            </div>
         </div>
-    </div>
+   </main> 
+
+
 
     <!-- Scripts -->
     <script>
