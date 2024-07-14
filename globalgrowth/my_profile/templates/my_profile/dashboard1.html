@@ -245,12 +245,7 @@
                                 <p class="text-4xl font-bold text-white" id="total-investments">Ksh 300,000</p>
                             </div>
                         
-                            <div class="bg-yellow-600 shadow-md rounded-lg p-6 dashboard-card flex flex-col justify-between">
-                                <h3 class="text-lg font-semibold text-white">Overall Referrals</h3>
-                                <p class="text-4xl font-bold text-white" id="referrals">10</p>
-                            </div>
-                            
-                            
+                           
                         
                             <!-- Complaints -->
                             <div class="bg-red-600 shadow-md rounded-lg p-6 dashboard-card flex flex-col justify-between">
@@ -947,21 +942,17 @@ setInterval(updateTotalInvestments, 3600000); // 1 hour = 3600000 milliseconds
 // Get the referrals element
 // Function to increment the referrals count
 // Get the referrals element
-document.addEventListener('DOMContentLoaded', function() {
-    // Your JavaScript code here
-    const referralsElement = document.getElementById('referrals');
-    
-    // Function to increment the referrals count
-    function incrementReferrals() {
-        let currentReferrals = parseInt(referralsElement.textContent);
-        currentReferrals++;
-        referralsElement.textContent = currentReferrals;
-    }
-    
-    // Set an interval to call the incrementReferrals function every 2 minutes
-    setInterval(incrementReferrals, 120000);
-});
+const referralsElement = document.getElementById('referrals');
 
+// Function to increment the referrals count
+function incrementReferrals() {
+  let currentReferrals = parseInt(referralsElement.textContent);
+  currentReferrals++;
+  referralsElement.textContent = currentReferrals;
+}
+
+// Set an interval to call the incrementReferrals function every 2 minutes
+setInterval(incrementReferrals, 120000);
 
 
 </script>
