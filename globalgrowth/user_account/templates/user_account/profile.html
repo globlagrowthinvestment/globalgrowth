@@ -47,6 +47,21 @@
         #button {
             color: black;
         }
+        @keyframes ring {
+    0% { transform: rotate(0); }
+    5% { transform: rotate(15deg); }
+    10% { transform: rotate(-15deg); }
+    15% { transform: rotate(15deg); }
+    20% { transform: rotate(-15deg); }
+    25% { transform: rotate(0); }
+    100% { transform: rotate(0); }
+  }
+
+  .ringing-bell {
+    display: inline-block;
+    animation: ring 2s infinite;
+    transform-origin: 50% 0;
+  }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -123,6 +138,20 @@
                         {% endfor %}
                     </div>
                     {% endif %}
+
+                    <div class="bg-blue-100 p-4 rounded-lg mb-4 text-base">
+                        <p class="flex items-center mb-2">
+                            <span class="text-red-500 text-2xl mr-2 ringing-bell">🔔</span>
+                            <span class="font-medium">Website upgrade in progress. Performance unaffected.</span>
+                        </p>
+                        <p class="flex items-center justify-between">
+                            <span class="font-medium">Experiencing an issue?</span>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <a href="{% url 'my_profile:complaints' %}" class="text-white no-underline">Notify us</a>
+                            </button>
+                        </p>
+                    </div>
+
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         <div id="account-balance" class="bg-yellow-400 card-shadow rounded-lg p-6 hover:shadow-lg transition-all">
