@@ -74,7 +74,30 @@ box-shadow:  41px 41px 100px #5a5a5a,
     transform: translateY(-5px); /* Moves the card up on hover */
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
 }
+.dark body {
+        background-color: #1a202c;
+        color: #e2e8f0;
+    }
 
+    .dark .bg-white {
+        background-color: #2d3748;
+    }
+
+    .dark .text-gray-600,
+    .dark .text-gray-700,
+    .dark .text-gray-800 {
+        color: #e2e8f0;
+    }
+
+    .dark .border-gray-200,
+    .dark .border-gray-300 {
+        border-color: #4a5568;
+    }
+
+    .dark .glass {
+        background: rgba(44, 55, 72, 0.5);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -129,11 +152,16 @@ box-shadow:  41px 41px 100px #5a5a5a,
                     </div>
                     <h1 class="text-2xl font-bold text-gray-800">{{ user.username }}!</h1>
                 </div>
-                <div class="flex items-center">
-                    <span class="mr-4 text-sm text-gray-600">Last login: {{ user.last_login|date:"F j, Y, g:i a" }}</span>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" class="hidden dark:inline-flex"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" class="inline-flex dark:hidden"/>
+                        </svg>
+                    </button>
                     <div class="relative">
                         <img src="{{ gravatar_url }}" alt="Profile" class="h-10 w-10 rounded-full border-2 border-blue-500">
-                        <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-400 ring-2 ring-white"></span>
+                        <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-400 ring-2 ring-white dark:ring-gray-800"></span>
                     </div>
                 </div>
             </header>
@@ -151,6 +179,7 @@ box-shadow:  41px 41px 100px #5a5a5a,
                         {% endfor %}
                     </div>
                     {% endif %}
+
                     </div>
 
 
@@ -274,20 +303,21 @@ box-shadow:  41px 41px 100px #5a5a5a,
                     </div>
                     
                     
+                    
 
-                    <div class="bg-blue-100 rounded-lg shadow-lg p-8 mb-8">
-                        <h2 class="text-3xl font-bold mb-6 text-gray-800">Deposit Verification</h2>
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-8 shadow-lg">
+                        <h2 class="text-3xl font-bold mb-6 text-indigo-800 dark:text-white">Deposit Verification</h2>
                         <form action="{% url 'user_account:deposit_money' %}" method="post" class="space-y-6">
                             {% csrf_token %}
                             <div class="relative">
-                                <label for="mpesa_message" class="block text-sm font-medium text-gray-700 mb-2">
+                                <label for="mpesa_message" class="block text-sm font-medium text-indigo-800 dark:text-gray-300 mb-2">
                                     Paste M-Pesa message here for verification:
                                 </label>
                                 <textarea 
                                     id="mpesa_message" 
                                     name="mpesa_message" 
                                     rows="4" 
-                                    class="block w-full px-4 py-3 border-2 border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
+                                    class="block w-full px-4 py-3 border-2 border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                     placeholder="e.g., AGTBXH7T9H Confirmed. Ksh5,000.00 sent to GLOBAL GROWTH PLATFORM..."
                                     required
                                 ></textarea>
@@ -310,8 +340,8 @@ box-shadow:  41px 41px 100px #5a5a5a,
                             </div>
                         </form>
                         <div class="mt-6">
-                            <h3 class="text-lg font-semibold mb-2 text-gray-700">How to verify your deposit:</h3>
-                            <ol class="list-decimal list-inside text-gray-600 space-y-2">
+                            <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">How to verify your deposit:</h3>
+                            <ol class="list-decimal list-inside text-indigo-800 text-indigo-800 space-y-2">
                                 <li>Paste you Mpesa Message</li>
                                 <li>Wait for Admin Approval<strong> Takes less than 1 minute</strong></li>
                                 <li>Check status in your transactions table</li>
@@ -320,7 +350,6 @@ box-shadow:  41px 41px 100px #5a5a5a,
                             </ol>
                         </div>
                     </div>
-
                     <div class="bg-white card-shadow rounded-lg p-6">
                         <h2 class="text-2xl font-semibold mb-4 text-gray-800">Recent Transactions</h2>
                         <div class="overflow-x-auto">
@@ -553,6 +582,88 @@ box-shadow:  41px 41px 100px #5a5a5a,
             maturityInfo.classList.remove('hidden');
         }
     }
+    // dark theme feature functionality
+   // Get the theme toggle button and the HTML element
+const themeToggle = document.getElementById('theme-toggle');
+const html = document.documentElement;
+
+// Check for saved theme preference or default to 'light'
+const currentTheme = localStorage.getItem('theme') || 'light';
+html.classList.add(currentTheme);
+
+/**
+ * Toggles the theme between 'light' and 'dark'
+ */
+function toggleTheme() {
+  // Toggle the 'dark' class on the HTML element
+  html.classList.toggle('dark');
+
+  // Get the current theme
+  const isDark = html.classList.contains('dark');
+
+  // Save the new theme preference to localStorage
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+  // Update the theme toggle icon
+  updateThemeIcon(isDark);
+
+  // Apply the theme to specific elements
+  applyTheme();
+}
+
+/**
+ * Updates the theme toggle icon to either a moon or sun icon
+ * @param {boolean} isDark - Indicates if the current theme is 'dark'
+ */
+function updateThemeIcon(isDark) {
+  const moonIcon = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />`;
+  const sunIcon = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`;
+  themeToggle.querySelector('svg').innerHTML = isDark ? sunIcon : moonIcon;
+}
+
+/**
+ * Applies the current theme to specific elements on the page
+ */
+function applyTheme() {
+  const isDark = html.classList.contains('dark');
+
+  // Update background colors
+  document.body.style.backgroundColor = isDark ? '#1a202c' : '#f7fafc';
+  document.querySelectorAll('.bg-white, .bg-gray-100').forEach(el => {
+    el.style.backgroundColor = isDark ? '#2d3748' : '';
+    el.style.color = isDark ? '#e2e8f0' : '';
+  });
+
+  // Update text colors
+  document.querySelectorAll('.text-gray-600, .text-gray-700, .text-gray-800').forEach(el => {
+    el.style.color = isDark ? '#e2e8f0' : '';
+  });
+
+  // Update border colors
+  document.querySelectorAll('.border-gray-200, .border-gray-300').forEach(el => {
+    el.style.borderColor = isDark ? '#4a5568' : '';
+  });
+
+  // Update glass effect
+  document.querySelectorAll('.glass').forEach(el => {
+    if (isDark) {
+      el.style.background = 'rgba(44, 55, 72, 0.5)';
+      el.style.boxShadow = '0 8px 32px 0 rgba(0, 0, 0, 0.37)';
+    } else {
+      el.style.background = '';
+      el.style.boxShadow = '';
+    }
+  });
+}
+
+// Set initial icon state
+updateThemeIcon(currentTheme === 'dark');
+
+// Apply theme on load and whenever it changes
+applyTheme();
+themeToggle.addEventListener('click', toggleTheme);
+
+</script>
     </script>
 </body>
 </html>
