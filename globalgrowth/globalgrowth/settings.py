@@ -74,6 +74,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'my_profile.middleware.MyProfileAuthMiddleware', 
+    'user_account.middleware.RedirectOnErrorMiddleware',
 ]
 # trusted origin for this case ngrok
 #CSRF_TRUSTED_ORIGINS = ['*']
@@ -115,6 +116,7 @@ DATABASES = {
 
 
 
+
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
@@ -122,6 +124,7 @@ DATABASES = {
         conn_max_age=600
     )
 }
+
 
 
 
