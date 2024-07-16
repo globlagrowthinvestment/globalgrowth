@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <style>
         body {
-            background: linear-gradient(135deg, #6f99d8 0%, #a7bfe6 100%);
+            background: url("{% static 'images/bbb.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
             font-family: 'Arial', sans-serif;
             min-height: 100vh;
             display: flex;
@@ -23,11 +24,13 @@
         .card {
             border: none;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             overflow: hidden;
+            background: rgba(255, 255, 255, 0.1); /* Slightly transparent */
+            backdrop-filter: blur(10px); /* Glassmorphism effect */
         }
         .card-header {
-            background-color: #4a90e2;
+            background-color: rgba(74, 144, 226, 0.8);
             color: white;
             text-align: center;
             padding: 25px;
@@ -47,9 +50,10 @@
         .form-control {
             border-radius: 8px;
             padding: 12px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #fefcfc;
             transition: all 0.3s ease;
             font-size: 16px;
+            background-color: rgba(243, 235, 235, 0.5); /* Slightly transparent */
         }
         .form-control:focus {
             border-color: #4a90e2;
@@ -59,7 +63,7 @@
             position: absolute;
             top: -10px;
             left: 10px;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.7);
             padding: 0 5px;
             font-size: 14px;
             color: #4a90e2;
@@ -134,7 +138,7 @@
                         <input type="password" class="form-control" id="password1" name="password1" placeholder=" " required>
                         <label for="password1" class="form-label">Password</label>
                         <div class="password-requirements">
-                            Password must be at least 8 characters long and include uppercase, lowercase, number, orspecial character.
+                            <strong>Password must be at least 8 characters long and include uppercase, lowercase, number, or special character.</strong>
                         </div>
                         <div class="invalid-feedback" id="password1Feedback"></div>
                     </div>
@@ -143,18 +147,7 @@
                         <label for="password2" class="form-label">Confirm Password</label>
                         <div class="invalid-feedback" id="password2Feedback"></div>
                     </div>
-                    <div class="form-group">
-                        <select id="country" name="country" class="form-control" required>
-                            <option value="" disabled selected>Select Country</option>
-                            <option value="Kenya">Kenya</option>
-                            <option value="Tanzania">Tanzania</option>
-                            <option value="Rwanda">Rwanda</option>
-                            <option value="Nigeria">Nigeria</option>
-                            <option value="Uganda">Uganda</option>
-                            <option value="Ethiopia">Ethiopia</option>
-                        </select>
-                        <label for="country" class="form-label">Country</label>
-                    </div>
+                    
                     <div class="form-group">
                         <input type="tel" class="form-control" id="phone" name="phone" placeholder=" " required>
                         <label for="phone" class="form-label">Phone Number</label>
