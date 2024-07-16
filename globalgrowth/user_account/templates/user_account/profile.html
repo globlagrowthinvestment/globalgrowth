@@ -62,6 +62,19 @@
     animation: ring 2s infinite;
     transform-origin: 50% 0;
   }
+  .glass {
+    border-radius: 36px;
+background: #e0e0e0;
+box-shadow:  41px 41px 100px #5a5a5a,
+             -41px -41px 100px #ffffff;
+}
+
+.hover-glass:hover {
+    background: rgba(255, 255, 255, 0.2); /* Slightly more opaque on hover */
+    transform: translateY(-5px); /* Moves the card up on hover */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+}
+
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -138,23 +151,11 @@
                         {% endfor %}
                     </div>
                     {% endif %}
-
-                    <div class="bg-blue-100 p-4 rounded-lg mb-4 text-base">
-                        <p class="flex items-center mb-2">
-                            <span class="text-red-500 text-2xl mr-2 ringing-bell">🔔</span>
-                            <span class="font-medium">Website upgrade in progress. Performance unaffected.</span>
-                        </p>
-                        <p class="flex items-center justify-between">
-                            <span class="font-medium">Experiencing an issue?</span>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                <a href="{% url 'my_profile:complaints' %}" class="text-white no-underline">Notify us</a>
-                            </button>
-                        </p>
                     </div>
 
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div id="account-balance" class="bg-yellow-400 card-shadow rounded-lg p-6 hover:shadow-lg transition-all">
+                        <div id="account-balance" class="glass card-shadow p-6 hover-glass transition-all">
                             <h3 class="text-lg font-semibold mb-2 text-yellow-800">Account Balance 💵</h3>
                             {% if user_profile.approved %}
                                 <p class="text-3xl font-bold text-white-600">Ksh <span id="balance-amount">{{ user_profile.balance }}</span></p>
@@ -163,18 +164,19 @@
                             {% endif %}
                         </div>
                     
-                        <div id="total-deposits" class="bg-green-400 card-shadow rounded-lg p-6 hover:shadow-lg transition-all">
+                        <div id="total-deposits" class="glass card-shadow p-6 hover-glass transition-all">
                             <h3 class="text-lg font-semibold mb-2 text-white-800">Total Deposits</h3>
                             <p class="text-3xl font-bold text-green-600">Ksh <span id="total-deposits-amount">{{ total_deposits }}</span></p>
                         </div>
                     
-                        <div id="total-investments" class="bg-blue-400 card-shadow rounded-lg p-6 hover:shadow-lg transition-all">
+                        <div id="total-investments" class="glass card-shadow p-6 hover-glass transition-all">
                             <h3 class="text-lg font-semibold mb-2 text-blue-800">Total Investments</h3>
                             <p class="text-3xl font-bold text-blue-600">Ksh <span id="investment-earnings">{{ total_investments }}</span></p>
                         </div>
                     </div>
                     
-                    <div class="bg-red-100 card-shadow rounded-lg p-6 mb-8">
+                    
+                    <div class="glass card-shadow p-6 mb-8 hover-glass transition-all">
                         <h2 class="text-2xl font-bold mb-6 text-gray-800">Investment</h2>
                         <form action="{% url 'user_account:package' %}" method="post" class="space-y-4">
                             {% csrf_token %}
