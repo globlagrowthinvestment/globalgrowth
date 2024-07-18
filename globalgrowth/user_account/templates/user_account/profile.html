@@ -12,6 +12,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    border-radius: 50px;
+    color: black;
+}
+
         .custom-alert {
             position: fixed;
             top: 0;
@@ -141,7 +154,7 @@ box-shadow:  41px 41px 100px #5a5a5a,
         <!-- Main content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Top bar -->
-            <header class="flex justify-between items-center p-6 bg-white shadow-md">
+            <header class="header">
                 <div class="flex items-center">
                     <div class="md:hidden mr-4">
                         <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
