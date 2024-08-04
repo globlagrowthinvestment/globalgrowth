@@ -14,6 +14,7 @@ pip install awscli
 
 # Upgrade setuptools and wheel
 pip install --upgrade setuptools wheel
+pip install ez_setup
 
 # Install requirements
 pip install -r requirements.txt
