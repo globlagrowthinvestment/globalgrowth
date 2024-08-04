@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-import dj_database_url
-
+""" import dj_database_url
+ """
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,16 +56,19 @@ INSTALLED_APPS = [
     'dashboard',
     'checkout',
     'my_profile',
+    'corsheaders',
     'guide',
     'referrals',
     'withdrawals.apps.WithdrawalsConfig',
-    'user_account.apps.UserAccountConfig'
+    'user_account.apps.UserAccountConfig',
+    'whatsapp_rewards.apps.WhatsappRewardsConfig'
 ]
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -104,7 +107,6 @@ WSGI_APPLICATION = 'globalgrowth.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:
-"""
 
 DATABASES = {
     'default': {
@@ -112,15 +114,15 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }  
-"""
 
-DATABASES = {
+
+""" DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
         default='postgresql://postgres:kali@localhost:5432/globalgrowth',
         conn_max_age=600
     )
-}
+} """
 
 
 
@@ -179,18 +181,23 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_secret_key())
 #ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.ngrok.io']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-import os
+from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Define BASE_DIR as a Path object
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATIC_URL = '/static/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 # This setting informs Django of the URI path from which your static files will be served to users
-# Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
+# Here, they will be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),

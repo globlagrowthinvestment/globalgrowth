@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,10 +28,10 @@ urlpatterns = [
     path('guide/', include('guide.urls')),
     path('profile/', include('my_profile.urls')),
     path('withdraw/', include('withdrawals.urls')),
-     path('account/', include('user_account.urls')),
-    path('', include('referrals.urls')),  # Added this line
-
-
-    
+    path('account/', include('user_account.urls')),
+    path('', include('referrals.urls')),
+    path('views_earn/', include('whatsapp_rewards.urls')),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
