@@ -8,153 +8,113 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
       body {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: #333; /* Fallback color for text */
-      }
-  
-      .content-area {
-          background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-          backdrop-filter: blur(10px); /* Frosted glass effect */
-          border-radius: 10px; /* Rounded corners */
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
-          border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for better visibility */
-      }
-  
-      .container {
-          background: rgba(255, 255, 255, 0.1); /* Container with a slight transparency */
-          border-radius: 10px; /* Rounded corners for the container */
-          padding: 20px; /* Spacing inside the container */
-      }
-  
-      h2 {
-          color: #6b46c1; /* Purple color for headings */
-      }
-  
-      p {
-          color: #4a5568; /* Darker gray color for paragraphs */
-      }
-  
-      table {
-          background: rgba(255, 255, 255, 0.1); /* Table with a slight transparency */
-          border-radius: 8px; /* Rounded corners for the table */
-      }
-  
-      thead {
-          background: rgba(107, 33, 168, 0.1); /* Slightly transparent purple header */
-      }
-  
-      tbody tr {
-          transition: background-color 0.3s ease; /* Smooth transition on hover */
-      }
-  
-      tbody tr:hover {
-          background-color: rgba(107, 33, 168, 0.05); /* Light purple hover effect */
-      }
-      .upload-status-screenshot {
-        background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
-        backdrop-filter: blur(10px); /* Frosted glass effect */
-        border-radius: 12px; /* Rounded corners */
-        padding: 24px; /* Spacing inside the container */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Elevated shadow */
-        border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for definition */
-    }
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333; /* Fallback color for text */
+}
 
-    .upload-status-screenshot h2 {
-        color: #6b46c1; /* Purple color for headings */
-    }
+.content-area {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for better visibility */
+}
 
-    .upload-status-screenshot p {
-        color: #4a5568; /* Dark gray color for paragraphs */
-        margin-bottom: 16px; /* Space below the paragraph */
-    }
+.container {
+    background: rgba(255, 255, 255, 0.1); /* Container with a slight transparency */
+    border-radius: 10px; /* Rounded corners for the container */
+    padding: 20px; /* Spacing inside the container */
+}
 
-    .upload-status-screenshot form {
-        margin-bottom: 24px; /* Space below the form */
-    }
+h2 {
+    color: #6b46c1; /* Purple color for headings */
+}
 
-    .upload-status-screenshot button {
-        background-color: #3182ce; /* Blue background */
-        border: none; /* Remove default border */
-        color: #ffffff; /* White text */
-        padding: 12px 24px; /* Padding around the button */
-        border-radius: 6px; /* Rounded corners */
-        font-weight: bold; /* Bold text */
-        cursor: pointer; /* Pointer cursor on hover */
-        transition: background-color 0.3s ease; /* Smooth transition for hover */
-    }
+p {
+    color: #4a5568; /* Darker gray color for paragraphs */
+}
 
-    .upload-status-screenshot button:hover {
-        background-color: #2b6cb0; /* Darker blue on hover */
-    }
+table {
+    background: rgba(255, 255, 255, 0.1); /* Table with a slight transparency */
+    border-radius: 8px; /* Rounded corners for the table */
+}
 
-    .upload-status-screenshot .alert-note {
-        background: rgba(255, 255, 0, 0.2); /* Semi-transparent yellow background */
-        border-left: 4px solid #f6e05e; /* Yellow left border */
-        color: #d69e2e; /* Dark yellow text color */
-        padding: 12px; /* Padding inside the alert */
-        border-radius: 6px; /* Rounded corners */
-    }
-    .product-images-section {
-        background: rgba(255, 255, 255, 0.9); /* Slightly transparent background for contrast */
-        border-radius: 12px; /* Rounded corners */
-        padding: 24px; /* Space inside the section */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow for elevation */
-        border: 1px solid rgba(0, 0, 0, 0.1); /* Light border for definition */
-    }
+thead {
+    background: rgba(107, 33, 168, 0.1); /* Slightly transparent purple header */
+}
 
-    .product-images-section h2 {
-        color: #6b46c1; /* Purple color for headings */
-        margin-bottom: 24px; /* Space below the heading */
-    }
+tbody tr {
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
 
-    .product-images-section .image-card {
-        background: #ffffff; /* White background for cards */
-        border-radius: 8px; /* Rounded corners */
-        overflow: hidden; /* Hide overflow */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
-        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-    }
+tbody tr:hover {
+    background-color: rgba(107, 33, 168, 0.05); /* Light purple hover effect */
+}
 
-    .product-images-section .image-card:hover {
-        transform: translateY(-5px); /* Slight lift on hover */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deepened shadow on hover */
-    }
+.upload-status-screenshot {
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-radius: 12px; /* Rounded corners */
+    padding: 24px; /* Spacing inside the container */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Elevated shadow */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for definition */
+}
 
-    .product-images-section .image-card img {
-        width: 100%; /* Full width of the card */
-        height: 200px; /* Fixed height */
-        object-fit: cover; /* Maintain aspect ratio */
-    }
+.upload-status-screenshot h2 {
+    color: #6b46c1; /* Purple color for headings */
+}
 
-    .product-images-section .image-card .content {
-        padding: 16px; /* Padding inside the content area */
-    }
+.upload-status-screenshot p {
+    color: #4a5568; /* Dark gray color for paragraphs */
+    margin-bottom: 16px; /* Space below the paragraph */
+}
 
-    .product-images-section .image-card .description {
-        color: #4a5568; /* Dark gray color for text */
-        margin-bottom: 12px; /* Space below the description */
-    }
+.upload-status-screenshot form {
+    margin-bottom: 24px; /* Space below the form */
+}
 
-    .product-images-section .image-card .download-button {
-        background-color: #3182ce; /* Blue background */
-        color: #ffffff; /* White text */
-        padding: 8px 16px; /* Padding around the button */
-        border-radius: 4px; /* Rounded corners */
-        font-weight: bold; /* Bold text */
-        text-decoration: none; /* Remove underline */
-        display: inline-block; /* Inline-block to apply padding */
-        transition: background-color 0.3s ease; /* Smooth transition on hover */
-    }
+.upload-status-screenshot button {
+    background-color: #3182ce; /* Blue background */
+    border: none; /* Remove default border */
+    color: #ffffff; /* White text */
+    padding: 12px 24px; /* Padding around the button */
+    border-radius: 6px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
 
-    .product-images-section .image-card .download-button:hover {
-        background-color: #2b6cb0; /* Darker blue on hover */
-    }
+.upload-status-screenshot button:hover {
+    background-color: #2b6cb0; /* Darker blue on hover */
+}
 
-    .product-images-section .no-images {
-        color: #4a5568; /* Dark gray color for no images text */
-        text-align: center; /* Center alignment */
-        padding: 16px; /* Padding around the text */
-    }
+.upload-status-screenshot .alert-note {
+    background: rgba(255, 255, 0, 0.2); /* Semi-transparent yellow background */
+    border-left: 4px solid #f6e05e; /* Yellow left border */
+    color: #d69e2e; /* Dark yellow text color */
+    padding: 12px; /* Padding inside the alert */
+    border-radius: 6px; /* Rounded corners */
+}
+
+.download-button {
+    background-color: #3182ce; /* Blue background */
+    border: none; /* Remove default border */
+    color: #ffffff; /* White text */
+    padding: 12px 24px; /* Padding around the button */
+    border-radius: 6px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Inline-block for proper spacing */
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.download-button:hover {
+    background-color: #2b6cb0; /* Darker blue on hover */
+}
+
+    
   </style>
   
 </head>
@@ -246,7 +206,6 @@
                           <p><strong>Note:</strong> The number of views for each status should not exceed 200. Please ensure you adhere to this limit to avoid any issues.</p>
                       </div>
                     </div>
-                </div>
                  
                   
 
@@ -255,18 +214,22 @@
                       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                           {% for image in images %}
                               <div class="image-card">
-                                  <img src="{{ image.image.url }}" alt="{{ image.name }}">
+                                  <img src="{{ image.image.url }}" alt="{{ image.name }}" class="w-full h-auto rounded-md">
                                   {% if image.description %}
-                                      <div class="content">
-                                          <p class="description">{{ image.description }}</p>
-                                          <a href="{{ image.image.url }}" download="{{ image.name }}" class="download-button">Download</a>
+                                      <div class="content mt-4">
+                                          <p class="description text-gray-700 mb-4">{{ image.description }}</p>
+                                          <a href="{{ image.image.url }}" download="{{ image.name }}" class="download-button bg-blue-500 text-white py-2 px-4 rounded inline-block hover:bg-blue-700 transition">
+                                              Download
+                                          </a>
                                       </div>
                                   {% endif %}
                               </div>
                           {% empty %}
-                              <p class="no-images">No product images available.</p>
+                              <p class="no-images text-gray-600">No product images available.</p>
                           {% endfor %}
                       </div>
+                  </div>
+                  
                   </div>
                   
 
