@@ -17,6 +17,7 @@ urlpatterns = [
     path('instructions/', views.instructions, name='instructions'),
     #path('submit_complaint/', views.submit_complaint, name='submit_complaint'),
     path('invest/', views.invest, name='invest'),
+    #path('views_earn/', views.views_earn, name='whatsapp_status'),
     path('request_withdrawal/', views.request_withdrawal, name='request_withdrawal'),
     #path('cancel_withdrawal/<int:transaction_id>/', views.cancel_withdrawal, name='cancel_withdrawal'),
 ]

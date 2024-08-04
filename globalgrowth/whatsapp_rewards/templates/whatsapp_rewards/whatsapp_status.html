@@ -1,476 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data Management - Global Growth</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>User Data Management</title>
     <style>
       body {
-        font-family: "Arial", sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        background-color: #f9f9f9; /* Background color for the whole page */
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: #333; /* Fallback color for text */
       }
-      
-
-      .sidebar {
-        width: 250px;
-        background-color: #2356d6; /* Updated sidebar background color */
-        color: white;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        overflow-y: auto;
-        transition: transform 0.3s ease;
+  
+      .content-area {
+          background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+          backdrop-filter: blur(10px); /* Frosted glass effect */
+          border-radius: 10px; /* Rounded corners */
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+          border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for better visibility */
       }
-      .sidebar.collapsed {
-        transform: translateX(-250px);
+  
+      .container {
+          background: rgba(255, 255, 255, 0.1); /* Container with a slight transparency */
+          border-radius: 10px; /* Rounded corners for the container */
+          padding: 20px; /* Spacing inside the container */
       }
-      .sidebar .header {
-        padding: 20px;
-        background-color: #1a4c8c; /* Slightly darker shade for header */
-        border-bottom: 1px solid #184c8c;
-        text-align: center;
-        position: relative;
-        color: white;
-      }
-      .sidebar .header h1 {
-        margin: 0;
-        font-size: 1.2em;
-        color: #ffffff; /* Greeting color updated to white */
-        font-weight: bold;
-      }
-      .sidebar .menu {
-        padding: 20px;
-      }
-      .sidebar .menu a {
-        display: block;
-        color: white;
-        text-decoration: none;
-        padding: 15px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-      }
-      .sidebar .menu a:hover {
-        background-color: #1a6fb3; /* Updated hover color */
-      }
-      .toggle-btn {
-        display: none;
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        font-size: 1.5em;
-        background: #1a4c8c; /* Updated button background color */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px;
-        cursor: pointer;
-        z-index: 1000;
-      }
-      .header {
-        background-color: #ffffff;
-        padding: 20px;
-        border-bottom: 1px solid #ddd;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-      .header h1 {
-        margin: 0;
-        font-size: 1.5em;
-        color: #2356d6; /* Color of the heading */
-        font-weight: bold;
-        text-align: center;
-        position: relative;
-        background: linear-gradient(
-          to right,
-          #2356d6,
-          #1a4c8c
-        ); /* Gradient effect */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        padding: 10px;
-        border-radius: 8px;
-      }
-      .header .welcome-message {
-        margin-top: 10px;
-        font-size: 1.2em;
-        color: #555;
-        text-align: center;
-      }
-      .main-content {
-        margin-left: 250px;
-        padding: 20px;
-        width: calc(100% - 250px); /* Adjust width for main content */
-      }
-      .main-content .container {
-        background-color: #ffffff;
-        border-radius: 8px;
-
-        padding: 20px;
-        margin-bottom: 20px;
-      }
+  
       h2 {
-        color: #2356d6; /* Color for section headings */
-        margin-top: 0;
-        font-size: 1.8em;
-        border-bottom: 2px solid #2356d6;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
+          color: #6b46c1; /* Purple color for headings */
       }
+  
       p {
-        font-size: 1.1em;
-        text-align: center;
-        color: #555;
-        margin: 0;
-        margin-bottom: 20px;
+          color: #4a5568; /* Darker gray color for paragraphs */
       }
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      form input[type="text"],
-      form input[type="file"],
-      form textarea,
-      form select {
-        padding: 12px;
-        border-radius: 6px;
-        border: 1px solid #ddd;
-        font-size: 16px;
-        transition: border-color 0.3s ease;
-      }
-      form input[type="text"]:focus,
-      form textarea:focus,
-      form select:focus {
-        border-color: #2356d6; /* Focus color for inputs */
-        outline: none;
-      }
-      form button {
-        padding: 12px;
-        font-size: 16px;
-        color: #ffffff;
-        background-color: #2356d6; /* Button background color */
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-      }
-      form button:hover {
-        background-color: #1a4c8c; /* Button hover color */
-        transform: scale(1.02);
-      }
+  
       table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        background-color: #ffffff;
-        border-radius: 8px;
-        overflow: hidden;
+          background: rgba(255, 255, 255, 0.1); /* Table with a slight transparency */
+          border-radius: 8px; /* Rounded corners for the table */
       }
+  
       thead {
-        background-color: #2356d6; /* Header background color */
-        color: white;
+          background: rgba(107, 33, 168, 0.1); /* Slightly transparent purple header */
       }
-      th,
-      td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
+  
+      tbody tr {
+          transition: background-color 0.3s ease; /* Smooth transition on hover */
       }
-      tbody tr:nth-child(even) {
-        background-color: #f4f4f4;
+  
+      tbody tr:hover {
+          background-color: rgba(107, 33, 168, 0.05); /* Light purple hover effect */
       }
-      th {
-        font-weight: bold;
-      }
-      .approved {
-        color: #4caf50;
-        font-weight: bold;
-      }
-      .not-approved {
-        color: #f44336;
-        font-weight: bold;
-      }
-      /* Base styles for messages */
-      .message {
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        font-size: 1.1em;
-        color: #ffffff;
-        background-color: #2d3e50; /* Default background for messages */
-      }
+      .upload-status-screenshot {
+        background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+        backdrop-filter: blur(10px); /* Frosted glass effect */
+        border-radius: 12px; /* Rounded corners */
+        padding: 24px; /* Spacing inside the container */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Elevated shadow */
+        border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for definition */
+    }
 
-      /* Success messages */
-      .message.success {
-        background-color: #4caf50; /* Green background for success messages */
-      }
+    .upload-status-screenshot h2 {
+        color: #6b46c1; /* Purple color for headings */
+    }
 
-      /* Error messages */
-      .message.error {
-        background-color: #f44336; /* Red background for error messages */
-      }
+    .upload-status-screenshot p {
+        color: #4a5568; /* Dark gray color for paragraphs */
+        margin-bottom: 16px; /* Space below the paragraph */
+    }
 
-      /* Info messages */
-      .message.info {
-        background-color: #2196f3; /* Blue background for info messages */
-      }
+    .upload-status-screenshot form {
+        margin-bottom: 24px; /* Space below the form */
+    }
 
-      /* Warning messages */
-      .message.warning {
-        background-color: #ff9800; /* Orange background for warning messages */
-      }
+    .upload-status-screenshot button {
+        background-color: #3182ce; /* Blue background */
+        border: none; /* Remove default border */
+        color: #ffffff; /* White text */
+        padding: 12px 24px; /* Padding around the button */
+        border-radius: 6px; /* Rounded corners */
+        font-weight: bold; /* Bold text */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s ease; /* Smooth transition for hover */
+    }
 
-      /* Additional styles for better readability */
-      .message p {
-        margin: 0;
-      }
-      .product_adds{
-        display: flex;
-        align-items: center;
-        gap: 1em;
-        margin: 1em 0;
-      }
-      .product-image {
-            height: 20vh;
-            margin: 10px 0;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .product-description {
-          display: flex;
-          gap: .6em;
-          flex-direction: column;
-            font-size: 1.1em;
-            color: #555;
-            text-align: center;
-        }
-        .download-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 10px;
-            font-size: 1em;
-            color: #fff;
-            background-color: #2356d6;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .download-btn:hover {
-            background-color: #1a252f;
-        }
+    .upload-status-screenshot button:hover {
+        background-color: #2b6cb0; /* Darker blue on hover */
+    }
 
-       
+    .upload-status-screenshot .alert-note {
+        background: rgba(255, 255, 0, 0.2); /* Semi-transparent yellow background */
+        border-left: 4px solid #f6e05e; /* Yellow left border */
+        color: #d69e2e; /* Dark yellow text color */
+        padding: 12px; /* Padding inside the alert */
+        border-radius: 6px; /* Rounded corners */
+    }
+    .product-images-section {
+        background: rgba(255, 255, 255, 0.9); /* Slightly transparent background for contrast */
+        border-radius: 12px; /* Rounded corners */
+        padding: 24px; /* Space inside the section */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow for elevation */
+        border: 1px solid rgba(0, 0, 0, 0.1); /* Light border for definition */
+    }
 
-      @media (max-width: 768px) {
-        .sidebar {
-          width: 100%;
-          height: auto;
-          transform: translateX(-100%);
-        }
-        .sidebar.collapsed {
-          transform: translateX(0);
-        }
-        .main-content {
-          margin-left: 0;
-          width: 100%;
-        }
-        .toggle-btn {
-          display: block;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="sidebar">
-      <div class="header">
-        <h3 class="greeting" id="greeting"></h1>
-      </div>
-      <div class="menu">
-        <nav class="flex-1 px-4 py-4">
-          <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-              <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
-          </a>
-          <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-              <i class="fas fa-user-tie mr-3"></i> Profile
-          </a>
-          <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-              <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
-          </a>
-          <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-              <i class="fas fa-user-plus mr-3"></i> Referral
-          </a>
-          <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+    .product-images-section h2 {
+        color: #6b46c1; /* Purple color for headings */
+        margin-bottom: 24px; /* Space below the heading */
+    }
+
+    .product-images-section .image-card {
+        background: #ffffff; /* White background for cards */
+        border-radius: 8px; /* Rounded corners */
+        overflow: hidden; /* Hide overflow */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    }
+
+    .product-images-section .image-card:hover {
+        transform: translateY(-5px); /* Slight lift on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deepened shadow on hover */
+    }
+
+    .product-images-section .image-card img {
+        width: 100%; /* Full width of the card */
+        height: 200px; /* Fixed height */
+        object-fit: cover; /* Maintain aspect ratio */
+    }
+
+    .product-images-section .image-card .content {
+        padding: 16px; /* Padding inside the content area */
+    }
+
+    .product-images-section .image-card .description {
+        color: #4a5568; /* Dark gray color for text */
+        margin-bottom: 12px; /* Space below the description */
+    }
+
+    .product-images-section .image-card .download-button {
+        background-color: #3182ce; /* Blue background */
+        color: #ffffff; /* White text */
+        padding: 8px 16px; /* Padding around the button */
+        border-radius: 4px; /* Rounded corners */
+        font-weight: bold; /* Bold text */
+        text-decoration: none; /* Remove underline */
+        display: inline-block; /* Inline-block to apply padding */
+        transition: background-color 0.3s ease; /* Smooth transition on hover */
+    }
+
+    .product-images-section .image-card .download-button:hover {
+        background-color: #2b6cb0; /* Darker blue on hover */
+    }
+
+    .product-images-section .no-images {
+        color: #4a5568; /* Dark gray color for no images text */
+        text-align: center; /* Center alignment */
+        padding: 16px; /* Padding around the text */
+    }
+  </style>
+  
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar for large screens -->
+        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
+            <div class="p-4">
+                <h2 class="text-2xl font-semibold">Global Growth</h2>
+            </div>
+            <nav class="flex-1 px-2 py-4">
+                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                </a>
+                <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-tie mr-3"></i> Profile
+                </a>
+                <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                </a>
+                <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-user-plus mr-3"></i> Referral
+                </a>
+                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                </a>
+                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-book mr-3"></i> Guide
+                </a>
+                <a href="{% url 'whatsapp_status' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-video mr-3"></i> Global views
+                </a>
+                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-cog mr-3"></i> Settings
+                </a>
+                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                </a>
+            </nav>
+            <div class="p-4">
+                <p class="text-sm">© 2024 Global Growth</p>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top bar -->
+            <header class="flex justify-between items-center p-4 bg-white shadow-md">
+                <div class="flex items-center">
+                    <div class="md:hidden mr-4">
+                        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <h1 id="greeting" class="text-xl font-semibold">Welcome, {{ user.username }}!</h1>
+                </div>
+                <div class="flex items-center">
+                    <span class="mr-4 text-sm text-gray-600">Last login: {{ user.last_login|date:"F j, Y, g:i a" }}</span>
+                    <div class="relative">
+                        <img src="{{ gravatar_url }}" alt="Profile" class="h-8 w-8 rounded-full">
+                        <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main content area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
+                <div class="container mx-auto">
+                    <!-- Display messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4" role="alert">
+                                <p>{{ message }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="upload-status-screenshot">
+                      <h2 class="text-3xl font-bold mb-6 text-purple-800">Upload Status Screenshot</h2>
+                      <p class="mb-4">Account Balance - KSH. {{ balance }}</p>
+                      <form method="post" enctype="multipart/form-data" class="mb-6">
+                          {% csrf_token %}
+                          {{ form.as_p }}
+                          <button type="submit">Upload</button>
+                      </form>
+                      <div class="alert-note" role="alert">
+                          <p><strong>Note:</strong> The number of views for each status should not exceed 200. Please ensure you adhere to this limit to avoid any issues.</p>
+                      </div>
+                    </div>
+                </div>
+                 
+                  
+
+                    <div class="product-images-section rounded-lg shadow-xl p-8 mb-8">
+                      <h2 class="text-3xl font-bold mb-6 text-purple-800">Product Images</h2>
+                      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {% for image in images %}
+                              <div class="image-card">
+                                  <img src="{{ image.image.url }}" alt="{{ image.name }}">
+                                  {% if image.description %}
+                                      <div class="content">
+                                          <p class="description">{{ image.description }}</p>
+                                          <a href="{{ image.image.url }}" download="{{ image.name }}" class="download-button">Download</a>
+                                      </div>
+                                  {% endif %}
+                              </div>
+                          {% empty %}
+                              <p class="no-images">No product images available.</p>
+                          {% endfor %}
+                      </div>
+                  </div>
+                  
+
+                    <div class="content-area rounded-lg shadow-xl p-8 mb-8">
+                        <h2 class="text-3xl font-bold mb-6 text-purple-800">Earnings</h2>
+                        <p class="mb-4">Total Earnings - KSH {{ total_earnings }}</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-auto">
+                                <thead>
+                                    <tr class="bg-purple-200 text-purple-800 uppercase text-sm leading-normal">
+                                        <th class="py-3 px-6 text-left">Package</th>
+                                        <th class="py-3 px-6 text-left">Views</th>
+                                        <th class="py-3 px-6 text-left">Earnings</th>
+                                        <th class="py-3 px-6 text-left">Approved</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-700 text-sm">
+                                    {% for status in statuses %}
+                                    <tr class="border-b border-purple-100 hover:bg-purple-50">
+                                        <td class="py-3 px-6 text-left whitespace-nowrap">{{ status.package.name }}</td>
+                                        <td class="py-3 px-6 text-left">{{ status.views }}</td>
+                                        <td class="py-3 px-6 text-left">{{ status.earnings }}</td>
+                                        <td class="py-3 px-6 text-left">
+                                            <span class="{% if status.approved %}bg-green-200 text-green-800{% else %}bg-red-200 text-red-800{% endif %} py-1 px-3 rounded-full text-xs">
+                                                {% if status.approved %}Yes{% else %}No{% endif %}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="content-area rounded-lg shadow-xl p-8">
+                        <h2 class="text-3xl font-bold mb-6 text-purple-800">History</h2>
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-auto">
+                                <thead>
+                                    <tr class="bg-purple-200 text-purple-800 uppercase text-sm leading-normal">
+                                        <th class="py-3 px-6 text-left">Status</th>
+                                        <th class="py-3 px-6 text-left">Approved At</th>
+                                        <th class="py-3 px-6 text-left">Approved By</th>
+                                        <th class="py-3 px-6 text-left">Rejected</th>
+                                        <th class="py-3 px-6 text-left">Rejection Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-700 text-sm">
+                                    {% for history in user_history %}
+                                    <tr class="border-b border-purple-100 hover:bg-purple-50">
+                                        <td class="py-3 px-6 text-left whitespace-nowrap">{{ history.status.package.name }}</td>
+                                        <td class="py-3 px-6 text-left">{{ history.approved_at }}</td>
+                                        <td class="py-3 px-6 text-left">{% if history.approved_by %}<span>GlobalGrowth</span>{% else %}N/A{% endif %}</td>
+                                        <td class="py-3 px-6 text-left">
+                                            <span class="{% if history.rejected %}bg-red-200 text-red-800{% else %}bg-green-200 text-green-800{% endif %} py-1 px-3 rounded-full text-xs">
+                                                {% if history.rejected %}Yes{% else %}No{% endif %}
+                                            </span>
+                                        </td>
+                                        <td class="py-3 px-6 text-left">{{ history.rejection_reason }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Mobile sidebar -->
+    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+        <div class="flex justify-between items-center p-4">
+            <h2 class="text-2xl font-semibold">Global Growth</h2>
+            <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="px-2 py-4">
+            <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+            </a>
+            <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-user-tie mr-3"></i> Profile
+            </a>
+            <a href="{% url 'withdrawals:request_withdrawal' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+            </a>
+            <a href="{% url 'referrals:referrals' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                <i class="fas fa-user-plus mr-3"></i> Referral
+            </a>
+            <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
               <i class="fas fa-exclamation-circle mr-3"></i> Complaints
           </a>
-          <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+          <a href="{% url 'my_profile:guide' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
               <i class="fas fa-book mr-3"></i> Guide
           </a>
-          <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+          <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+              <i class="fas fa-video mr-3"></i> Global views
+          </a>
+          <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
               <i class="fas fa-cog mr-3"></i> Settings
           </a>
-          <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+          <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
               <i class="fas fa-sign-out-alt mr-3"></i> Logout
           </a>
       </nav>
-        <!-- Add other links as needed -->
-      </div>
-    </div>
+  </div>
 
-    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+  <script>
+      const sidebarToggle = document.getElementById('sidebar-toggle');
+      const mobileSidebar = document.getElementById('mobile-sidebar');
+      const closeSidebar = document.getElementById('close-sidebar');
+      const greeting = document.getElementById('greeting');
 
-    <div class="main-content">
-      <div class="container">
-        <!-- Display messages -->
-        {% if messages %} {% for message in messages %}
-        <div class="message {{ message.tags }}">{{ message }}</div>
-        <br />
-        <br />
-        {% endfor %} {% endif %}
+      sidebarToggle.addEventListener('click', () => {
+          mobileSidebar.classList.toggle('-translate-x-full');
+      });
 
-        <div class="info-box">
-          <p>
-            <strong>Note:</strong> The number of views for each status should
-            not exceed 200. Please ensure you adhere to this limit to avoid any
-            issues.
-          </p>
-        </div>
-
-        <h2>Upload Status Screenshot</h2>
-        <p>Account Balance - KSH. {{ balance }}</p>
-        <form method="post" enctype="multipart/form-data">
-          {% csrf_token %} {{ form.as_p }}
-          <button type="submit">Upload</button>
-        </form>
-        <br />
-
-       
-        <h2>Product Image</h2>
-        <div>
-            {% for image in images %}
-                <div class="product_adds">
-                  <div class="image__cont">
-                    <img src="{{ image.image.url }}" alt="{{ image.name }}" class="product-image">
-
-                  </div>
-                    
-                    {% if image.description %}
-                        <div class="product-description">
-                          <span>{{ image.description }}</span>
-                          <a href="{{ image.image.url }}" download="{{ image.name }}" class="download-btn">Download</a>
-                        </div>
-                    {% endif %}
-                    
-                </div>
-            {% empty %}
-                <p>No product images available.</p>
-            {% endfor %}
-        </div>
-
-        <h2>Earnings</h2>
-        <p>Total Earnings - KSH {{ total_earnings }}</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Package</th>
-              <th>Views</th>
-              <th>Earnings</th>
-              <th>Approved</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for status in statuses %}
-            <tr>
-              <td>{{ status.package.name }}</td>
-              <td>{{ status.views }}</td>
-              <td>{{ status.earnings }}</td>
-              <td
-                class="{% if status.approved %}approved{% else %}not-approved{% endif %}"
-              >
-                {% if status.approved %}Yes{% else %}No{% endif %}
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-
-        <h2>History</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Status</th>
-              <th>Approved At</th>
-              <th>Approved By</th>
-              <th>Rejected</th>
-              <th>Rejection Reason</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for history in user_history %}
-            <tr>
-              <td>{{ history.status.package.name }}</td>
-              <td>{{ history.approved_at }}</td>
-              <td>
-                {% if history.approved_by %}
-                <span>GlobalGrowth</span>
-                {% else %} N/A {% endif %}
-              </td>
-              <td
-                class="{% if history.rejected %}not-approved{% else %}approved{% endif %}"
-              >
-                {% if history.rejected %}Yes{% else %}No{% endif %}
-              </td>
-              <td>{{ history.rejection_reason }}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <script>
-      function toggleSidebar() {
-        document.querySelector(".sidebar").classList.toggle("collapsed");
-      }
+      closeSidebar.addEventListener('click', () => {
+          mobileSidebar.classList.add('-translate-x-full');
+      });
 
       function updateGreeting() {
-        const username = "{{ user.username }}";
-        const greetingElement = document.getElementById("greeting");
-        const now = new Date();
-        const hours = now.getHours();
+          const username = "{{ user.username }}";
+          const now = new Date();
+          const hours = now.getHours();
+          let greetingText;
 
-        let greeting;
+          if (hours < 12) {
+              greetingText = "Good Morning";
+          } else if (hours < 18) {
+              greetingText = "Good Afternoon";
+          } else {
+              greetingText = "Good Evening";
+          }
 
-        if (hours < 12) {
-          greeting = "Good Morning";
-        } else if (hours < 18) {
-          greeting = "Good Afternoon";
-        } else {
-          greeting = "Good Evening";
-        }
-
-        // Apply the greeting class and set text content
-        greetingElement.textContent = `${greeting}, ${username}.`;
-        greetingElement.classList.add("greeting"); // Add the greeting class
-
-        
+          greeting.textContent = `${greetingText}, ${username}!`;
       }
 
-      // Run updateGreeting on page load
       updateGreeting();
-    </script>
-  </body>
+      setInterval(updateGreeting, 60000); // Update greeting every minute
+  </script>
+</body>
 </html>
