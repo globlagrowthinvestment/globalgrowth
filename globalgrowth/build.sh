@@ -5,8 +5,12 @@ set -o errexit
 # Upgrade pip
 pip install --upgrade pip
 
+pip install --upgrade setuptools
+pip install --upgrade wheel
+
 # Install requirements
 pip install -r requirements.txt
+
 
 # Collect static files (if applicable)
 python manage.py collectstatic --no-input
