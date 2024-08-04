@@ -5,7 +5,7 @@ set -o errexit
 # Upgrade pip
 pip install --upgrade pip
 
-pip install awscli==2.17.3
+pip install awscli
 
 pip install --upgrade setuptools pip
 pip install --upgrade wheel
