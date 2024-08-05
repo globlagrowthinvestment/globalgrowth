@@ -194,6 +194,44 @@ tbody tr:hover {
                         {% endfor %}
                     {% endif %}
 
+
+                    <!-- Tailwind CSS styling for package status and expiry messages -->
+<!-- Inside your HTML body where appropriate -->
+<!-- Display package status and remaining days -->
+<!-- Include Font Awesome CDN in the head of your HTML -->
+
+
+<div class="package-info p-6 mb-6 rounded-lg shadow-md
+    {% if can_upload_image %}
+        bg-green-50 border border-green-200 text-green-800
+    {% else %}
+        {% if package_expiry %}
+            bg-red-50 border border-red-200 text-red-800
+        {% else %}
+            bg-gray-50 border border-gray-200 text-gray-800
+        {% endif %}
+    {% endif %}
+">
+    <div class="flex items-center space-x-3">
+        {% if can_upload_image %}
+            <i class="fas fa-check-circle text-green-500 text-2xl"></i>
+            <p class="text-lg font-semibold">You can upload a new image now. {{ remaining_days }} days remaining before expiry.</p>
+        {% else %}
+            {% if package_expiry %}
+                <i class="fas fa-exclamation-circle text-red-500 text-2xl"></i>
+                <p class="text-lg font-semibold">Your package has expired. Please buy a new package to continue. Your current package expired {{ remaining_days }} days ago.</p>
+            {% else %}
+                <i class="fas fa-info-circle text-gray-500 text-2xl"></i>
+                <p class="text-lg font-semibold">You need to buy a new package to upload images.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+
                     <div class="upload-status-screenshot">
                       <h2 class="text-3xl font-bold mb-6 text-purple-800">Upload Status Screenshot</h2>
                       <p class="mb-4">Account Balance - KSH. {{ balance }}</p>

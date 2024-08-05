@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Status, Package, UserHistory, ProductImage
+from django.utils import timezone
+from datetime import timedelta
+from .models import Status, Package, UserHistory, ProductImage, UserAccount
 from .forms import StatusForm
-from .models import Status, UserAccount
 
 @login_required
 def whatsapp_status(request):
@@ -24,20 +25,39 @@ def whatsapp_status(request):
             package = status.package
             package_cost = package.price
 
-            # Check if the user has sufficient balance
-            if account_balance >= package_cost:
-                # Deduct the cost from the user's account balance
-                user_account.balance -= package_cost
-                user_account.save()
-
+            if user_account.is_package_active():
+                # Allow the user to upload an image without deducting balance
+                messages.success(request, 'You have an active package. You can upload images without additional charges before package expiry.')
+                # Continue processing the image upload here
                 # Assign the UserAccount instance to the status
                 status.user = user_account
                 status.save()
-                
-                messages.success(request, 'Status uploaded successfully and balance updated.')
+                messages.success(request, 'Status uploaded successfully.')
                 return redirect('whatsapp_status')  # Redirect to the same view to display updated data
             else:
-                messages.error(request, 'Insufficient balance to upload status.')
+                # Check if the user can buy a new package
+                if not user_account.can_buy_package():
+                    messages.error(request, 'You need to wait before buying a new package.')
+                    return redirect('whatsapp_status')
+
+                # User can buy a new package, proceed with purchase
+                if account_balance >= package.price:
+                    # Deduct the cost from the user's account balance
+                    user_account.balance -= package.price
+                    user_account.package_expiry = timezone.now() + timedelta(days=package.duration_days)
+                    user_account.next_package_purchase_allowed = timezone.now() + timedelta(days=7)  # Next purchase allowed after 7 days
+                    user_account.last_package_purchase = timezone.now()
+                    user_account.save()
+
+                    # Assign the UserAccount instance to the status
+                    status.user = user_account
+                    status.save()
+
+                    messages.success(request, 'Status uploaded successfully and balance updated.')
+                else:
+                    messages.error(request, 'Insufficient balance to upload status.')
+
+                return redirect('whatsapp_status')  # Redirect to the same view to display updated data
     else:
         form = StatusForm()
 
@@ -45,22 +65,22 @@ def whatsapp_status(request):
     statuses = Status.objects.filter(user=user_account)
     total_earnings = sum(status.earnings for status in statuses)
 
-    #fetch the product add image
+    # Fetch product images
     images = ProductImage.objects.filter(is_active=True)
-    print(images)
 
     # Fetch user history for the current user
     user_history = UserHistory.objects.filter(user=user_account)
 
-    return render(request, 'whatsapp_rewards/whatsapp_status.html', {
+    # Prepare data for template
+    context = {
         'form': form,
         'statuses': statuses,
         'total_earnings': total_earnings,
         'balance': account_balance,
         'user_history': user_history,
-        'images' : images,
-    })
+        'images': images,
+        'can_upload_image': user_account.is_package_active(),
+        'remaining_days': max(0, (user_account.package_expiry - timezone.now()).days) if user_account.package_expiry else 0,
+    }
 
-
-
-
+    return render(request, 'whatsapp_rewards/whatsapp_status.html', context)
