@@ -119,9 +119,6 @@ WSGI_APPLICATION = 'globalgrowth.wsgi.application'
 
 
 
-
-
-
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.

@@ -4,14 +4,16 @@ from django.utils import timezone
 from datetime import timedelta
 
 
+
 class UserAccount(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     balance = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    approved = models.BooleanField(default=False)  # Approval field
-    verified = models.BooleanField(default=False)  # Verification field
+    approved = models.BooleanField(default=False)
+    verified = models.BooleanField(default=False)
     total_investments = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     last_package_purchase = models.DateTimeField(null=True, blank=True)
     next_package_purchase_allowed = models.DateTimeField(null=True, blank=True)
+    package = models.ForeignKey('whatsapp_rewards.Package', on_delete=models.SET_NULL, null=True, blank=True)
     package_expiry = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
@@ -26,9 +28,6 @@ class UserAccount(models.Model):
         if not self.package_expiry:
             return False
         return timezone.now() <= self.package_expiry
-
-
-
 
 
 
