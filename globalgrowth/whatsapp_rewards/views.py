@@ -24,7 +24,7 @@ def whatsapp_status(request):
             status = form.save(commit=False)
             package = status.package
             package_cost = package.price
-
+       
             if user_account.is_package_active():
                 # Allow the user to upload an image without deducting balance
                 messages.success(request, 'You have an active package. You can upload images without additional charges before package expiry.')
@@ -81,6 +81,7 @@ def whatsapp_status(request):
         'images': images,
         'can_upload_image': user_account.is_package_active(),
         'remaining_days': max(0, (user_account.package_expiry - timezone.now()).days) if user_account.package_expiry else 0,
+        'show_add' : user_account.is_package_active(),
     }
 
     return render(request, 'whatsapp_rewards/whatsapp_status.html', context)
