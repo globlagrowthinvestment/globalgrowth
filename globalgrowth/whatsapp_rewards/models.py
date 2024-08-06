@@ -3,7 +3,6 @@ from user_account.models import UserAccount
 from django.utils import timezone
 from datetime import timedelta
 
-
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='product_images/')
     name = models.CharField(max_length=255, blank=True, null=True)
@@ -14,7 +13,6 @@ class ProductImage(models.Model):
     def __str__(self):
         return self.name or f"Product Image {self.id}"
 
-
 class Package(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -23,10 +21,10 @@ class Package(models.Model):
     duration_days = models.PositiveIntegerField(default=7)
 
     def __str__(self) -> str:
-        return f'{self.name} {self.price} earn {self.earnings_per_view} bob per view'
+        return f'{self.name} {self.price} earn {self.earnings_per_view} per view'
 
 class Status(models.Model):
-    user = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    user = models.ForeignKey('user_account.UserAccount', on_delete=models.CASCADE)
     package = models.ForeignKey(Package, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='statuses/')
     views = models.PositiveIntegerField(default=0)
@@ -50,12 +48,16 @@ class Status(models.Model):
         return self.package.name
 
 class UserHistory(models.Model):
-    user = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    user = models.ForeignKey('user_account.UserAccount', on_delete=models.CASCADE)
     status = models.ForeignKey(Status, on_delete=models.CASCADE)
     approved_at = models.DateTimeField(null=True, blank=True)
-    approved_by = models.ForeignKey(UserAccount, related_name='approved_by', null=True, blank=True, on_delete=models.SET_NULL)
+    approved_by = models.ForeignKey('user_account.UserAccount', related_name='approved_by', null=True, blank=True, on_delete=models.SET_NULL)
     rejected = models.BooleanField(default=False)
     rejection_reason = models.TextField(blank=True)
 
     def __str__(self):
         return f"{self.user.user.username} - {self.status.package.name}"
+
+
+
+
