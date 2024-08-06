@@ -1,0 +1,25 @@
+
+
+{% block content %}
+<h1>Buy Ticket</h1>
+
+<form action="{% url 'globalspin:buy_ticket' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="mpesa_code">Enter MPesa Code:</label>
+        <input type="text" id="mpesa_code" name="mpesa_code" required class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<div class="mt-4">
+    <h2>Instructions</h2>
+    <ol>
+        <li>Send money to our MPesa number: XXXXXXXXXX</li>
+        <li>Enter the MPesa transaction code in the field above</li>
+        <li>Click submit and wait for admin approval</li>
+        <li>Once approved, your ticket will appear on your dashboard</li>
+    </ol>
+</div>
+
+{% endblock %}

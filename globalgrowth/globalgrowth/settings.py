@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'guide',
     'referrals',
+    'globalspin',
     'withdrawals.apps.WithdrawalsConfig',
     'user_account.apps.UserAccountConfig',
     'whatsapp_rewards.apps.WhatsappRewardsConfig'
@@ -109,18 +110,13 @@ WSGI_APPLICATION = 'globalgrowth.wsgi.application'
 # Replace the SQLite DATABASES configuration with PostgreSQL:
 
 
-""" DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}  """
-
-
-
-
-
-
+}
+"""
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -130,14 +126,7 @@ DATABASES = {
     )
 }
 
-
-
-
-
-
-
-
-
+"""
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

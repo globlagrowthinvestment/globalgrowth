@@ -188,3 +188,4 @@ def payment_agent(request):
 @login_required
 def instructions(request):
     return render(request, 'my_profile/instructions.html')
+
