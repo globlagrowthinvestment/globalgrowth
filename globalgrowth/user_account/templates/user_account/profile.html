@@ -111,6 +111,16 @@ box-shadow:  41px 41px 100px #5a5a5a,
         background: rgba(44, 55, 72, 0.5);
         box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
+    #countdown-message {
+            font-size: 18px;
+            color: #000; /* Default color for the message */
+        }
+
+        #countdown-number {
+            font-size: 24px; /* Larger font size for visibility */
+            color: #ff0000;  /* Red color for emphasis */
+            font-weight: bold; /* Make the text bold */
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -169,7 +179,13 @@ box-shadow:  41px 41px 100px #5a5a5a,
                             </svg>
                         </button>
                     </div>
-                    <h1 class="text-2xl font-bold text-gray-800">{{ user.username }}!</h1>
+                   
+                    <p id="countdown-message">
+                        All inactive accounts will be autodeleted in <span id="countdown-number">4 days</span>
+                    </p>
+                                 <!--<strong><p id="countdown-message">All inactive accounts will be autodeleted in </p></strong>
+                        <h1 class="text-2xl font-bold text-gray-800">{{ user.username }}!</h1>
+                    -->
                 </div>
                 <div class="flex items-center space-x-4">
                     <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -184,7 +200,7 @@ box-shadow:  41px 41px 100px #5a5a5a,
                     </div>
                 </div>
             </header>
-
+            
             <!-- Main content area -->
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
                 <div class="container mx-auto">
@@ -198,35 +214,35 @@ box-shadow:  41px 41px 100px #5a5a5a,
                         {% endfor %}
                     </div>
                     {% endif %}
-
-                    </div>
-
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div id="account-balance" class="glass card-shadow p-6 hover-glass transition-all">
-                            <h3 class="text-lg font-semibold mb-2 text-yellow-800">Account Balance 💵</h3>
-                            {% if user_profile.approved %}
-                                <p class="text-3xl font-bold text-white-600">Ksh <span id="balance-amount">{{ user_profile.balance }}</span></p>
-                            {% else %}
-                                <p class="text-3xl font-bold text-yellow-600">Ksh <span id="balance-amount">0.00</span></p>
-                            {% endif %}
-                        </div>
                     
-                        <div id="total-deposits" class="glass card-shadow p-6 hover-glass transition-all">
-                            <h3 class="text-lg font-semibold mb-2 text-white-800">Total Deposits</h3>
-                            <p class="text-3xl font-bold text-green-600">Ksh <span id="total-deposits-amount">{{ total_deposits }}</span></p>
-                        </div>
-                    
-                        <div id="total-investments" class="glass card-shadow p-6 hover-glass transition-all">
-                            <h3 class="text-lg font-semibold mb-2 text-blue-800">Total Investments</h3>
-                            <p class="text-3xl font-bold text-blue-600">Ksh <span id="investment-earnings">{{ total_investments }}</span></p>
-                        </div>
+                </div>
+                
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div id="account-balance" class="glass card-shadow p-6 hover-glass transition-all">
+                        <h3 class="text-lg font-semibold mb-2 text-yellow-800">Account Balance 💵</h3>
+                        {% if user_profile.approved %}
+                        <p class="text-3xl font-bold text-white-600">Ksh <span id="balance-amount">{{ user_profile.balance }}</span></p>
+                        {% else %}
+                        <p class="text-3xl font-bold text-yellow-600">Ksh <span id="balance-amount">0.00</span></p>
+                        {% endif %}
                     </div>
                     
+                    <div id="total-deposits" class="glass card-shadow p-6 hover-glass transition-all">
+                        <h3 class="text-lg font-semibold mb-2 text-white-800">Total Deposits</h3>
+                        <p class="text-3xl font-bold text-green-600">Ksh <span id="total-deposits-amount">{{ total_deposits }}</span></p>
+                    </div>
                     
-                    <div class="glass card-shadow p-6 mb-8 hover-glass transition-all">
-                        <h2 class="text-2xl font-bold mb-6 text-gray-800">Investment</h2>
-                        <form action="{% url 'user_account:package' %}" method="post" class="space-y-4">
+                    <div id="total-investments" class="glass card-shadow p-6 hover-glass transition-all">
+                        <h3 class="text-lg font-semibold mb-2 text-blue-800">Total Investments</h3>
+                        <p class="text-3xl font-bold text-blue-600">Ksh <span id="investment-earnings">{{ total_investments }}</span></p>
+                    </div>
+                </div>
+                
+                
+                <div class="glass card-shadow p-6 mb-8 hover-glass transition-all">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Investment</h2>
+                    <form action="{% url 'user_account:package' %}" method="post" class="space-y-4">
                             {% csrf_token %}
                             <div class="relative inline-block text-left w-full">
                                 <div>
@@ -687,7 +703,53 @@ updateThemeIcon(currentTheme === 'dark');
 // Apply theme on load and whenever it changes
 applyTheme();
 themeToggle.addEventListener('click', toggleTheme);
+//timer
+// Set the date we're counting down to (4 days from now)
+// Calculate the end date (4 days from now)
+// Function to get the target date from local storage or set it if not present
+function getTargetDate() {
+            let targetDate = localStorage.getItem('targetDate');
+            if (!targetDate) {
+                // If no target date in local storage, set it to 4 days from now
+                targetDate = new Date();
+                targetDate.setDate(targetDate.getDate() + 4);
+                localStorage.setItem('targetDate', targetDate.toISOString());
+            } else {
+                // Convert target date back to a Date object
+                targetDate = new Date(targetDate);
+            }
+            return targetDate;
+        }
 
+        // Function to update the countdown display
+        function updateCountdown() {
+            const targetDate = getTargetDate(); // Retrieve target date
+            const now = new Date();
+            const timeLeft = targetDate - now;
+
+            if (timeLeft <= 0) {
+                document.getElementById('countdown-number').textContent = "Expired";
+                clearInterval(countdownInterval); // Stop the countdown when expired
+                localStorage.removeItem('targetDate'); // Optionally remove target date
+                return;
+            }
+
+            // Calculate days, hours, minutes, and seconds left
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Construct the countdown text
+            const countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            // Update the content of the <span> tag
+            document.getElementById('countdown-number').textContent = countdownText;
+        }
+
+        // Initialize countdown and set interval
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
 </script>
     </script>
 </body>

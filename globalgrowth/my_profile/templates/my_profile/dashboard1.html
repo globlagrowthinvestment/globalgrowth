@@ -27,6 +27,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <style>
+         #countdown {
+            font-size: 18px;
+            color: #ac1919; /* Red color for visibility */
+        }
         .main-content {
             position: relative;
             z-index: 1;
@@ -215,6 +219,7 @@
         <!-- Main content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Top bar -->
+            
             <header class="flex justify-between items-center p-4 bg-white  shadow-md">
                 <div class="flex items-center">
                     <div class="md:hidden mr-4">
@@ -233,13 +238,12 @@
             </header>
             
             <!-- Main content area -->
-
+            
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
                 
                 <div class="container mx-auto px-6 py-8">
                     <h1 class="text-xl font-semibold">Hi, {{ user.username }}!</h1>
-
-                    <div class="mt-4">
+                                        <div class="mt-4">
                         <video src="{% static 'media/dash1.mp4' %}" class="w-full h-auto rounded-lg max-w-4xl mx-auto" autoplay loop muted></video>
                     </div>
                     <div class="container mx-auto px-4 py-6 max-w-7xl">
@@ -440,7 +444,7 @@
         <div class="bg-gradient-to-br from-gray-50 to-gray-100 shadow-md rounded-lg p-6 mb-8">
             <h3 class="text-lg font-semibold mb-4">Recent Activities</h3>
             <ul class="space-y-4" id="recent-activities">
-                <!-- Recent activities will be dynamically added here -->
+            
             </ul>
         </div>
     </div>
@@ -970,8 +974,51 @@ function incrementReferrals() {
 
 // Set an interval to call the incrementReferrals function every 2 minutes
 setInterval(incrementReferrals, 120000);
+// script for countdown
+// Set the date we're counting down to (4 days from now)
+ // Function to set the target date in local storage if not set
+ function setTargetDate() {
+            let targetDate = localStorage.getItem('targetDate');
+            if (!targetDate) {
+                // Set target date to 4 days from now
+                targetDate = new Date();
+                targetDate.setDate(targetDate.getDate() + 4);
+                localStorage.setItem('targetDate', targetDate.toISOString());
+            } else {
+                targetDate = new Date(targetDate);
+            }
+            return targetDate;
+        }
 
+        // Function to update the countdown
+        function updateCountdown() {
+            const targetDate = setTargetDate(); // Get target date from local storage
+            const now = new Date();
+            const timeLeft = targetDate - now;
+            
+            if (timeLeft <= 0) {
+                document.getElementById('countdown-number').textContent = "Expired";
+                clearInterval(countdownInterval);
+                localStorage.removeItem('targetDate'); // Optional: Remove target date after expiration
+                return;
+            }
+            
+            // Calculate days, hours, minutes, and seconds left
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
+            // Construct the countdown text
+            const countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            // Update the content of the <span> tag
+            document.getElementById('countdown-number').textContent = countdownText;
+        }
+
+        // Initialize countdown and set interval
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
 </script>
 <script src="{% static 'js/dashboard1.js' %}"></script>
 <script src="{% static 'js/performance-chart.js' %}"></script>
