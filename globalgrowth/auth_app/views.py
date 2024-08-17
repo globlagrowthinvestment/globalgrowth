@@ -27,7 +27,7 @@ def register_view(request):
             else:
                 print("No referral code found in session")  # For debugging
             
-            return redirect('auth_app:login') # my_profile:dashboard1
+            return redirect('my_profile:dashboard1') # my_profile:dashboard1
     else:
         form = RegisterForm()
     return render(request, 'auth_app/register.html', {'form': form})
@@ -45,7 +45,7 @@ def login_view(request):
             if 'referral_code' in request.session:
                 return complete_referral(request)
             
-            return redirect('auth_app:login') #my_profile:dashboard1
+            return redirect('my_profile:dashboard1') #my_profile:dashboard1
         else:
             return render(request, 'auth_app/login.html', {'error_message': 'Invalid username or password'})
 
