@@ -10,6 +10,7 @@
     <title>My Profile - Global Growth</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .header {
@@ -160,6 +161,17 @@ box-shadow:  41px 41px 100px #5a5a5a,
                 </a>
             </nav>
             <div class="p-4">
+                <div class="flex justify-center mt-4 space-x-4">
+                    <a href="#" class="text-white hover:text-gray-300">
+                        <i class='bx bxl-whatsapp text-2xl'></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-gray-300">
+                        <i class='bx bxl-discord-alt text-2xl'></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-gray-300">
+                        <i class='bx bxl-youtube text-2xl'></i>
+                    </a>
+                </div>
                 <p class="text-sm opacity-75">© 2024 Global Growth</p>
             </div>
         </aside>
@@ -177,9 +189,7 @@ box-shadow:  41px 41px 100px #5a5a5a,
                         </button>
                     </div>
                    
-                    <p id="countdown-message">
-                        All inactive accounts will be autodeleted in <span id="countdown-number">4 days</span>
-                    </p>
+                    
                                  <!--<strong><p id="countdown-message">All inactive accounts will be autodeleted in </p></strong>
                         <h1 class="text-2xl font-bold text-gray-800">{{ user.username }}!</h1>
                     -->
@@ -443,45 +453,60 @@ box-shadow:  41px 41px 100px #5a5a5a,
         </div>
     </div>
 
-    <!-- Mobile sidebar -->
-    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 gradient-bg text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
-        <div class="flex justify-between items-center p-6">
-            <h2 class="text-2xl font-bold">Global Growth</h2>
-            <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <nav class="px-4 py-4">
-            <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
-            </a>
-            <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                <i class="fas fa-user-tie mr-3"></i> My Profile
-            </a>
-            
-            <a href="{% url 'withdrawals:request_withdrawal' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
-            </a>
-            <a href="{% url 'referrals:referrals' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                <i class="fas fa-user-plus mr-3"></i> Referral
-            </a>
-            <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                <i class="fas fa-exclamation-circle mr-3"></i> Complaints
-            </a>
-            <a href="{% url 'my_profile:guide' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                <i class="fas fa-book mr-3"></i> Guide
-            </a>
-            <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-video mr-3"></i> Global views
-            </a>
-            <a href="{% url 'my_profile:user' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                <i class="fas fa-cog mr-3"></i> Settings
-            </a>
-            <a href="{% url 'auth_app:login' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                <i class="fas fa-sign-out-alt mr-3"></i> Logout
-            </a>
-        </nav>
+   <!-- Mobile sidebar -->
+<div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 gradient-bg text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col">
+    <div class="flex justify-between items-center p-6">
+        <h2 class="text-2xl font-bold">Global Growth</h2>
+        <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
+            <i class="fas fa-times"></i>
+        </button>
     </div>
+    <nav class="px-4 py-4 flex-grow">
+        <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+        </a>
+        <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class="fas fa-user-tie mr-3"></i> My Profile
+        </a>
+        <a href="{% url 'withdrawals:request_withdrawal' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+        </a>
+        <a href="{% url 'referrals:referrals' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class="fas fa-user-plus mr-3"></i> Referral
+        </a>
+        <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+        </a>
+        <a href="{% url 'my_profile:guide' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class="fas fa-book mr-3"></i> Guide
+        </a>
+        <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+            <i class="fas fa-video mr-3"></i> Global views
+        </a>
+        <a href="{% url 'my_profile:user' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class="fas fa-cog mr-3"></i> Settings
+        </a>
+        <a href="{% url 'auth_app:login' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class="fas fa-sign-out-alt mr-3"></i> Logout
+        </a>
+    </nav>
+    <div class="mt-auto p-4 border-t border-blue-800">
+        <div class="text-center mb-2">
+            <p class="text-sm opacity-75">Connect with us</p>
+        </div>
+        <div class="flex justify-center space-x-6">
+            <a href="#" class="text-white hover:text-gray-300 transition-colors duration-200">
+                <i class='bx bxl-whatsapp text-3xl'></i>
+            </a>
+            <a href="#" class="text-white hover:text-gray-300 transition-colors duration-200">
+                <i class='bx bxl-discord-alt text-3xl'></i>
+            </a>
+            <a href="#" class="text-white hover:text-gray-300 transition-colors duration-200">
+                <i class='bx bxl-youtube text-3xl'></i>
+            </a>
+        </div>
+    </div>
+</div>
 
     <div id="customAlert" class="custom-alert hidden">
         <div class="alert-content bg-white rounded-lg shadow-xl p-6 max-w-sm mx-auto">
