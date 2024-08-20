@@ -122,6 +122,60 @@ box-shadow:  41px 41px 100px #5a5a5a,
             color: #ff0000;  /* Red color for emphasis */
             font-weight: bold; /* Make the text bold */
         }
+        /* From Uiverse.io by mobinkakei */ 
+.loader {
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border-top: 2px solid #e74c3c;
+  position: relative;
+  animation: load 2s linear infinite;
+}
+
+.loader::before,.loader::after {
+  content: '';
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+
+.loader::before {
+  border-top: 5px solid #e67e22;
+  transform: rotate(120deg);
+}
+
+.loader::after {
+  border-top: 5px solid #3498db;
+  transform: rotate(240deg);
+}
+
+.loader span {
+  position: absolute;
+  font-size: small;
+  width: 100px;
+  height: 100px;
+  color: #0c0a0a;
+  text-align: center;
+  line-height: 100px;
+  animation: a2 2s linear infinite;
+}
+
+@keyframes load {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes a2 {
+  to {
+    transform: rotate(-360deg);
+  }
+}
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -188,12 +242,10 @@ box-shadow:  41px 41px 100px #5a5a5a,
                             </svg>
                         </button>
                     </div>
-                   
-                    
-                                 <!--<strong><p id="countdown-message">All inactive accounts will be autodeleted in </p></strong>
-                        <h1 class="text-2xl font-bold text-gray-800">{{ user.username }}!</h1>
-                    -->
-                </div>
+                    <div class="loader">
+                        <span>Migrating...</span>
+                    </div>
+                                </div>
                 <div class="flex items-center space-x-4">
                     <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
