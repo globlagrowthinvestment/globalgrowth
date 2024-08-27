@@ -20,4 +20,3 @@ python manage.py collectstatic --no-input
 
 # Apply database migrations (if applicable for Django projects)
 python manage.py migrate
-
