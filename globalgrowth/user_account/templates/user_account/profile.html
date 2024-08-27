@@ -9,22 +9,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile - Global Growth</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-    backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
-    -webkit-backdrop-filter: blur(10px); /* For Safari */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    border-radius: 50px;
-    color: black;
-}
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            border-radius: 50px;
+            color: black;
+        }
 
         .custom-alert {
             position: fixed;
@@ -56,63 +55,69 @@
         }
         
         .transition-all {
-            transition: all 0.3s ease;
+            transition: all 0.3<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+            s ease;
         }
+
         #button {
             color: black;
         }
+
         @keyframes ring {
-    0% { transform: rotate(0); }
-    5% { transform: rotate(15deg); }
-    10% { transform: rotate(-15deg); }
-    15% { transform: rotate(15deg); }
-    20% { transform: rotate(-15deg); }
-    25% { transform: rotate(0); }
-    100% { transform: rotate(0); }
-  }
+            0% { transform: rotate(0); }
+            5% { transform: rotate(15deg); }
+            10% { transform: rotate(-15deg); }
+            15% { transform: rotate(15deg); }
+            20% { transform: rotate(-15deg); }
+            25% { transform: rotate(0); }
+            100% { transform: rotate(0); }
+        }
 
-  .ringing-bell {
-    display: inline-block;
-    animation: ring 2s infinite;
-    transform-origin: 50% 0;
-  }
-  .glass {
-    border-radius: 36px;
-background: #e0e0e0;
-box-shadow:  41px 41px 100px #5a5a5a,
-             -41px -41px 100px #ffffff;
-}
+        .ringing-bell {
+            display: inline-block;
+            animation: ring 2s infinite;
+            transform-origin: 50% 0;
+        }
 
-.hover-glass:hover {
-    background: rgba(255, 255, 255, 0.2); /* Slightly more opaque on hover */
-    transform: translateY(-5px); /* Moves the card up on hover */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
-}
-.dark body {
-        background-color: #1a202c;
-        color: #e2e8f0;
-    }
+        .glass {
+            border-radius: 36px;
+            background: #e0e0e0;
+            box-shadow:  41px 41px 100px #5a5a5a,
+                         -41px -41px 100px #ffffff;
+        }
 
-    .dark .bg-white {
-        background-color: #2d3748;
-    }
+        .hover-glass:hover {
+            background: rgba(255, 255, 255, 0.2); /* Slightly more opaque on hover */
+            transform: translateY(-5px); /* Moves the card up on hover */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+        }
 
-    .dark .text-gray-600,
-    .dark .text-gray-700,
-    .dark .text-gray-800 {
-        color: #e2e8f0;
-    }
+        .dark body {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
 
-    .dark .border-gray-200,
-    .dark .border-gray-300 {
-        border-color: #4a5568;
-    }
+        .dark .bg-white {
+            background-color: #2d3748;
+        }
 
-    .dark .glass {
-        background: rgba(44, 55, 72, 0.5);
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    }
-    #countdown-message {
+        .dark .text-gray-600,
+        .dark .text-gray-700,
+        .dark .text-gray-800 {
+            color: #e2e8f0;
+        }
+
+        .dark .border-gray-200,
+        .dark .border-gray-300 {
+            border-color: #4a5568;
+        }
+
+        .dark .glass {
+            background: rgba(44, 55, 72, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        #countdown-message {
             font-size: 18px;
             color: #000; /* Default color for the message */
         }
@@ -122,60 +127,60 @@ box-shadow:  41px 41px 100px #5a5a5a,
             color: #ff0000;  /* Red color for emphasis */
             font-weight: bold; /* Make the text bold */
         }
-        /* From Uiverse.io by mobinkakei */ 
-.loader {
-  width: 100px;
-  height: 100px;
-  box-sizing: border-box;
-  border-radius: 50%;
-  border-top: 2px solid #e74c3c;
-  position: relative;
-  animation: load 2s linear infinite;
-}
 
-.loader::before,.loader::after {
-  content: '';
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  box-sizing: border-box;
-  border-radius: 50%;
-}
+        .loader {
+            width: 100px;
+            height: 100px;
+            box-sizing: border-box;
+            border-radius: 50%;
+            border-top: 2px solid #e74c3c;
+            position: relative;
+            animation: load 2s linear infinite;
+        }
 
-.loader::before {
-  border-top: 5px solid #e67e22;
-  transform: rotate(120deg);
-}
+        .loader::before, .loader::after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            box-sizing: border-box;
+            border-radius: 50%;
+        }
 
-.loader::after {
-  border-top: 5px solid #3498db;
-  transform: rotate(240deg);
-}
+        .loader::before {
+            border-top: 5px solid #e67e22;
+            transform: rotate(120deg);
+        }
 
-.loader span {
-  position: absolute;
-  font-size: small;
-  width: 100px;
-  height: 100px;
-  color: #0c0a0a;
-  text-align: center;
-  line-height: 100px;
-  animation: a2 2s linear infinite;
-}
+        .loader::after {
+            border-top: 5px solid #3498db;
+            transform: rotate(240deg);
+        }
 
-@keyframes load {
-  to {
-    transform: rotate(360deg);
-  }
-}
+        .loader span {
+            position: absolute;
+            font-size: small;
+            width: 100px;
+            height: 100px;
+            color: #0c0a0a;
+            text-align: center;
+            line-height: 100px;
+            animation: a2 2s linear infinite;
+        }
 
-@keyframes a2 {
-  to {
-    transform: rotate(-360deg);
-  }
-}
+        @keyframes load {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes a2 {
+            to {
+                transform: rotate(-360deg);
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -187,40 +192,40 @@ box-shadow:  41px 41px 100px #5a5a5a,
             </div>
             <nav class="flex-1 px-4 py-4">
                 <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                    <i class='bx bx-tachometer mr-3'></i> Dashboard
                 </a>
                 <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class="fas fa-user-tie mr-3"></i> Profile
+                    <i class='bx bx-user mr-3'></i> Profile
                 </a>
                 <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                    <i class='bx bx-credit-card mr-3'></i> Payment Agents
                 </a>
                 <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class="fas fa-user-plus mr-3"></i> Referral
+                    <i class='bx bx-user-plus mr-3'></i> Referral
                 </a>
                 <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                    <i class='bx bx-error-circle mr-3'></i> Complaints
                 </a>
                 <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class="fas fa-book mr-3"></i> Guide
+                    <i class='bx bx-book mr-3'></i> Guide
                 </a>
                 <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-video mr-3"></i> Global views
+                    <i class='bx bx-video mr-3'></i> Global views
                 </a>
                 <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class="fas fa-cog mr-3"></i> Settings
+                    <i class='bx bx-cog mr-3'></i> Settings
                 </a>
                 <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                    <i class='bx bx-log-out mr-3'></i> Logout
                 </a>
             </nav>
             <div class="p-4">
                 <div class="flex justify-center mt-4 space-x-4">
-                    <a href="https://whatsapp.com/channel/0029VafuQfFInlqXI5SxDS0Y"   target="_blank" class="text-white hover:text-gray-300">
+                    <a href="https://whatsapp.com/channel/0029VafuQfFInlqXI5SxDS0Y" target="_blank" class="text-white hover:text-gray-300">
                         <i class='bx bxl-whatsapp text-2xl'></i>
                     </a>
                     <a href="https://discord.com/invite/xQhq27Z" target="_blank" class="text-white hover:text-gray-300">
-                        <i class='bx bxl-discord-alt text-2xl'></i>
+                        <i class='bx bxl-discord text-2xl'></i>
                     </a>
                     <a href="#" class="text-white hover:text-gray-300">
                         <i class='bx bxl-youtube text-2xl'></i>
@@ -502,62 +507,60 @@ box-shadow:  41px 41px 100px #5a5a5a,
             </main>
         </div>
     </div>
-
-   <!-- Mobile sidebar -->
-<div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 gradient-bg text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col">
-    <div class="flex justify-between items-center p-6">
-        <h2 class="text-2xl font-bold">Global Growth</h2>
-        <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    <nav class="px-4 py-4 flex-grow">
-        <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-            <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
-        </a>
-        <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-            <i class="fas fa-user-tie mr-3"></i> My Profile
-        </a>
-        <a href="{% url 'withdrawals:request_withdrawal' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-            <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
-        </a>
-        <a href="{% url 'referrals:referrals' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-            <i class="fas fa-user-plus mr-3"></i> Referral
-        </a>
-        <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-            <i class="fas fa-exclamation-circle mr-3"></i> Complaints
-        </a>
-        <a href="{% url 'my_profile:guide' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-            <i class="fas fa-book mr-3"></i> Guide
-        </a>
-        <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-            <i class="fas fa-video mr-3"></i> Global views
-        </a>
-        <a href="{% url 'my_profile:user' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-            <i class="fas fa-cog mr-3"></i> Settings
-        </a>
-        <a href="{% url 'auth_app:login' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-            <i class="fas fa-sign-out-alt mr-3"></i> Logout
-        </a>
-    </nav>
-    <div class="mt-auto p-4 border-t border-blue-800">
-        <div class="text-center mb-2">
-            <p class="text-sm opacity-75">Connect with us</p>
-        </div>
-        <div class="flex justify-center space-x-6">
-            <a href="#" class="text-white hover:text-gray-300 transition-colors duration-200">
-                <i class='bx bxl-whatsapp text-3xl'></i>
-            </a>
-            <a href="#" class="text-white hover:text-gray-300 transition-colors duration-200">
-                <i class='bx bxl-discord-alt text-3xl'></i>
-            </a>
-            <a href="#" class="text-white hover:text-gray-300 transition-colors duration-200">
-                <i class='bx bxl-youtube text-3xl'></i>
-            </a>
-        </div>
-    </div>
-</div>
-
+            <!-- Mobile sidebar -->
+            <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 gradient-bg text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col">
+                <div class="flex justify-between items-center p-6">
+                    <h2 class="text-2xl font-bold">Global Growth</h2>
+                    <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
+                        <i class='bx bx-x'></i>
+                    </button>
+                </div>
+                <nav class="px-4 py-4 flex-grow">
+                    <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                        <i class='bx bx-tachometer mr-3'></i> Dashboard
+                    </a>
+                    <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                        <i class='bx bx-user mr-3'></i> My Profile
+                    </a>
+                    <a href="{% url 'withdrawals:request_withdrawal' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                        <i class='bx bx-credit-card mr-3'></i> Payment Agents
+                    </a>
+                    <a href="{% url 'referrals:referrals' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                        <i class='bx bx-user-plus mr-3'></i> Referral
+                    </a>
+                    <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                        <i class='bx bx-error-circle mr-3'></i> Complaints
+                    </a>
+                    <a href="{% url 'my_profile:guide' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                        <i class='bx bx-book mr-3'></i> Guide
+                    </a>
+                    <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+                        <i class='bx bx-video mr-3'></i> Global views
+                    </a>
+                    <a href="{% url 'my_profile:user' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                        <i class='bx bx-cog mr-3'></i> Settings
+                    </a>
+                    <a href="{% url 'auth_app:login' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                        <i class='bx bx-log-out mr-3'></i> Logout
+                    </a>
+                </nav>
+                <div class="mt-auto p-6 border-t border-blue-800 bg-gray-800 text-white">
+                    <div class="text-center mb-4">
+                        <p class="text-sm opacity-75">Connect with us</p>
+                    </div>
+                    <div class="flex justify-center space-x-6">
+                        <a href="https://whatsapp.com/channel/0029VafuQfFInlqXI5SxDS0Y" target="_blank" class="transition-transform transform hover:scale-110">
+                            <i class='bx bxl-whatsapp text-3xl text-green-400 hover:text-green-500'></i>
+                        </a>
+                        <a href="https://discord.com/invite/xQhq27Z" target="_blank" class="transition-transform transform hover:scale-110">
+                            <i class='bx bxl-discord text-3xl text-indigo-400 hover:text-indigo-500'></i>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" class="transition-transform transform hover:scale-110">
+                            <i class='bx bxl-youtube text-3xl text-red-400 hover:text-red-500'></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
     <div id="customAlert" class="custom-alert hidden">
         <div class="alert-content bg-white rounded-lg shadow-xl p-6 max-w-sm mx-auto">
             <h2 class="text-xl font-semibold mb-4">Notification</h2>

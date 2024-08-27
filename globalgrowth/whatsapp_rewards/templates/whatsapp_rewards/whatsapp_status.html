@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Data Management - Global Growth</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
       body {
@@ -127,38 +129,38 @@ tbody tr:hover {
             </div>
             <nav class="flex-1 px-2 py-4">
                 <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                    <i class="bx bx-tachometer mr-3"></i> Dashboard
                 </a>
                 <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-user-tie mr-3"></i> Profile
+                    <i class="bx bx-user-circle mr-3"></i> Profile
                 </a>
                 <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                    <i class="bx bx-credit-card mr-3"></i> Payment Agents
                 </a>
                 <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-user-plus mr-3"></i> Referral
+                    <i class="bx bx-user-plus mr-3"></i> Referral
                 </a>
                 <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                    <i class="bx bx-error-circle mr-3"></i> Complaints
                 </a>
                 <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-book mr-3"></i> Guide
+                    <i class="bx bx-book mr-3"></i> Guide
                 </a>
                 <a href="#" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-video mr-3"></i> Global views
+                    <i class="bx bx-video mr-3"></i> Global views
                 </a>
-                
                 <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-cog mr-3"></i> Settings
+                    <i class="bx bx-cog mr-3"></i> Settings
                 </a>
                 <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                    <i class="bx bx-log-out mr-3"></i> Logout
                 </a>
             </nav>
             <div class="p-4">
                 <p class="text-sm">© 2024 Global Growth</p>
             </div>
         </aside>
+
 
         <!-- Main content -->
         <div class="flex-1 flex flex-col overflow-hidden">

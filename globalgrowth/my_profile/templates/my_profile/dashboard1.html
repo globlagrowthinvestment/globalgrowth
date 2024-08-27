@@ -7,215 +7,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Global Growth</title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Tailwind CSS -->
+    <title>My Profile - Global Growth</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/dashboard1.css' %}">
-    
-    <!-- Chart.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
     <style>
-         #countdown {
+        .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    border-radius: 50px;
+    color: black;
+}
+
+        .custom-alert {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+    
+        .custom-alert.hidden {
+            display: none;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+        
+        .hover-gradient:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        #button {
+            color: black;
+        }
+        @keyframes ring {
+    0% { transform: rotate(0); }
+    5% { transform: rotate(15deg); }
+    10% { transform: rotate(-15deg); }
+    15% { transform: rotate(15deg); }
+    20% { transform: rotate(-15deg); }
+    25% { transform: rotate(0); }
+    100% { transform: rotate(0); }
+  }
+
+  .ringing-bell {
+    display: inline-block;
+    animation: ring 2s infinite;
+    transform-origin: 50% 0;
+  }
+  .glass {
+    border-radius: 36px;
+background: #e0e0e0;
+box-shadow:  41px 41px 100px #5a5a5a,
+             -41px -41px 100px #ffffff;
+}
+
+.hover-glass:hover {
+    background: rgba(255, 255, 255, 0.2); /* Slightly more opaque on hover */
+    transform: translateY(-5px); /* Moves the card up on hover */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+}
+.dark body {
+        background-color: #1a202c;
+        color: #e2e8f0;
+    }
+
+    .dark .bg-white {
+        background-color: #2d3748;
+    }
+
+    .dark .text-gray-600,
+    .dark .text-gray-700,
+    .dark .text-gray-800 {
+        color: #e2e8f0;
+    }
+
+    .dark .border-gray-200,
+    .dark .border-gray-300 {
+        border-color: #4a5568;
+    }
+
+    .dark .glass {
+        background: rgba(44, 55, 72, 0.5);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+    #countdown-message {
             font-size: 18px;
-            color: #ac1919; /* Red color for visibility */
+            color: #000; /* Default color for the message */
         }
-        .main-content {
-            position: relative;
-            z-index: 1;
+
+        #countdown-number {
+            font-size: 24px; /* Larger font size for visibility */
+            color: #ff0000;  /* Red color for emphasis */
+            font-weight: bold; /* Make the text bold */
         }
-        .btn-buy {
-          margin-left: 10px;
-          background-color: #28a745; /* Green background */
-          border-color: #28a745; /* Green border */
-          color: #fff; /* White text */
-          padding: 8px 16px; /* Reduced padding */
-          border-radius: 8px; /* Reduced border-radius */
-          font-size: 14px; /* Reduced font-size */
-        }
-        
-        .btn-buy:hover {
-          background-color: #218838; /* Darker green on hover */
-          border-color: #1e7e34;
-        }
-        
-        .btn-withdraw {
-          margin-left: 10px;
-          background-color: #dc3545; /* Red background */
-          border-color: #dc3545; /* Red border */
-          color: #fff; /* White text */
-          padding: 8px 16px; /* Reduced padding */
-          border-radius: 8px; /* Reduced border-radius */
-          font-size: 14px; /* Reduced font-size */
-        }
-        .mobile-sidebar{
-            z-index: 99999;
-        }
-        /* Ensure text wraps properly and elements don't overflow */
-.flex-col {
-    flex-direction: column;
+        /* From Uiverse.io by mobinkakei */ 
+.loader {
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border-top: 2px solid #e74c3c;
+  position: relative;
+  animation: load 2s linear infinite;
 }
 
-@media (max-width: 768px) {
-    .profit-chart {
-        height: auto;
-        min-height: 200px;
-    }
-
-    #profit,
-    #profitChangePercent {
-        font-size: 2xl; /* Adjust font size for smaller screens */
-    }
-
-    .text-right {
-        text-align: left;
-        margin-top: 10px;
-    }
-
-    .flex.items-center.justify-end {
-        justify-content: flex-start;
-    }
-
-    .flex-col.md\\:flex-row {
-        flex-direction: column;
-    }
-
-    .mb-6.md\\:mr-4 {
-        margin-bottom: 10px;
-    }
-
-    .md\\:mb-0 {
-        margin-bottom: 0;
-    }
+.loader::before,.loader::after {
+  content: '';
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  border-radius: 50%;
 }
 
-/* Additional responsive tweaks */
-@media (max-width: 640px) {
-    .profit-chart {
-        padding: 10px;
-    }
-
-    #profit,
-    #profitChangePercent {
-        font-size: 1.5rem; /* Smaller font size for very small screens */
-    }
+.loader::before {
+  border-top: 5px solid #e67e22;
+  transform: rotate(120deg);
 }
-@keyframes gradientBackground {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+
+.loader::after {
+  border-top: 5px solid #3498db;
+  transform: rotate(240deg);
 }
-:root {
-    font-size: 14px;
+
+.loader span {
+  position: absolute;
+  font-size: small;
+  width: 100px;
+  height: 100px;
+  color: #0c0a0a;
+  text-align: center;
+  line-height: 100px;
+  animation: a2 2s linear infinite;
+}
+/* Container style */
+.flex {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+/* Button base style */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Primary button style */
+.btn-primary {
+    background-color: #0400ff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #007bff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Secondary button style */
+.btn-secondary {
+    background-color: #f30505;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon style */
+.btn i {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+@keyframes load {
+  to {
+    transform: rotate(360deg);
   }
+}
 
-  body {
-    font-family: 'Inter', sans-serif;
+@keyframes a2 {
+  to {
+    transform: rotate(-360deg);
   }
-
-  .dashboard-card {
-    font-size: 1rem;
-  }
-
-  .dashboard-card h3 {
-    font-size: 1.1rem;
-  }
-
-  .dashboard-card p {
-    font-size: 1.5rem;
-  }
-
-  .card-title {
-    font-size: 1.3rem;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  @media (min-width: 768px) {
-    .dashboard-card {
-      min-height: 150px;
-    }
-  }
-  
-  
-
-
-        
+}
     </style>
-    
 </head>
-<body class="bg-gray-100">
-    <body class="bg-gray-100 p-4 md:p-8">
-        <div class="animated-bg"></div>
-        <div class="pattern-overlay"></div>
-    
+<body class="bg-gray-100 font-sans">
     <div class="flex h-screen bg-gray-100">
         <!-- Sidebar for large screens -->
-        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
-            <div class="p-4">
-                <h2 class="text-2xl font-semibold">Global Growth</h2>
+        <aside class="hidden md:flex md:flex-col w-64 gradient-bg text-white">
+            <div class="p-6">
+                <h2 class="text-3xl font-bold">Global Growth</h2>
             </div>
-            <nav class="flex-1 px-2 py-4">
-                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+            <nav class="flex-1 px-4 py-4">
+                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                    <i class='bx bx-tachometer mr-3'></i> Dashboard
                 </a>
-                <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-user-tie mr-3"></i>Profile
+                <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                    <i class='bx bx-user mr-3'></i> Profile
                 </a>
-                <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+                <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                    <i class='bx bx-credit-card mr-3'></i> Payment Agents
                 </a>
-                <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-user-plus mr-3"></i> Referral
+                <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                    <i class='bx bx-user-plus mr-3'></i> Referral
                 </a>
-                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                    <i class='bx bx-error-circle mr-3'></i> Complaints
                 </a>
-                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-book mr-3"></i> Guide
+                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                    <i class='bx bx-book mr-3'></i> Guide
                 </a>
                 <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-video mr-3"></i> Global views
+                    <i class='bx bx-video mr-3'></i> Global views
                 </a>
-                
-                
-                <a href="#" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class="fas fa-dice mr-3"></i> Global Spin
+                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                    <i class='bx bx-cog mr-3'></i> Settings
                 </a>
-                
-                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-cog mr-3"></i> Settings
-                </a>
-                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
+                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+                    <i class='bx bx-log-out mr-3'></i> Logout
                 </a>
             </nav>
             <div class="p-4">
-                <p class="text-sm">© 2024 Global Growth</p>
+                <div class="flex justify-center mt-4 space-x-4">
+                    <a href="https://whatsapp.com/channel/0029VafuQfFInlqXI5SxDS0Y" target="_blank" class="text-white hover:text-gray-300">
+                        <i class='bx bxl-whatsapp text-2xl'></i>
+                    </a>
+                    <a href="https://discord.com/invite/xQhq27Z" target="_blank" class="text-white hover:text-gray-300">
+                        <i class='bx bxl-discord text-2xl'></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-gray-300">
+                        <i class='bx bxl-youtube text-2xl'></i>
+                    </a>
+                </div>
+                <p class="text-sm opacity-75">© 2024 Global Growth</p>
             </div>
         </aside>
-       
-
         <!-- Main content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Top bar -->
@@ -231,9 +291,14 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <button type="button" class="btn btn-primary btn-buy" onclick="location.href='{% url 'my_profile:invest' %}'">Invest</button>
-                    <button type="button" class="btn btn-secondary btn-withdraw" onclick="location.href='{% url 'user_account:account_balance' %}'">Withdraw</button>
+                    <button type="button" class="btn btn-primary btn-buy" onclick="location.href='{% url 'my_profile:invest' %}'">
+                        <i class='bx bx-dollar'></i> Invest
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-withdraw" onclick="location.href='{% url 'withdrawals:request_withdrawal' %}'">
+                        <i class='bx bx-wallet'></i> Withdraw
+                    </button>
                 </div>
+                
                 
             </header>
             
@@ -449,45 +514,59 @@
         </div>
     </div>
     
-<div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
-    <div class="flex justify-between items-center p-4">
-        <h2 class="text-2xl font-semibold">Global Growth</h2>
+<!-- Mobile sidebar -->
+<div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 gradient-bg text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col">
+    <div class="flex justify-between items-center p-6">
+        <h2 class="text-2xl font-bold">Global Growth</h2>
         <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
-            <i class="fas fa-times"></i>
+            <i class='bx bx-x'></i>
         </button>
     </div>
-    <nav class="px-2 py-4">
-        <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-            <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+    <nav class="px-4 py-4 flex-grow">
+        <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class='bx bx-tachometer mr-3'></i> Dashboard
         </a>
-        <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-            <i class="fas fa-user-tie mr-3"></i> My Profile
+        <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class='bx bx-user mr-3'></i> My Profile
         </a>
-        <a href="{% url 'withdrawals:request_withdrawal' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-            <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
+        <a href="{% url 'withdrawals:request_withdrawal' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class='bx bx-credit-card mr-3'></i> Payment Agents
         </a>
-        <a href="{% url 'referrals:referrals' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-            <i class="fas fa-user-plus mr-3"></i> Referral
+        <a href="{% url 'referrals:referrals' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class='bx bx-user-plus mr-3'></i> Referral
         </a>
-        <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-            <i class="fas fa-exclamation-circle mr-3"></i> Complaints
+        <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class='bx bx-error-circle mr-3'></i> Complaints
         </a>
-        <a href="{% url 'my_profile:guide' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-            <i class="fas fa-book mr-3"></i> Guide
+        <a href="{% url 'my_profile:guide' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class='bx bx-book mr-3'></i> Guide
         </a>
         <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-            <i class="fas fa-video mr-3"></i> Global views
+            <i class='bx bx-video mr-3'></i> Global views
         </a>
-        <a href="#" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-            <i class="fas fa-dice mr-3"></i> Global Spin
+        <a href="{% url 'my_profile:user' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class='bx bx-cog mr-3'></i> Settings
         </a>
-        <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-            <i class="fas fa-cog mr-3"></i> Settings
-        </a>
-        <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-            <i class="fas fa-sign-out-alt mr-3"></i> Logout
+        <a href="{% url 'auth_app:login' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
+            <i class='bx bx-log-out mr-3'></i> Logout
         </a>
     </nav>
+    <div class="mt-auto p-6 border-t border-blue-800 bg-gray-800 text-white">
+        <div class="text-center mb-4">
+            <p class="text-sm opacity-75">Connect with us</p>
+        </div>
+        <div class="flex justify-center space-x-6">
+            <a href="https://whatsapp.com/channel/0029VafuQfFInlqXI5SxDS0Y" target="_blank" class="transition-transform transform hover:scale-110">
+                <i class='bx bxl-whatsapp text-3xl text-green-400 hover:text-green-500'></i>
+            </a>
+            <a href="https://discord.com/invite/xQhq27Z" target="_blank" class="transition-transform transform hover:scale-110">
+                <i class='bx bxl-discord text-3xl text-indigo-400 hover:text-indigo-500'></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="transition-transform transform hover:scale-110">
+                <i class='bx bxl-youtube text-3xl text-red-400 hover:text-red-500'></i>
+            </a>
+        </div>
+    </div>
 </div>
 
 <script>
