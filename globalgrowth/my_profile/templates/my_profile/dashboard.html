@@ -70,12 +70,12 @@
                           <span class="ml-4">My account</span>
                       </a>
                   </li>
-                  <li class="">
-                    <a href="{% url 'payment_agents:payment_agent_view' %}" class="svg-icon">
-                      <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
-                      <span class="ml-4">Payment Agents</span>
-                  </a>
-              </li>
+                    <li class="">
+                        <a href="{% url 'payment_agents:payment_agent_view' %}" class="svg-icon">
+                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Payment Agents</span>
+                      </a>
+                  </li>
                     <li class="">
                         <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
                             <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
@@ -180,52 +180,161 @@
                 </div>
             </nav>
         </div>
-    </div>       
-    <div class="content">
-        <div class="loader"></div>
-        <h1>Updating the UI</h1>
-        <p>We are currently upgrading the user interface for <span class="highlight">GlobalGrowth</span>. Some operations are on hold until the migration is complete. Please bear with us, as this process will be completed in less than <span class="highlight">12 hours</span>.</p>
-        <p>Thank you for your patience!</p>
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-    const agentButtons = document.querySelectorAll('.select-agent');
-    const withdrawalForm = document.getElementById('withdrawal-form');
-    const submitButton = document.getElementById('submit-button');
-    const confirmationDialog = document.getElementById('confirmation-dialog');
-    const continueButton = document.getElementById('continue-button');
-    const cancelButton = document.getElementById('cancel-button');
-    const sidebarToggle = document.getElementById('sidebar-toggle');
-    const sidebar = document.querySelector('aside');
-
-    sidebarToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('hidden');
-    });
-
-    agentButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            withdrawalForm.classList.remove('hidden');
-            withdrawalForm.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    submitButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        confirmationDialog.classList.remove('hidden');
-    });
-
-    continueButton.addEventListener('click', function() {
-        confirmationDialog.classList.add('hidden');
-        document.querySelector('#withdrawal-form form').submit();
-    });
-
-    cancelButton.addEventListener('click', function() {
-        confirmationDialog.classList.add('hidden');
-    });
-});
-
+    </div>    
+            <!-- Main content area -->
+            
+            <div class="content-page">
+                <div class="container-fluid">
+                   <div class="row">
+                       <div class="col-md-6 col-lg-3">
+                           <div class="card card-block card-stretch card-height">
+                               <div class="card-body">
+                                   <div class="top-block d-flex align-items-center justify-content-between">
+                                       <h5>Total User Investment</h5>
+                                       <span class="badge badge-primary">Equity</span>
+                                   </div>
+                                   <div class="d-flex align-items-center mt-3">
+                                       <i class="fas fa-chart-line fa-2x mr-3" style="color: #0077B5;"></i>
+                                       <h3>$<span class="counter">250,000</span></h3>
+                                   </div>
+                                   <p class="text-muted mt-2">Total Value</p>
+                                   <div class="d-flex align-items-center justify-content-between mt-3">
+                                       <p class="mb-0">Annual Return</p>
+                                       <span class="text-primary">12.5%</span>
+                                   </div>
+                                   <div class="iq-progress-bar bg-primary-light mt-2">
+                                       <span class="bg-primary iq-progress progress-1" data-percent="65"></span>
+                                   </div>
+                                   <a href="#" class="btn btn-outline-primary btn-block mt-3">
+                                       Analyze Stocks
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-6 col-lg-3">
+                           <div class="card card-block card-stretch card-height">
+                               <div class="card-body">
+                                   <div class="top-block d-flex align-items-center justify-content-between">
+                                       <h5>Crypto Assets by Globalgrowth</h5>
+                                       <span class="badge badge-warning">Digital</span>
+                                   </div>
+                                   <div class="d-flex align-items-center mt-3">
+                                       <i class="fab fa-bitcoin fa-2x mr-3" style="color: #F7931A;"></i>
+                                       <h3>$<span class="counter">75,500</span></h3>
+                                   </div>
+                                   <p class="text-muted mt-2">Total Holdings</p>
+                                   <div class="d-flex align-items-center justify-content-between mt-3">
+                                       <p class="mb-0">24h Change</p>
+                                       <span class="text-warning">+5.7%</span>
+                                   </div>
+                                   <div class="iq-progress-bar bg-warning-light mt-2">
+                                       <span class="bg-warning iq-progress progress-1" data-percent="35"></span>
+                                   </div>
+                                   <a href="#" class="btn btn-outline-primary btn-block mt-3">
+                                       Track Crypto
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-6 col-lg-3">
+                           <div class="card card-block card-stretch card-height">
+                               <div class="card-body">
+                                   <div class="top-block d-flex align-items-center justify-content-between">
+                                       <h5>GlobalGrowth Market</h5>
+                                       <span class="badge badge-success">Property</span>
+                                   </div>
+                                   <div class="d-flex align-items-center mt-3">
+                                       <i class="fas fa-home fa-2x mr-3" style="color: #2ECC71;"></i>
+                                       <h3>$<span class="counter">1,200,000</span></h3>
+                                   </div>
+                                   <p class="text-muted mt-2">Portfolio Value</p>
+                                   <div class="d-flex align-items-center justify-content-between mt-3">
+                                       <p class="mb-0">Occupancy Rate</p>
+                                       <span class="text-success">95%</span>
+                                   </div>
+                                   <div class="iq-progress-bar bg-success-light mt-2">
+                                       <span class="bg-success iq-progress progress-1" data-percent="85"></span>
+                                   </div>
+                                   <a href="#" class="btn btn-outline-primary btn-block mt-3">
+                                       Manage Properties
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-6 col-lg-3">
+                           <div class="card card-block card-stretch card-height">
+                               <div class="card-body">
+                                   <div class="top-block d-flex align-items-center justify-content-between">
+                                       <h5>P2P Lending</h5>
+                                       <span class="badge badge-danger">Loans</span>
+                                   </div>
+                                   <div class="d-flex align-items-center mt-3">
+                                       <i class="fas fa-handshake fa-2x mr-3" style="color: #E74C3C;"></i>
+                                       <h3>$<span class="counter">50,000</span></h3>
+                                   </div>
+                                   <p class="text-muted mt-2">Active Loans</p>
+                                   <div class="d-flex align-items-center justify-content-between mt-3">
+                                       <p class="mb-0">Avg. Interest Rate</p>
+                                       <span class="text-danger">8.5%</span>
+                                   </div>
+                                   <div class="iq-progress-bar bg-danger-light mt-2">
+                                       <span class="bg-danger iq-progress progress-1" data-percent="70"></span>
+                                   </div>
+                                   <a href="#" class="btn btn-outline-primary btn-block mt-3">
+                                       Review Loans
+                                   </a>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+        
+           <div class="col-xl-4">
+            <div class="card card-block card-stretch card-height">
+                <div class="card-body">
+                    <!-- Support Chat Request -->
+                    <div class="card border-bottom pb-2 shadow-none">
+                        <div class="card-body text-center inln-date flet-datepickr">
+                            <h5 class="mb-2">Live Support Chat</h5>
+                            <p>Request high-priority assistance directly from support staff.</p>
+                            <a class="btn btn-primary btn-block" href="#">Start Chat</a>
+                        </div>
+                    </div>
+        
+                    <!-- User Feedback -->
+                    <div class="card card-list">
+                        <div class="card-body">
+                            <h5 class="mb-2">Give Feedback</h5>
+                            <p>We value your opinion! Let us know how we can improve.</p>
+                            <form id="feedback-form">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="feedback-message" rows="3" placeholder="Your feedback..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-secondary btn-block">Submit Feedback</button>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Support Request -->
+                </div>
+            </div>
+        </div>
+        <footer class="iq-footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                            <li class="list-inline-item"><a href="#">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">Globalgrowth</a>.
+                    </div>
+                </div>
+            </div>
+        </footer>
 </script>
+<!-- Backend Bundle JavaScript -->
 <script src="{% static 'js/backend-bundle.min.js' %}"></script>
 
 <!-- Table Treeview JavaScript -->

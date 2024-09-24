@@ -1,217 +1,119 @@
-{% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <style>
-        body {
-            background: url("{% static 'images/bbb.jpg' %}") no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Arial', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .container {
-            max-width: 500px;
-            width: 100%;
-        }
-        .card {
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.1); /* Slightly transparent */
-            backdrop-filter: blur(10px); /* Glassmorphism effect */
-        }
-        .card-header {
-            background-color: rgba(74, 144, 226, 0.8);
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-        .card-title {
-            margin-bottom: 0;
-            font-weight: bold;
-            font-size: 24px;
-        }
-        .card-body {
-            padding: 30px;
-        }
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-        .form-control {
-            border-radius: 8px;
-            padding: 12px;
-            border: 2px solid #fefcfc;
-            transition: all 0.3s ease;
-            font-size: 16px;
-            background-color: rgba(243, 235, 235, 0.5); /* Slightly transparent */
-        }
-        .form-control:focus {
-            border-color: #4a90e2;
-            box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
-        }
-        .form-label {
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 0 5px;
-            font-size: 14px;
-            color: #4a90e2;
-            transition: all 0.3s ease;
-        }
-        .form-control:focus + .form-label,
-        .form-control:not(:placeholder-shown) + .form-label {
-            top: -10px;
-            font-size: 14px;
-            color: #4a90e2;
-        }
-        .btn-primary {
-            background-color: #4a90e2;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 20px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            width: 100%;
-            font-size: 18px;
-        }
-        .btn-primary:hover {
-            background-color: #3a7bc8;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        .messages {
-            margin-bottom: 20px;
-        }
-        .alert {
-            border-radius: 8px;
-        }
-        .password-requirements {
-            font-size: 0.8rem;
-            color: #6c757d;
-            margin-top: 5px;
-        }
-        .invalid-feedback {
-            display: none;
-            color: #dc3545;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Create Your Account</h4>
-                <p>Use a strong password for security purposes</p>
-            </div>
-            <div class="card-body">
-                {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-                <form method="post" id="registrationForm">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="username" name="username" placeholder=" " required>
-                        <label for="username" class="form-label">Username</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder=" " required>
-                        <label for="email" class="form-label">Email</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="password1" name="password1" placeholder=" " required>
-                        <label for="password1" class="form-label">Password</label>
-                        <div class="password-requirements">
-                            <strong>Password must be at least 8 characters long and include uppercase, lowercase, number, or special character.</strong>
-                        </div>
-                        <div class="invalid-feedback" id="password1Feedback"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="password2" name="password2" placeholder=" " required>
-                        <label for="password2" class="form-label">Confirm Password</label>
-                        <div class="invalid-feedback" id="password2Feedback"></div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder=" " required>
-                        <label for="phone" class="form-label">Phone Number</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
-                    <div>
-                        <p>Already have an account? <a href="{% url 'auth_app:login' %}">Login</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SignUp </title>
+    
+    <!-- Load static template tag -->
+    {% load static %}
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'css/backend-plugin.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-calendar/dist/tui-calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css' %}">
+  </head>
+  <body class="">
+    <!-- loader Start -->
+    <div id="loading">
+      <div id="loading-center"></div>
     </div>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('registrationForm');
-            const password1 = document.getElementById('password1');
-            const password2 = document.getElementById('password2');
-            const password1Feedback = document.getElementById('password1Feedback');
-            const password2Feedback = document.getElementById('password2Feedback');
-
-            function validatePassword(password) {
-                const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-                return regex.test(password);
-            }
-
-            function showError(element, feedback, message) {
-                element.classList.add('is-invalid');
-                feedback.textContent = message;
-                feedback.style.display = 'block';
-            }
-
-            function clearError(element, feedback) {
-                element.classList.remove('is-invalid');
-                feedback.style.display = 'none';
-            }
-
-            password1.addEventListener('input', function() {
-                if (!validatePassword(this.value)) {
-                    showError(this, password1Feedback, 'Password does not meet the requirements.');
-                } else {
-                    clearError(this, password1Feedback);
-                }
-            });
-
-            password2.addEventListener('input', function() {
-                if (this.value !== password1.value) {
-                    showError(this, password2Feedback, 'Passwords do not match.');
-                } else {
-                    clearError(this, password2Feedback);
-                }
-            });
-
-            form.addEventListener('submit', function(e) {
-                if (!validatePassword(password1.value)) {
-                    e.preventDefault();
-                    showError(password1, password1Feedback, 'Password does not meet the requirements.');
-                }
-                if (password1.value !== password2.value) {
-                    e.preventDefault();
-                    showError(password2, password2Feedback, 'Passwords do not match.');
-                }
-            });
-        });
-    </script>
-</body>
+    <!-- loader END -->
+    
+    <div class="wrapper">
+      <section class="login-content">
+        <div class="container">
+          <div class="row align-items-center justify-content-center height-self-center">
+            <div class="col-lg-8">
+              <div class="card auth-card">
+                <div class="card-body p-0">
+                  <div class="d-flex align-items-center auth-content">
+                    <div class="col-lg-6 bg-primary content-left">
+                      <div class="p-3">
+                        <h2 class="mb-2 text-white">Sign Up</h2>
+                        <p>Create your globalgrowth account</p>
+                        {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                          {% endfor %}
+                        {% endif %}
+                        <form method="post">
+                          {% csrf_token %}
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="floating-label form-group">
+                                <input class="floating-input form-control" type="text" name="full_name" placeholder=" " required>
+                                <label>Full Name</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="floating-label form-group">
+                                <input class="floating-input form-control" type="email" name="email" placeholder=" " required>
+                                <label>Email</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="floating-label form-group">
+                                <input class="floating-input form-control" type="password" name="password1" placeholder=" " required>
+                                <label>Password</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="floating-label form-group">
+                                <input class="floating-input form-control" type="password" name="password2" placeholder=" " required>
+                                <label>Confirm Password</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-12">
+                              <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                                <label class="custom-control-label text-white" for="customCheck1">I agree with the terms of use</label>
+                              </div>
+                            </div>
+                          </div>
+                          <button type="submit" class="btn btn-white">Sign Up</button>
+                          <p class="mt-3">
+                            Already have an Account <a href="{% url 'auth_app:login' %}" class="text-white text-underline">Sign In</a>
+                          </p>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 content-right">
+                      <img src="{% static 'images/login/01.png' %}" class="img-fluid image-right" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Backend Bundle JavaScript -->
+    <script src="{% static 'js/backend-bundle.min.js' %}"></script>
+    
+    <!-- Table Treeview JavaScript -->
+    <script src="{% static 'js/table-treeview.js' %}"></script>
+    
+    <!-- Chart Custom JavaScript -->
+    <script src="{% static 'js/customizer.js' %}"></script>
+    
+    <!-- Chart Custom JavaScript -->
+    <script async src="{% static 'js/chart-custom.js' %}"></script>
+    
+    <!-- Chart Custom JavaScript -->
+    <script async src="{% static 'js/slider.js' %}"></script>
+    
+    <!-- app JavaScript -->
+    <script src="{% static 'js/app.js' %}"></script>
+    
+    <script src="{% static 'vendor/moment.min.js' %}"></script>
+  </body>
 </html>

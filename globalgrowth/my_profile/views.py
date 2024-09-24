@@ -111,6 +111,10 @@ def extract_amount_from_mpesa(message):
     return None
 
 @login_required
+def dashboard(request):
+    return render(request, 'my_profile/dashboard.html')
+
+@login_required
 def payment_agents(request):
     return render(request, 'my_profile/payment_agents.html')
 
@@ -167,7 +171,7 @@ def guide(request):
 
 @login_required
 def dashboard1(request):
-    return render(request, 'my_profile/dashboard1.html')
+    return render(request, 'my_profile/dashboard.html')
 
 @login_required
 def instructions(request):
@@ -178,8 +182,8 @@ def invest(request):
     return render(request, 'my_profile/invest.html')
 
 @login_required
-def referral(request):
-    return render(request, 'my_profile/referral.html')
+def refer(request):
+    return render(request, 'refer/refer.html')
 
 @login_required
 def payment_agent(request):

@@ -23,13 +23,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('landing.urls')),
     path('auth_app/', include('auth_app.urls')),
-    path('dashboard/', include('dashboard.urls')),
+    path('refer/', include('refer.urls')),
     path('checkout/', include('checkout.urls')),
     path('guide/', include('guide.urls')),
     path('profile/', include('my_profile.urls')),
     path('withdraw/', include('withdrawals.urls')),
     path('account/', include('user_account.urls')),
-    path('', include('referrals.urls')),
+    path('payment-agents/', include('payment_agents.urls', namespace='payment_agents')),
     path('views_earn/', include('whatsapp_rewards.urls')),
     
 

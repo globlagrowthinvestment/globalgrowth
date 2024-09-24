@@ -37,7 +37,7 @@
     <div class="wrapper">
       <div class="iq-sidebar  sidebar-default ">
           <div class="iq-sidebar-logo d-flex align-items-center">
-              <a href="{% url 'dashboard:dashboard' %}" class="header-logo">
+              <a href="{% url 'my_profile:dashboard' %}" class="header-logo">
                   <h3 class="logo-title light-logo">Globalgrowth</h3>
               </a>
               <div class="iq-menu-bt-sidebar ml-0">
@@ -48,7 +48,7 @@
             <nav class="iq-sidebar-menu">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
                     <li class="active">
-                        <a href="{% url 'dashboard:dashboard' %}" class="svg-icon">                        
+                        <a href="{% url 'my_profile:dashboard' %}" class="svg-icon">                        
                             <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="3" width="7" height="7"></rect>
                                 <rect x="14" y="3" width="7" height="7"></rect>
@@ -59,7 +59,7 @@
                         </a>
                     </li>
                     <li class="">
-                      <a href="{% url 'my_profile:dashboard1' %}" class="svg-icon">
+                      <a href="{% url 'my_profile:dashboard' %}" class="svg-icon">
                             <img src="{% static 'icons/dashboard.png' %}" alt="Packages Icon" width="25" height="25">
                             <span class="ml-4">Dashboard</span>
                         </a>
@@ -70,14 +70,14 @@
                           <span class="ml-4">My account</span>
                       </a>
                   </li>
+                  <li class="">
+                    <a href="{% url 'payment_agents:payment_agent_view' %}" class="svg-icon">
+                      <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                      <span class="ml-4">Payment Agents</span>
+                  </a>
+              </li>
                     <li class="">
-                      <a href="{% url 'my_profile:payment_agents' %}" class="svg-icon">
-                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
-                          <span class="ml-4">Payment Agents</span>
-                      </a>
-                  </li>
-                    <li class="">
-                        <a href="{% url 'referrals:referrals' %}" class="svg-icon">
+                        <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
                             <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
                             <span class="ml-4">Refer</span>
                         </a>
@@ -150,7 +150,7 @@
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                     <i class="ri-menu-line wrapper-menu"></i>
-                    <a href="{% url 'dashboard:dashboard' %}" class="header-logo">
+                    <a href="{% url 'my_profile:dashboard' %}" class="header-logo">
                         <h4 class="logo-title text-uppercase">Globalgrowth</h4>
     
                     </a>
@@ -180,161 +180,86 @@
                 </div>
             </nav>
         </div>
-    </div>    
-            <!-- Main content area -->
-            
-            <div class="content-page">
-                <div class="container-fluid">
-                   <div class="row">
-                       <div class="col-md-6 col-lg-3">
-                           <div class="card card-block card-stretch card-height">
-                               <div class="card-body">
-                                   <div class="top-block d-flex align-items-center justify-content-between">
-                                       <h5>Total User Investment</h5>
-                                       <span class="badge badge-primary">Equity</span>
-                                   </div>
-                                   <div class="d-flex align-items-center mt-3">
-                                       <i class="fas fa-chart-line fa-2x mr-3" style="color: #0077B5;"></i>
-                                       <h3>$<span class="counter">250,000</span></h3>
-                                   </div>
-                                   <p class="text-muted mt-2">Total Value</p>
-                                   <div class="d-flex align-items-center justify-content-between mt-3">
-                                       <p class="mb-0">Annual Return</p>
-                                       <span class="text-primary">12.5%</span>
-                                   </div>
-                                   <div class="iq-progress-bar bg-primary-light mt-2">
-                                       <span class="bg-primary iq-progress progress-1" data-percent="65"></span>
-                                   </div>
-                                   <a href="#" class="btn btn-outline-primary btn-block mt-3">
-                                       Analyze Stocks
-                                   </a>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-md-6 col-lg-3">
-                           <div class="card card-block card-stretch card-height">
-                               <div class="card-body">
-                                   <div class="top-block d-flex align-items-center justify-content-between">
-                                       <h5>Crypto Assets by Globalgrowth</h5>
-                                       <span class="badge badge-warning">Digital</span>
-                                   </div>
-                                   <div class="d-flex align-items-center mt-3">
-                                       <i class="fab fa-bitcoin fa-2x mr-3" style="color: #F7931A;"></i>
-                                       <h3>$<span class="counter">75,500</span></h3>
-                                   </div>
-                                   <p class="text-muted mt-2">Total Holdings</p>
-                                   <div class="d-flex align-items-center justify-content-between mt-3">
-                                       <p class="mb-0">24h Change</p>
-                                       <span class="text-warning">+5.7%</span>
-                                   </div>
-                                   <div class="iq-progress-bar bg-warning-light mt-2">
-                                       <span class="bg-warning iq-progress progress-1" data-percent="35"></span>
-                                   </div>
-                                   <a href="#" class="btn btn-outline-primary btn-block mt-3">
-                                       Track Crypto
-                                   </a>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-md-6 col-lg-3">
-                           <div class="card card-block card-stretch card-height">
-                               <div class="card-body">
-                                   <div class="top-block d-flex align-items-center justify-content-between">
-                                       <h5>GlobalGrowth Market</h5>
-                                       <span class="badge badge-success">Property</span>
-                                   </div>
-                                   <div class="d-flex align-items-center mt-3">
-                                       <i class="fas fa-home fa-2x mr-3" style="color: #2ECC71;"></i>
-                                       <h3>$<span class="counter">1,200,000</span></h3>
-                                   </div>
-                                   <p class="text-muted mt-2">Portfolio Value</p>
-                                   <div class="d-flex align-items-center justify-content-between mt-3">
-                                       <p class="mb-0">Occupancy Rate</p>
-                                       <span class="text-success">95%</span>
-                                   </div>
-                                   <div class="iq-progress-bar bg-success-light mt-2">
-                                       <span class="bg-success iq-progress progress-1" data-percent="85"></span>
-                                   </div>
-                                   <a href="#" class="btn btn-outline-primary btn-block mt-3">
-                                       Manage Properties
-                                   </a>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-md-6 col-lg-3">
-                           <div class="card card-block card-stretch card-height">
-                               <div class="card-body">
-                                   <div class="top-block d-flex align-items-center justify-content-between">
-                                       <h5>P2P Lending</h5>
-                                       <span class="badge badge-danger">Loans</span>
-                                   </div>
-                                   <div class="d-flex align-items-center mt-3">
-                                       <i class="fas fa-handshake fa-2x mr-3" style="color: #E74C3C;"></i>
-                                       <h3>$<span class="counter">50,000</span></h3>
-                                   </div>
-                                   <p class="text-muted mt-2">Active Loans</p>
-                                   <div class="d-flex align-items-center justify-content-between mt-3">
-                                       <p class="mb-0">Avg. Interest Rate</p>
-                                       <span class="text-danger">8.5%</span>
-                                   </div>
-                                   <div class="iq-progress-bar bg-danger-light mt-2">
-                                       <span class="bg-danger iq-progress progress-1" data-percent="70"></span>
-                                   </div>
-                                   <a href="#" class="btn btn-outline-primary btn-block mt-3">
-                                       Review Loans
-                                   </a>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-        
-           <div class="col-xl-4">
-            <div class="card card-block card-stretch card-height">
-                <div class="card-body">
-                    <!-- Support Chat Request -->
-                    <div class="card border-bottom pb-2 shadow-none">
-                        <div class="card-body text-center inln-date flet-datepickr">
-                            <h5 class="mb-2">Live Support Chat</h5>
-                            <p>Request high-priority assistance directly from support staff.</p>
-                            <a class="btn btn-primary btn-block" href="#">Start Chat</a>
-                        </div>
-                    </div>
-        
-                    <!-- User Feedback -->
-                    <div class="card card-list">
+    </div>
+    <div class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-lg-6">
+                    <div class="card card-block card-stretch card-height">
                         <div class="card-body">
-                            <h5 class="mb-2">Give Feedback</h5>
-                            <p>We value your opinion! Let us know how we can improve.</p>
-                            <form id="feedback-form">
+                            <div class="top-block d-flex align-items-center justify-content-between">
+                                <h5>Payment Agent</h5>
+                            </div>
+    
+                            <form method="post" class="mt-4">
+                                {% csrf_token %}
                                 <div class="form-group">
-                                    <textarea class="form-control" id="feedback-message" rows="3" placeholder="Your feedback..."></textarea>
+                                    <label for="payment_agent">Choose a Payment Agent</label>
+                                    <select class="form-control" id="payment_agent" name="payment_agent" required>
+                                        <option value="">Select a payment agent</option>
+                                        {% for agent in payment_agents %}
+                                        <option value="{{ agent.id }}">{{ agent.name }}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
-                                <button type="submit" class="btn btn-secondary btn-block">Submit Feedback</button>
+                                <div class="form-group">
+                                    <label for="phone_number">Phone Number</label>
+                                    <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" class="form-control" id="amount" name="amount" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Withdrawal Request</button>
                             </form>
+    
+                            <div class="mt-4">
+                                <h6>Your Withdrawal Requests</h6>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Payment Agent</th>
+                                            <th>Phone Number</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Admin Comment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for request in requests %}
+                                        <tr>
+                                            <td>{{ request.payment_agent.name }}</td>
+                                            <td>{{ request.phone_number }}</td>
+                                            <td>{{ request.amount }}</td>
+                                            <td>
+                                                {% if request.status == 'pending' %}
+                                                    <span class="badge badge-warning">Pending</span>
+                                                {% elif request.status == 'approved' %}
+                                                    <span class="badge badge-success">Approved</span>
+                                                {% elif request.status == 'declined' %}
+                                                    <span class="badge badge-danger">Declined</span>
+                                                {% elif request.status == 'paid' %}
+                                                    <span class="badge badge-primary">Paid</span>
+                                                {% elif request.status == 'blocked' %}
+                                                    <span class="badge badge-dark">Blocked</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ request.admin_comment }}</td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="5">You haven't made any withdrawal requests yet.</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <!-- Support Request -->
                 </div>
             </div>
         </div>
-        <footer class="iq-footer">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
-                            <li class="list-inline-item"><a href="#">Terms of Use</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6 text-right">
-                        <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">Globalgrowth</a>.
-                    </div>
-                </div>
-            </div>
-        </footer>
-</script>
-<!-- Backend Bundle JavaScript -->
+    </div>
 <script src="{% static 'js/backend-bundle.min.js' %}"></script>
 
 <!-- Table Treeview JavaScript -->

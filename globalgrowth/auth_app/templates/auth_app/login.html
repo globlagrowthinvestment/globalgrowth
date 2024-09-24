@@ -1,229 +1,94 @@
-{% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-            overflow: hidden; /* Added to hide overflow */
-        }
-        .background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("{% static 'images/bbbb.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            filter: blur(5px); /* Blur effect for the background */
-            z-index: 0; /* Behind other content */
-        }
-        .container {
-            max-width: 400px;
-            width: 100%;
-            padding: 20px;
-            z-index: 1; /* Above background */
-            position: relative; /* For stacking context */
-        }
-        .card {
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Slightly darker shadow */
-    overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.5); /* More transparent */
-    backdrop-filter: blur(15px); /* Increased blur */
-}
-
-/* Keep other styles as is */
-
-        .card-header {
-            background-color: transparent;
-            border-bottom: none;
-            text-align: center;
-            padding: 30px 20px;
-        }
-        .card-header h4 {
-            color: #333;
-            font-size: 24px;
-            font-weight: bold;
-            margin: 0;
-        }
-        .card-body {
-            padding: 30px;
-        }
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-        .form-control {
-            border: none;
-            border-bottom: 2px solid #ddd;
-            border-radius: 0;
-            padding: 10px 0;
-            font-size: 16px;
-            background-color: transparent;
-            transition: all 0.3s ease;
-        }
-        .form-control:focus {
-            box-shadow: none;
-            border-color: #764ba2;
-        }
-        .form-label {
-            position: absolute;
-            top: 10px;
-            left: 0;
-            font-size: 16px;
-            color: #999;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        .form-control:focus ~ .form-label,
-        .form-control:not(:placeholder-shown) ~ .form-label {
-            top: -20px;
-            font-size: 12px;
-            color: #764ba2;
-        }
-        .btn-primary {
-            background-color: #6086c0;
-            border: none;
-            border-radius: 30px;
-            padding: 12px 20px;
-            font-size: 16px;
-            font-weight: bold;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            background-color: #6a3c9e;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        .card-footer {
-            background-color: transparent;
-            border-top: none;
-            text-align: center;
-            padding: 20px;
-        }
-        .card-footer p {
-            margin: 0;
-            color: #666;
-        }
-        .card-footer a {
-            color: #764ba2;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        .card-footer a:hover {
-            color: #6a3c9e;
-        }
-        .input-icon {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            color: #999;
-        }
-        .password-toggle {
-            cursor: pointer;
-        }
-        .social-login {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin: 0 10px;
-            color: #fff;
-            transition: all 0.3s ease;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-        .social-btn:hover {
-            transform: none;
-        }
-        .facebook { background-color: #3b5998; }
-        .google { background-color: #db4a39; }
-        .twitter { background-color: #1da1f2; }
-    </style>
-</head>
-<body>
-    <div class="background-image"></div> <!-- Background image -->
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h4>Welcome Back</h4>
-            </div>
-            <div class="card-body">
-                {% if error_message %}
-                <div class="alert alert-danger" role="alert">
-                    {{ error_message }}
-                </div>
-                {% endif %}
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="username" name="username" required placeholder=" ">
-                        <label for="username" class="form-label">Username</label>
-                        <i class="fas fa-user input-icon"></i>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="password" name="password" required placeholder=" ">
-                        <label for="password" class="form-label">Password</label>
-                        <i class="fas fa-eye-slash input-icon password-toggle" onclick="togglePassword()"></i>
-                    </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="remember-me">
-                        <label class="form-check-label" for="remember-me">Remember me</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </form>
-                <div class="social-login">
-                    <a href="#" class="social-btn facebook" onclick="disabledSocialLogin(event)"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-btn google" onclick="disabledSocialLogin(event)"><i class="fab fa-google"></i></a>
-                    <a href="#" class="social-btn twitter" onclick="disabledSocialLogin(event)"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-            <div class="card-footer">
-                <p>Don't have an account? <a href="{% url 'auth_app:register' %}">Register</a></p> <!--{% url 'auth_app:register' %}-->
-                <p><a href="#">Forgot your password?</a></p>
-            </div>
-        </div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Globalgrowth</title>
+    
+    {% load static %}
+    
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'css/backend-plugin.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-calendar/dist/tui-calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css' %}">
+  </head>
+  <body class="">
+    <div id="loading">
+      <div id="loading-center"></div>
     </div>
-    <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const passwordToggle = document.querySelector('.password-toggle');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                passwordToggle.classList.replace('fa-eye-slash', 'fa-eye');
-            } else {
-                passwordInput.type = 'password';
-                passwordToggle.classList.replace('fa-eye', 'fa-eye-slash');
-            }
-        }
-
-        function disabledSocialLogin(event) {
-            event.preventDefault();
-            console.log("Social login is currently disabled");
-        }
-    </script>
-</body>
+    
+    <div class="wrapper">
+      <section class="login-content">
+        <div class="container">
+          <div class="row align-items-center justify-content-center height-self-center">
+            <div class="col-lg-8">
+              <div class="card auth-card">
+                <div class="card-body p-0">
+                  <div class="d-flex align-items-center auth-content">
+                    <div class="col-lg-6 bg-primary content-left">
+                      <div class="p-3">
+                        <h2 class="mb-2 text-white">Sign In</h2>
+                        <p>Login to stay connected.</p>
+                        {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                          {% endfor %}
+                        {% endif %}
+                        <form method="post">
+                          {% csrf_token %}
+                          <div class="row">
+                            <div class="col-lg-12">
+                              <div class="floating-label form-group">
+                                <input class="floating-input form-control" type="email" name="email" placeholder=" ">
+                                <label>Email</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-12">
+                              <div class="floating-label form-group">
+                                <input class="floating-input form-control" type="password" name="password" placeholder=" ">
+                                <label>Password</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="custom-control custom-checkbox mb-3">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label control-label-1 text-white" for="customCheck1">Remember Me</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <a href="#" class="text-white float-right">Forgot Password?</a>
+                            </div>
+                          </div>
+                          <button type="submit" class="btn btn-white">Sign In</button>
+                          <p class="mt-3">
+                            Create an Account <a href="{% url 'auth_app:register' %}" class="text-white text-underline">Sign Up</a>
+                          </p>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 content-right">
+                      <img src="{% static 'images/login/01.png' %}" class="img-fluid image-right" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <script src="{% static 'js/backend-bundle.min.js' %}"></script>
+    <script src="{% static 'js/table-treeview.js' %}"></script>
+    <script src="{% static 'js/customizer.js' %}"></script>
+    <script async src="{% static 'js/chart-custom.js' %}"></script>
+    <script async src="{% static 'js/slider.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'vendor/moment.min.js' %}"></script>
+  </body>
 </html>

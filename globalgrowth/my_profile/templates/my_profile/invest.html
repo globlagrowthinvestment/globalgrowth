@@ -1,218 +1,186 @@
+
 {% load static %}
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide - Global Growth</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-  <style>
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Globalgrowth | Profile</title>
 
-      :root {
-          --primary-color: #4CAF50;
-          --secondary-color: #FFC107;
-          --tertiary-color: #2196F3;
-          --background-color: #f0f4f8;
-          --card-color: #ffffff;
-          --text-color: #333333;
-      }
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/logo1.png' %}" />
 
-      body {
-          font-family: 'Poppins', sans-serif;
-          background-color: var(--background-color);
-          margin: 0;
-          padding: 0;
-          color: var(--text-color);
-      }
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/backend-plugin.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
+    
+    <!-- TUI Calendar CSS Files -->
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-calendar/dist/tui-calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css' %}">
 
-      .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px;
-      }
+    <!--scripts for javascript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 
-      .header {
-          background-color: var(--card-color);
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-          padding: 20px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 30px;
-      }
-
-      .header h1 {
-          font-size: 28px;
-          font-weight: 600;
-          color: var(--primary-color);
-      }
-
-      .btn {
-          padding: 12px 24px;
-          border: none;
-          border-radius: 50px;
-          cursor: pointer;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          transition: all 0.3s ease;
-          font-size: 14px;
-          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      }
-
-      .btn-primary {
-          background-color: var(--primary-color);
-          color: white;
-      }
-
-      .btn-primary:hover {
-          background-color: #45a049;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 8px rgba(0,0,0,0.15);
-      }
-
-      .btn-secondary {
-          background-color: var(--secondary-color);
-          color: var(--text-color);
-      }
-
-      .btn-secondary:hover {
-          background-color: #e6ac00;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 8px rgba(0,0,0,0.15);
-      }
-
-      .packages-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 30px;
-      }
-
-      .package-card {
-          background-color: var(--card-color);
-          border-radius: 20px;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-          padding: 30px;
-          transition: all 0.3s ease;
-      }
-
-      .package-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-      }
-
-      .package-title {
-          font-size: 24px;
-          color: var(--primary-color);
-          margin-bottom: 15px;
-          font-weight: 600;
-      }
-
-      .package-description {
-          color: #666;
-          margin-bottom: 25px;
-          font-size: 16px;
-          line-height: 1.6;
-      }
-
-      .package-actions {
-          display: flex;
-          justify-content: space-between;
-          gap: 10px;
-      }
-
-      .btn-success {
-          background-color: var(--primary-color);
-          color: white;
-          flex: 1;
-      }
-
-      .btn-success:hover {
-          background-color: #45a049;
-      }
-
-      .btn-warning {
-          background-color: var(--secondary-color);
-          color: var(--text-color);
-          flex: 1;
-      }
-
-      .btn-warning:hover {
-          background-color: #e6ac00;
-      }
-
-      .btn-info {
-          background-color: var(--tertiary-color);
-          color: white;
-          flex: 1;
-      }
-
-      .btn-info:hover {
-          background-color: #1976D2;
-      }
-
-      @media (max-width: 768px) {
-          .package-actions {
-              flex-direction: column;
-          }
-
-          .btn {
-              width: 100%;
-              margin-bottom: 10px;
-          }
-      }
-  </style>
-  <!-- plugins:css -->
-
-</head>
-<body class="bg-gray-100">
-  <div class="flex h-screen bg-gray-100">
-      <!-- Sidebar for large screens -->
-      <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
-          <div class="p-4">
-              <h2 class="text-2xl font-semibold">Global Growth</h2>
+  <body class="  ">
+    <!-- loader Start -->
+    <div id="loading">
+          <div id="loading-center">
           </div>
-          <nav class="flex-1 px-2 py-4">
-              <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-                  <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+    </div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+      <div class="iq-sidebar  sidebar-default ">
+          <div class="iq-sidebar-logo d-flex align-items-center">
+              <a href="{% url 'my_profile:dashboard' %}" class="header-logo">
+                  <h3 class="logo-title light-logo">Globalgrowth</h3>
               </a>
-              <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                  <i class="fas fa-user-tie mr-3"></i>Profile
-              </a>
-              <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
-            </a>
-              <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                  <i class="fas fa-user-plus mr-3"></i> Referral
-              </a>
-              <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                  <i class="fas fa-exclamation-circle mr-3"></i> Complaints
-              </a>
-              <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 bg-blue-700 rounded transition duration-200">
-                  <i class="fas fa-book mr-3"></i> Guide
-              </a>
-              <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-video mr-3"></i> Global views
-            </a>
-            <a href="#" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                <i class="fas fa-dice mr-3"></i> Global Spin
-            </a>
-              <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                  <i class="fas fa-cog mr-3"></i> Settings
-              </a>
-              <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                  <i class="fas fa-sign-out-alt mr-3"></i> Logout
-              </a>
-          </nav>
-          <div class="p-4">
-              <p class="text-sm">© 2024 Global Growth</p>
+              <div class="iq-menu-bt-sidebar ml-0">
+                  <i class="las la-bars wrapper-menu"></i>
+              </div>
           </div>
-      </aside>
-
+          <div class="data-scrollbar" data-scroll="1">
+            <nav class="iq-sidebar-menu">
+                <ul id="iq-sidebar-toggle" class="iq-menu">
+                    <li class="active">
+                        <a href="{% url 'my_profile:dashboard' %}" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <span class="ml-4">Home</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:dashboard' %}" class="svg-icon">
+                            <img src="{% static 'icons/dashboard.png' %}" alt="Packages Icon" width="25" height="25">
+                            <span class="ml-4">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'user_account:account_balance' %}" class="svg-icon">
+                          <img src="{% static 'icons/profile.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">My account</span>
+                      </a>
+                  </li>
+                  <li class="">
+                    <a href="{% url 'payment_agents:payment_agent_view' %}" class="svg-icon">
+                      <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                      <span class="ml-4">Payment Agents</span>
+                  </a>
+              </li>
+                    <li class="">
+                        <a href="{% url 'referrals:referrals' %}" class="svg-icon">
+                            <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
+                            <span class="ml-4">Refer</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'my_profile:complaints' %}" class="svg-icon">
+                            <img src="{% static 'icons/support.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Enquiries</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:guide' %}" class="svg-icon">
+                          <img src="{% static 'icons/guide.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Guide</span>
+                      </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'my_profile:user' %}" class="svg-icon">
+                            <img src="{% static 'icons/settings.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">settings</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'auth_app:login' %}" class="svg-icon">
+                            <img src="{% static 'icons/logout.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Log out</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span class="ml-4">Coming Soon</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+              <div id="sidebar-bottom" class="position-relative sidebar-bottom">
+                <div class="card border-none mb-0 shadow-none">
+                    <div class="card-body p-4">
+                        <div class="sidebarbottom-content text-center">
+                            <h5 class="mb-4">Connect with us</h5>
+                            <div class="d-flex justify-content-center mb-4">
+                                <a href="https://whatsapp.com/channel/0029Vap6nHhLdQeWL1hlJW1Z" target="_blank" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-info" style="font-size: 2rem;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-danger" style="font-size: 2rem;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </div>
+                            <p class="text-muted">Stay updated with our latest news and offers!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <div class="pt-5 pb-2"></div>
+          </div>
+      </div> 
+      <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+                    <i class="ri-menu-line wrapper-menu"></i>
+                    <a href="{% url 'my_profile:dashboard' %}" class="header-logo">
+                        <h4 class="logo-title text-uppercase">Globalgrowth</h4>
+    
+                    </a>
+                </div>
+                <div class="navbar-breadcrumb">
+                    <h5>Dashboard</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-label="Toggle navigation">
+                        <i class="ri-menu-3-line"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                            <li>
+                                <div class="iq-search-bar device-search">
+                                    <form action="#" class="searchbox">
+                                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                        <input type="text" class="text search-input" placeholder="Search here...">
+                                    </form>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>    
       <!-- Main content -->
       <div class="flex-1 flex flex-col overflow-hidden">
           <!-- Top bar -->
@@ -332,7 +300,7 @@
           <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
             <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
         </a>
-          <a href="{% url 'referrals:referrals' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
+        <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
               <i class="fas fa-user-plus mr-3"></i> Referral
           </a>
           <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">

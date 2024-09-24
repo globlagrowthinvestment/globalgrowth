@@ -70,12 +70,12 @@
                           <span class="ml-4">My account</span>
                       </a>
                   </li>
-                    <li class="">
-                      <a href="{% url 'my_profile:payment_agents' %}" class="svg-icon">
-                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
-                          <span class="ml-4">Payment Agents</span>
-                      </a>
-                  </li>
+                  <li class="">
+                    <a href="{% url 'payment_agents:payment_agent_view' %}" class="svg-icon">
+                      <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                      <span class="ml-4">Payment Agents</span>
+                  </a>
+              </li>
                     <li class="">
                         <a href="{% url 'referrals:referrals' %}" class="svg-icon">
                             <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
