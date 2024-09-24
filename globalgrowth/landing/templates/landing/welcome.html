@@ -1,740 +1,220 @@
-{% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
   <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
-    <title>GlobalGrowthInvestments</title>
-    <meta content="" name="description" />
-    <meta content="" name="keywords" />
-
-    <!-- Favicons -->
-
-    <link href="{% static 'assets/img/LuluLogo.svg' %}" rel="icon" />
-    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
-    
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"
-    />
-    
-    <!-- Vendor CSS Files -->
-    <link href="{% static '/vendor/aos/aos.css' %}" rel="stylesheet" />
-    <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
-    <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
-    <link href="{% static '/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
-    <link href="{% static '/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
-    <link href="{% static '/vendor/remixicon/remixicon.css' %}" rel="stylesheet" />
-    <link href="{% static '/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
-    
-    <!-- Template Main CSS File -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    
-
-    <!-- =======================================================
-  * Template Name: Arsha
-  * Updated: Jan 29 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
   </head>
-
   <body>
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-      <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto">
-          <a href="index.html">GLOBALGROWTH<a/>
-          </a>
-        </h1>
-  
-
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="#about">About</a></li>
-            <li><a class="nav-link scrollto" href="#services">Virtues</a></li>
-            <!--
-            <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
-            
-          -->
-            <li><a class="nav-link scrollto" href="#team">Team</a></li>
-            
-            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-            <li>
-              <a class="getstarted scrollto" href="{% url 'auth_app:login' %}">Create Account</a>
-            </li>
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-        <!-- .navbar -->
-      </div>
-    </header>
-    <!-- End Header -->
-
-    <!-- ======= Hero Section ======= -->
-    <section id="hero" class="d-flex align-items-center">
-      <div class="container">
-        <div class="row">
-          <div
-            class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <h1>GlobalGrowthInvestments</h1>
-            <h2>
-             Dive in to the world of Financial freedom through investments:
-
-            </h2>
-            <div class="d-flex justify-content-center justify-content-lg-start">
-              <a href="{% url 'auth_app:login' %}" class="btn-get-started scrollto">Get Started</a>
-              <a
-                href="https://www.youtube.com/"
-                class="glightbox btn-watch-video"
-                ><i class="bi bi-play-circle"></i><span>Watch Video</span></a
-              >
-            </div>
-          </div>
-          
-        </div>
-      </div>
-    </section>
-    <!-- End Hero -->
-
-    <main id="main">
-      <!-- ======= Clients Section ======= -->
-
-<section id="clients" class="clients section-bg">
-    <div class="container">
-        <div class="row" data-aos="zoom-in">
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                <img src="{% static 'images/clients/client-1.png' %}" class="img-fluid" alt="" />
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                <img src="{% static 'images/clients/client-2.png' %}" class="img-fluid" alt="" />
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                <img src="{% static 'images/clients/client-3.png' %}" class="img-fluid" alt="" />
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                <img src="{% static 'images/clients/client-4.png' %}" class="img-fluid" alt="" />
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                <img src="{% static 'images/clients/client-5.png' %}" class="img-fluid" alt="" />
-            </div>
-            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                <img src="{% static 'images/clients/client-6.png' %}" class="img-fluid" alt="" />
-            </div>
-        </div>
-    </div>
-</section>
-
-      <!-- End Cliens Section -->
-
-      <!-- ======= About Us Section ======= -->
-      <section id="about" class="about">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>About Us</h2>
-          </div>
-
-          <div class="row content">
-            <div class="col-lg-6">
-              <p>
-                We are Digital financial agency, a state-of-the-art financial digital platform designed to be your steadfast companion on your transformative journey to financial freedom. Our unwavering mission is to simplify the intricate complexities of modern finance and empower you, our valued user, to take firm control of your money and unlock a world of boundless possibilities through successful investments.
-              </p>
-              <ul>
-                <li>
-                  <i class="ri-check-double-line"></i> Real Time Investment Analysis from expert market analysis
-                </li>
-                <li>
-                  <i class="ri-check-double-line"></i> Diverse range of investment packages
-                </li>
-                <li>
-                  <i class="ri-check-double-line"></i> Financial freedom at your finger tips
-                </li>
-              </ul>
-            </div>
-            <div class="col-lg-6 pt-4 pt-lg-0">
-              <p>
-                Unlock the desire for financial freedom. Invest with us today and attaain your desires.
-                With our diverse range of investment packages, we offer high quality market value analysis in real time
-              </p>
-              <a href="{% url 'auth_app:register' %}" class="btn-learn-more">Sign Up</a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- End About Us Section -->
-
-      <!-- ======= Services Section ======= -->
-      <section id="services" class="services section-bg">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Our Value</h2>
-            <p>
-              Discover the innovative world of Global Growth investments, where cutting-edge
-financial strategies meet immersive pathways to financial freedom. From
-interactive investment tools to personalized financial assistance, our Investments products
-are designed to make your journey towards financial independence engaging,
-effective, and enjoyable.
-            </p>
-          </div>
-
-          <div class="row">
-            <div
-              class="col-xl-3 col-md-6 d-flex align-items-stretch"
-              data-aos="zoom-in"
-              data-aos-delay="100"
-            >
-              <div class="icon-box">
-                <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                <h4><a href="">Financially correct</a></h4>
-                <p>
-                  Enhacne your financial architecture through streamlined investment process.
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-file"></i></div>
-                <h4><a href="">Interactive Literature</a></h4>
-                <p>
-                  Connect with a vibrant community of market analysts, package investments analysts anf financial experts.
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0"
-              data-aos="zoom-in"
-              data-aos-delay="300"
-            >
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-tachometer"></i></div>
-                <h4><a href="">Real time Profit Growth</a></h4>
-                <p>
-                  Monitor your investemnts growth in real time from your personal dashboard
-                </p>
-              </div>
-            </div>
-
-            <div
-              class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0"
-              data-aos="zoom-in"
-              data-aos-delay="400"
-            >
-              <div class="icon-box">
-                <div class="icon"><i class="bx bx-layer"></i></div>
-                <h4><a href="">Cultural Financial workshops</a></h4>
-                <p>
-                  Dive deeper in to the rich tapestry of Global Growth investements and connect with a vibrant team of investors like you
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- End Services Section -->
-
-      <!-- ======= Cta Section ======= -->
-      <section id="cta" class="cta">
-        <div class="container" data-aos="zoom-in">
-          <div class="row">
-            <div class="col-lg-9 text-center text-lg-start">
-              <h3>Join Us Today</h3>
-              <p>
-                Take the first step towards your financial advancement journey. Click below to start your investments journey
-              </p>
-            </div>
-            <div class="col-lg-3 cta-btn-container text-center">
-              <a class="cta-btn align-middle" href="{% url 'auth_app:register' %}">Sign Up</a>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- End Cta Section
-
-
-    ======= Team Section ======= -->
-    {% load static %}
-    <section id="team" class="team section-bg">
-        <div class="container" data-aos="fade-up">
-            <div class="section-title">
-                <h2>MARKET ANALYSTS</h2>
-                <p>
-                    Our Team: Meet the dedicated individuals behind
-                    <strong>Global Growth Investments</strong> who are committed to fostering a love
-                    for financial literacy and investments. Together, we strive to create
-                    an engaging and supportive financial market environment for our community.
-                </p>
-            </div>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
     
-            <div class="row">
-                <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="member d-flex align-items-start">
-                        <div class="pic">
-                            <img src="{% static 'images/team/a.jpg' %}" class="img-fluid" alt="" />
-                        </div>
-                        <div class="member-info">
-                            <h4>BILLY BEZON</h4>
-                            <span>CEO | Founder</span>
-                            <p>
-                                Visionary leader and a professional market analyst.
-                            </p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""><i class="ri-linkedin-box-fill"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <script src="" async defer></script>
+
+<!-- design and filter inspired from apple.com/iphone-16-pro/ -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*{ box-sizing: border-box; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; scroll-behavior: smooth;}
+html, body { height: 100%; overflow: hidden;}
+
+body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: Poppins;
+    background: #000;
+
+    font-size: calc(var(--_size) * 0.022);
+    --_factor: min(1000px, 100vh);
+    --_size: min(var(--_factor), 100vw);
+}
+svg.filters { height:0; width: 0; position: absolute; z-index:-1; }
+.header-text {
+    color: #c8c2bd;
+    font-size: 3em;
+    text-align: center;
+    line-height: 1.0625;
+    font-weight: 600;
+    letter-spacing: -0.009em;
+}
+.glow-filter{
+    position: relative;
+    display: inline-block;
+    scale: 1;
+
+    animation: onloadscale 1s ease-out forwards;
+}
+.glow-filter::before{
+    content: attr(data-text);
+    position: absolute;
+    pointer-events: none;
+    color:  #fffaf6;
+    background: linear-gradient(0deg, #dfe5ee 0%, #fffaf6 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: url(#glow-4);
+    -moz-filter: url(#glow-4);
+    -webkit-filter: url(#glow-4);
+
+    opacity: 0;
+    animation: onloadopacity 1s ease-out forwards;
+}
+@keyframes onloadscale {
+    24% { scale: 1; }
+    100% { scale: 1.02; }
+}
+@keyframes onloadopacity {
+    24% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+p {
+    position: absolute;
+    color:  #86868b;
+    font-weight: 600;
+    background: linear-gradient(0deg,#86868b 0%, #bdc2c9 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    top: 0; bottom: 0; margin: auto;
+    height: fit-content;
+    translate: 0 12em;
+    max-width: 28em;
+    text-align: center;
+}
+p span {
+    position: relative;
+    display: inline-block;
+    -webkit-text-fill-color:#e7dfd6;
+    font-weight: 1000;
+}
+
+
+.bg {
+    width: 100%; height: 100%;
+    max-width: 44em;
+    position: absolute;
+}
+.bg > div {
+    position: absolute;
+    scale: 1.2;
+    opacity: 0.6;
+}
+.bg > div:nth-child(1) {
+    width: 100%;
+    height: 100%;
+    border-radius: 100em;
+    box-shadow: 
+    inset 0 0 4em 3em rgba(238, 200, 175, 0.2),
+    inset 0 0 2em 0.4em rgba(238, 200, 175, 0.2),
+    0 0 0.1em 0.1em rgba(238, 200, 175, 0.2),
+    0 0 1em 0.4em rgba(238, 200, 175, 0.3);
+
+    translate: 0 -70%;
+    animation: onloadbgt 1s ease-in-out forwards;
+}
+.bg > div:nth-child(2) {
+    width: 100%;
+    height: 100%;
+    border-radius: 100em;
+    box-shadow: 
+    inset 0 0 4em 3em rgba(238, 200, 175, 0.2),
+    inset 0 0 2em 0.4em rgba(238, 200, 175, 0.2),
+    0 0 0.1em 0.1em rgba(238, 200, 175, 0.2),
+    0 0 1em 0.4em rgba(238, 200, 175, 0.3);
     
-                <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="member d-flex align-items-start">
-                        <div class="pic">
-                            <img src="{% static 'images/team/e.jpg' %}" class="img-fluid" alt="" />
-                        </div>
-                        <div class="member-info">
-                            <h4>TALISHA</h4>
-                            <span>Finance Analyst</span>
-                            <p>
-                                Bringing shared vision for profit-oriented investors.
-                            </p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""><i class="ri-linkedin-box-fill"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="member d-flex align-items-start">
-                        <div class="pic">
-                            <img src="{% static 'images/team/b.jpg' %}" class="img-fluid" alt="" />
-                        </div>
-                        <div class="member-info">
-                            <h4>FRED</h4>
-                            <span>Finance Professional</span>
-                            <p>
-                                Real-time market and profit expert analyst.
-                            </p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""><i class="ri-linkedin-box-fill"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="member d-flex align-items-start">
-                        <div class="pic">
-                            <img src="{% static 'images/team/d.jpg' %}" class="img-fluid" alt="" />
-                        </div>
-                        <div class="member-info">
-                            <h4>SOPHINA</h4>
-                            <span>Top Investor | Businesswoman</span>
-                            <p>Transform your financial journey through top-level investors.</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""><i class="ri-linkedin-box-fill"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    
-      <!-- End Team Section -->
+    translate: 0 70%;
+    animation: onloadbgb 1s ease-in-out forwards;
+}
+/* Main button styles */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
 
-      
+/* Glassmorphism effect */
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease-in-out;
+}
 
-      <!-- ======= Frequently Asked Questions Section ======= -->
-      <section id="faq" class="faq section-bg">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Frequently Asked Questions</h2>
-            <p>
-              Explore our Frequently Asked Questions (FAQ) section to find
-              answers to common queries about our platform, services, and
-              investment options.
-            </p>
-          </div>
+.glassmorphism:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
 
-          <div class="faq-list">
-            <ul>
-              <li data-aos="fade-up" data-aos-delay="100">
-                <i class="bx bx-help-circle icon-help"></i>
-                <a
-                  data-bs-toggle="collapse"
-                  class="collapse"
-                  data-bs-target="#faq-list-1"
-                >
-                  How do i sign up for an account?
-                  <i class="bx bx-chevron-down icon-show"></i
-                  ><i class="bx bx-chevron-up icon-close"></i
-                ></a>
-                <div
-                  id="faq-list-1"
-                  class="collapse show"
-                  data-bs-parent=".faq-list"
-                >
-                  <p>
-                    To create an account simply click on the sign up button at
-                    the top of homepage and follow prompts.
-                  </p>
-                </div>
-              </li>
+/* Positioning the buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
 
-              <li data-aos="fade-up" data-aos-delay="200">
-                <i class="bx bx-help-circle icon-help"></i>
-                <a
-                  data-bs-toggle="collapse"
-                  data-bs-target="#faq-list-2"
-                  class="collapsed"
-                  >What packages are availabe for investing on your platform?
-                  <i class="bx bx-chevron-down icon-show"></i
-                  ><i class="bx bx-chevron-up icon-close"></i
-                ></a>
-                <div
-                  id="faq-list-2"
-                  class="collapse"
-                  data-bs-parent=".faq-list"
-                >
-                  <p>
-                    We offer a wide range of investment packages, which include
-                    <strong>Silver, Bronze, Iron, Gold and Pro Packages</strong>. Explore our packages
-                    catalog to discover the full list of investment options available.
-                  </p>
-                </div>
-              </li>
+.home-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
 
-              <li data-aos="fade-up" data-aos-delay="300">
-                <i class="bx bx-help-circle icon-help"></i>
-                <a
-                  data-bs-toggle="collapse"
-                  data-bs-target="#faq-list-3"
-                  class="collapsed"
-                  >Are there <strong>Custom Packages?</strong>?
-                  <i class="bx bx-chevron-down icon-show"></i
-                  ><i class="bx bx-chevron-up icon-close"></i
-                ></a>
-                <div
-                  id="faq-list-3"
-                  class="collapse"
-                  data-bs-parent=".faq-list"
-                >
-                  <p>
-                    Yes, we offer a custom investment package to amounts above<strong>Ksh, 50,000 </strong> Sign up for a
-                    free account to access more information.
-                  </p>
-                </div>
-              </li>
+.login-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
 
-              <li data-aos="fade-up" data-aos-delay="400">
-                <i class="bx bx-help-circle icon-help"></i>
-                <a
-                  data-bs-toggle="collapse"
-                  data-bs-target="#faq-list-4"
-                  class="collapsed"
-                  >How can i track my profits progress?
-                  <i class="bx bx-chevron-down icon-show"></i
-                  ><i class="bx bx-chevron-up icon-close"></i
-                ></a>
-                <div
-                  id="faq-list-4"
-                  class="collapse"
-                  data-bs-parent=".faq-list"
-                >
-                  <p>
-                    You can track your investment profits through our user-friendly
-                    dashboard, which displays your total earnings, referral bonuses and overall real time view.
-                  </p>
-                </div>
-              </li>
+@keyframes onloadbgt {
+    0% { translate: 0 -70%; opacity: 0.3; }
+    100% { translate: 0 -64%; opacity: 0.8; }
+}
+@keyframes onloadbgb {
+    0% { translate: 0 70%; opacity: 0.3; }
+    100% { translate: 0 64%; opacity: 0.8; }
+}
 
-              <li data-aos="fade-up" data-aos-delay="500">
-                <i class="bx bx-help-circle icon-help"></i>
-                <a
-                  data-bs-toggle="collapse"
-                  data-bs-target="#faq-list-5"
-                  class="collapsed"
-                  >Do you offer financial training sessions?
-                  <i class="bx bx-chevron-down icon-show"></i
-                  ><i class="bx bx-chevron-up icon-close"></i
-                ></a>
-                <div
-                  id="faq-list-5"
-                  class="collapse"
-                  data-bs-parent=".faq-list"
-                >
-                  <p>
-                    Yes, we provide free financial literacy guides though our social media channels: links are provided to users accordingly on creation of accounts.
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-      <!-- End Frequently Asked Questions Section -->
+</style>
 
-      <!-- ======= Contact Section ======= -->
-      <section id="contact" class="contact">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title">
-            <h2>Contact</h2>
-            <p>
-              Contact Us: Have a question or need assistance? Reach out to our
-              team through the Contact Us section. We're here to help you on
-              your financial transformation journey!"
-            </p>
-          </div>
+<div class="bg"><div></div><div></div></div>
+<div class="header-text" aria-hidden="true">
+    Introducing<br><span class="glow-filter" data-text="Globalgrowth 2.0">Globalgrowth 2.0</span><br>Your one point for smart financial investment<br>
+</div>
+<p>
+    Experience a new way to start and manage your financial freedom with <span>Globalgrowth </span> Perfect for making smart investments, with new dynamic and advanced financial and assets management
+</p>
 
-          <div class="row">
-            <div class="col-lg-5 d-flex align-items-stretch">
-              <div class="info">
-                <div class="address">
-                  <i class="bi bi-geo-alt"></i>
-                  <h4>Location:</h4>
-                  <p>Wells View W.S.P 77899</p>
-                </div>
+<div class="buttons">
+    <a href="#" class="btn glassmorphism home-button">Home</a>
+    <a href="{% url 'auth_app:login' %}" class="btn glassmorphism login-button">Login</a>
+</div>
 
-                <div class="email">
-                  <i class="bi bi-envelope"></i>
-                  <h4>Email:</h4>
-                  <p>queries@globalgrowthinvestment.com</p>
-                  <p>support@globalgrowth.com</p>
-                </div>
-
-                
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1349.1741540239996!2d-77.61789246991107!3d43.1533794056905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d6b4f8549f61ab%3A0xc5379fb7a5c52809!2s35%20S%20Washington%20St%2C%20Rochester%2C%20NY%2014608%2C%20USA!5e0!3m2!1sen!2ske!4v1720357605915!5m2!1sen!2ske"
-                  width="600"
-                  height="450"
-                  style="border: 0"
-                  allowfullscreen=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
-            </div>
-
-            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-              <form
-                action="forms/contact.php"
-                method="post"
-                role="form"
-                class="php-email-form"
-              >
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label for="name">Your Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      class="form-control"
-                      id="name"
-                      required
-                    />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="name">Your Email</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      name="email"
-                      id="email"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="name">Subject</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="subject"
-                    id="subject"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <label for="name">Message</label>
-                  <textarea
-                    class="form-control"
-                    name="message"
-                    rows="10"
-                    required
-                  ></textarea>
-                </div>
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">
-                    Your message has been sent. Thank you!
-                  </div>
-                </div>
-                <div class="text-center">
-                  <button type="submit">Send Message</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- End Contact Section -->
-    </main>
-    <!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-      <div class="footer-newsletter">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-6">
-              <h4>Join Our Newsletter</h4>
-              <p>
-                Subscribe to our newsletter and receive the latest updates on
-                beta features
-              </p>
-              <form action="" method="post">
-                <input type="email" name="email" /><input
-                  type="submit"
-                  value="Subscribe"
-                />
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-top">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-6 footer-contact">
-              <h3>GlobalGrowth</h3>
-              <p>
-                Wells View W.S.P 77899 <br />
-                <br />
-                <br /><br />
-                <strong>Email:</strong> support@globalgrowth.com<br />
-              </p>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Navigation links</h4>
-              <ul>
-                <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">About us</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Services</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Terms of service</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Privacy policy</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Our Mission</h4>
-              <ul>
-                <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Financial literacy</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="#">Transparency</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-lg-3 col-md-6 footer-links">
-              <h4>Our Social Networks</h4>
-              <p>
-                Connect with us for latest updates from our social media
-                presence.
-              </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"
-                  ><i class="bx bxl-instagram"></i
-                ></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container footer-bottom clearfix">
-        <div class="copyright">
-          <strong><span>GlobalgrowthInvestments</span></strong
-          >. All Rights Reserved
-        </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-          Designed by
-          <a href="#">Globalgrowth Engineers</a>
-        </div>
-      </div>
-    </footer>
-    <!-- End Footer -->
-
-    <div id="preloader"></div>
-    <a
-      href="#"
-      class="back-to-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
-
-    <!-- Vendor JS Files -->
-
-    <script src="{% static 'vendor/aos/aos.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
-    <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-    <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
-    <script src="{% static 'vendor/waypoints/noframework.waypoints.js' %}"></script>
-    <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
-    
-
-    <!-- Template Main JS File -->
-    <script src="{% static 'js/main.js' %}"></script>
-  </body>
+<svg class="filters" width='1440px' height='300px' viewBox='0 0 1440 300' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter id="glow-4" color-interpolation-filters="sRGB" x="-50%" y="-200%" width="200%" Height="500%">
+            <!-- Filter code remains the same -->
+        </filter>
+    </defs>
+</svg>
+</body>
 </html>
