@@ -31,7 +31,6 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'f6c3-102-209-18-30.ngrok-free.app',
     'globalgrowth.onredner.com',
     '105.27.122.14',
     'corsheaders',
@@ -59,7 +58,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'guide',
     'referrals',
-    'globalspin',
     'withdrawals.apps.WithdrawalsConfig',
     'user_account.apps.UserAccountConfig',
     'whatsapp_rewards.apps.WhatsappRewardsConfig'
@@ -125,8 +123,6 @@ DATABASES = {
         conn_max_age=600
     )
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 

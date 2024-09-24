@@ -1,335 +1,276 @@
-{% load static %}
-{% load gravatar_filters %}
 
-<!DOCTYPE html>
+{% load static %}
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Agents - Global Growth</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Globalgrowth | Profile</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/logo1.png' %}" />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/backend-plugin.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
+    
+    <!-- TUI Calendar CSS Files -->
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-calendar/dist/tui-calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css' %}">
+
+    <!--scripts for javascript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <style>
-        @keyframes blink {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #644fdf 0%, #c56adb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
         }
-        .blink {
-            animation: blink 1.5s infinite;
+
+        .content {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1.5s ease-in-out;
         }
-        .trust-badge {
-            transition: transform 0.3s ease-in-out;
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
         }
-        .trust-badge:hover {
-            transform: scale(1.05);
+
+        p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            font-weight: 500;
+            color: #ffeb3b;
+            text-shadow: 0px 0px 10px rgba(255, 235, 59, 0.8);
+        }
+
+        .loader {
+            margin: 0 auto 30px auto;
+            width: 80px;
+            height: 80px;
+            border: 10px solid rgba(255, 255, 255, 0.2);
+            border-top: 10px solid #ffeb3b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.4);
+            }
+            100% {
+                text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
-</head>
-<body class="bg-gray-100">
-    <div class="flex h-screen bg-gray-100">
-        <!-- Sidebar -->
-        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
-            <div class="p-4">
-                <h2 class="text-2xl font-semibold">Global Growth</h2>
-            </div>
-            <nav class="flex-1 px-2 py-4">
-                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
-                </a>
-                <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-user-tie mr-3"></i>Profile
-                </a>
-                <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
-                </a>
-                <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-user-plus mr-eferral3"></i> Referral
-                </a>
-                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
-                </a>
-                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-book mr-3"></i> Guide
-                </a>
-                <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-video mr-3"></i> Global views
-                </a>
-                <a href="#" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class="fas fa-dice mr-3"></i> Global Spin
-                </a>
-                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-cog mr-3"></i> Settings
-                </a>
-                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
-                </a>
-            </nav>
-            <div class="p-4">
-                <p class="text-sm">© 2024 Global Growth</p>
-            </div>
-        </aside>
-
-        <!-- Main content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top bar -->
-            <header class="flex justify-between items-center p-4 bg-white shadow-md">
-                <div class="flex items-center">
-                    <div class="md:hidden mr-4">
-                        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+  <body class="  ">
+    <!-- loader Start -->
+    <div id="loading">
+          <div id="loading-center">
+          </div>
+    </div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+      <div class="iq-sidebar  sidebar-default ">
+          <div class="iq-sidebar-logo d-flex align-items-center">
+              <a href="{% url 'dashboard:dashboard' %}" class="header-logo">
+                  <h3 class="logo-title light-logo">Globalgrowth</h3>
+              </a>
+              <div class="iq-menu-bt-sidebar ml-0">
+                  <i class="las la-bars wrapper-menu"></i>
+              </div>
+          </div>
+          <div class="data-scrollbar" data-scroll="1">
+            <nav class="iq-sidebar-menu">
+                <ul id="iq-sidebar-toggle" class="iq-menu">
+                    <li class="active">
+                        <a href="{% url 'dashboard:dashboard' %}" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
                             </svg>
-                        </button>
+                            <span class="ml-4">Home</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:dashboard1' %}" class="svg-icon">
+                            <img src="{% static 'icons/dashboard.png' %}" alt="Packages Icon" width="25" height="25">
+                            <span class="ml-4">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'user_account:account_balance' %}" class="svg-icon">
+                          <img src="{% static 'icons/profile.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">My account</span>
+                      </a>
+                  </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:payment_agents' %}" class="svg-icon">
+                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Payment Agents</span>
+                      </a>
+                  </li>
+                    <li class="">
+                        <a href="{% url 'referrals:referrals' %}" class="svg-icon">
+                            <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
+                            <span class="ml-4">Refer</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'my_profile:complaints' %}" class="svg-icon">
+                            <img src="{% static 'icons/support.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Enquiries</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:guide' %}" class="svg-icon">
+                          <img src="{% static 'icons/guide.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Guide</span>
+                      </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'my_profile:user' %}" class="svg-icon">
+                            <img src="{% static 'icons/settings.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">settings</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'auth_app:login' %}" class="svg-icon">
+                            <img src="{% static 'icons/logout.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Log out</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span class="ml-4">Coming Soon</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+              <div id="sidebar-bottom" class="position-relative sidebar-bottom">
+                <div class="card border-none mb-0 shadow-none">
+                    <div class="card-body p-4">
+                        <div class="sidebarbottom-content text-center">
+                            <h5 class="mb-4">Connect with us</h5>
+                            <div class="d-flex justify-content-center mb-4">
+                                <a href="https://whatsapp.com/channel/0029Vap6nHhLdQeWL1hlJW1Z" target="_blank" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-info" style="font-size: 2rem;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-danger" style="font-size: 2rem;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </div>
+                            <p class="text-muted">Stay updated with our latest news and offers!</p>
+                        </div>
                     </div>
-                    <h1 class="text-xl font-semibold">Payment Agents</h1>
                 </div>
-                <div class="flex items-center">
-                    <span class="mr-4 text-sm text-gray-600">Last login: {{ user.last_login|date:"F j, Y, g:i a" }}</span>
-                    <div class="relative">
-                        <img src="{{ gravatar_url }}" alt="Profile" class="h-8 w-8 rounded-full">
-                        <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Main content area -->
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-                <div class="container mx-auto px-6 py-8">
-                    <!-- Swift payment message -->
-                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
-                        <p class="font-bold">Swift Payments</p>
-                        <p>Our payments are processed quickly and securely, typically taking less than 2 minutes to complete.</p>
-                    </div>
-
-                    <!-- Trust badges -->
-                    <div class="flex flex-wrap justify-center mb-8">
-                        <div class="trust-badge bg-white shadow-md rounded-lg p-4 m-2 text-center">
-                            <i class="fas fa-shield-alt text-3xl text-blue-500 mb-2"></i>
-                            <p class="text-sm font-semibold">Secure Transactions</p>
-                        </div>
-                        <div class="trust-badge bg-white shadow-md rounded-lg p-4 m-2 text-center">
-                            <i class="fas fa-user-shield text-3xl text-green-500 mb-2"></i>
-                            <p class="text-sm font-semibold">Verified Agents</p>
-                        </div>
-                        <div class="trust-badge bg-white shadow-md rounded-lg p-4 m-2 text-center">
-                            <i class="fas fa-comment-dots text-3xl text-purple-500 mb-2"></i>
-                            <p class="text-sm font-semibold">24/7 Support</p>
-                        </div>
-                        <div class="trust-badge bg-white shadow-md rounded-lg p-4 m-2 text-center">
-                            <i class="fas fa-money-bill-wave text-3xl text-yellow-500 mb-2"></i>
-                            <p class="text-sm font-semibold">Best Rates</p>
-                        </div>
-                    </div>
-
-                    <h2 class="text-2xl font-semibold mb-4">Payment Agents</h2>
-                    
-                    <!-- Search and filter options -->
-                    <div class="mb-6">
-                        <input type="text" id="agent-search" placeholder="Search agents..." class="w-full p-2 border rounded-lg">
-                        <div class="mt-2">
-                            <label class="inline-flex items-center mr-4">
-                                <input type="checkbox" class="form-checkbox" id="filter-online">
-                                <span class="ml-2">Online Only</span>
-                            </label>
-                            <select id="sort-agents" class="p-2 border rounded-lg">
-                                <option value="name">Sort by Name</option>
-                                <option value="rating">Sort by Rating</option>
-                                <option value="transactions">Sort by Transactions</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div id="agent-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <!-- Payment Agent 1 -->
-                        <div class="bg-white shadow-md rounded-lg p-6">
-                            <div class="flex items-center">
-                                <img src="{% static 'api/placeholder/agent2.jpg' %}" alt="John Doe" class="w-16 h-16 rounded-full mr-4">
-                                <div>
-                                    <h3 class="text-lg font-semibold">Fast Pesa</h3>
-                                    <div class="flex items-center">
-                                        <span class="text-green-500 mr-2 blink">
-                                            <i class="fas fa-circle text-xs"></i>
-                                        </span>
-                                        <span class="text-sm text-gray-600">Online</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mt-4">Experienced agent specializing in fast international transfers. 5+ years of service.</p>
-                            <div class="mt-4 flex justify-between items-center">
-                                <div>
-                                    <span class="text-yellow-500"><i class="fas fa-star"></i> 4.8</span>
-                                    <span class="text-sm text-gray-600">(120 reviews)</span>
-                                </div>
-                                <span class="text-sm text-gray-600">1000+ transactions</span>
-                            </div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mt-4 select-agent" data-agent-id="1">
-                                Select Agent
-                            </button>
-                        </div>
-
-                        <!-- Payment Agent 2 -->
-                        <div class="bg-white shadow-md rounded-lg p-6">
-                            <div class="flex items-center">
-                                <img src="{% static 'api/placeholder/agent3.jpg' %}" alt="Jane Smith" class="w-16 h-16 rounded-full mr-4">
-                                <div>
-                                    <h3 class="text-lg font-semibold">BanSec Transfers</h3>
-                                    <div class="flex items-center">
-                                        <span class="text-green-500 mr-2 blink">
-                                            <i class="fas fa-circle text-xs"></i>
-                                        </span>
-                                        <span class="text-sm text-gray-600">Online</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mt-4">Crypto expert with a focus on secure and anonymous transactions. Available 24/7.</p>
-                            <div class="mt-4 flex justify-between items-center">
-                                <div>
-                                    <span class="text-yellow-500"><i class="fas fa-star"></i> 4.9</span>
-                                    <span class="text-sm text-gray-600">(85 reviews)</span>
-                                </div>
-                                <span class="text-sm text-gray-600">750+ transactions</span>
-                            </div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mt-4 select-agent" data-agent-id="2">
-                                Select Agent
-                            </button>
-                        </div>
-
-                        <!-- Payment Agent 3 -->
-                        <div class="bg-white shadow-md rounded-lg p-6">
-                            <div class="flex items-center">
-                                <img src="{% static 'api/placeholder/agent1.jpg' %}" alt="Alex Johnson" class="w-16 h-16 rounded-full mr-4">
-
-                                <div>
-                                    <h3 class="text-lg font-semibold">Swift Securities</h3>
-                                    <div class="flex items-center">
-                                        <span class="text-green-500 mr-2 blink">
-                                            <i class="fas fa-circle text-xs"></i>
-                                        </span>
-                                        <span class="text-sm text-gray-600">Online</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mt-4">Specializes in large volume transfers. Excellent rates for transactions over $10,000.</p>
-                            <div class="mt-4 flex justify-between items-center">
-                                <div>
-                                    <span class="text-yellow-500"><i class="fas fa-star"></i> 4.7</span>
-                                    <span class="text-sm text-gray-600">(200 reviews)</span>
-                                </div>
-                                <span class="text-sm text-gray-600">1500+ transactions</span>
-                            </div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mt-4 select-agent" data-agent-id="3">
-                                Select Agent
-                            </button>
-                        </div>
-
-                        <!-- Payment Agent 4 -->
-                        <div class="bg-white shadow-md rounded-lg p-6">
-                            <div class="flex items-center">
-                                <img src="{% static 'api/placeholder/agent4.jpg' %}" alt="Angeline " class="w-16 h-16 rounded-full mr-4">
-                                <div>
-                                    <h3 class="text-lg font-semibold">Ether agencies</h3>
-                                    <div class="flex items-center">
-                                        <span class="text-green-500 mr-2 blink">
-                                            <i class="fas fa-circle text-xs"></i>
-                                        </span>
-                                        <span class="text-sm text-gray-600">Online</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mt-4">New agent offering competitive rates. First-time customers receive a 5% bonus on their transfer.</p>
-                            <div class="mt-4 flex justify-between items-center">
-                                <div>
-                                    <span class="text-yellow-500"><i class="fas fa-star"></i> 4.6</span>
-                                    <span class="text-sm text-gray-600">(50 reviews)</span>
-                                </div>
-                                <span class="text-sm text-gray-600">300+ transactions</span>
-                            </div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mt-4 select-agent" data-agent-id="4">
-                                Select Agent
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <!-- Withdrawal Form -->
-                    <div id="withdrawal-form" class="mt-8 bg-white shadow-md rounded-lg p-6 hidden">
-                        <form action="{% url 'my_profile:profile' %}" method="post" class="mt-8 bg-white shadow-md rounded-lg p-6">
-                            {% csrf_token %}
-                            <h3 class="text-xl font-semibold mb-4">Request Withdrawal</h3>
-                            <div class="mb-4">
-                                <label for="amount" class="block text-gray-700 text-sm font-bold mb-2">Amount:</label>
-                                <input type="number" id="amount" name="amount" step="0.01" min="0.01" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="mpesa_number" class="block text-gray-700 text-sm font-bold mb-2">MPESA Number:</label>
-                                <input type="tel" id="mpesa_number" name="mpesa_number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                            </div>
-                            <a href="#"><button type="submit" id="submit-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200">
-                                Request Withdrawal
-                            </button></a>
-                            
-                        </form>
-                    </div>
-                    <!-- Mobile sidebar -->
-    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
-        <div class="flex justify-between items-center p-4">
-            <h2 class="text-2xl font-semibold">Global Growth</h2>
-            <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <nav class="px-2 py-4">
-            <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
-            </a>
-            <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-user-tie mr-3"></i> My Profile
-            </a>
-            <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
-            </a>
-            <a href="{% url 'referrals:referrals' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-user-plus mr-3"></i> Referral
-            </a>
-            <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-exclamation-circle mr-3"></i> Complaints
-            </a>
-            <a href="{% url 'my_profile:guide' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-book mr-3"></i> Guide
-            </a>
-            <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-video mr-3"></i> Global views
-            </a>
-            <a href="#" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-              <i class="fas fa-dice mr-3"></i> Global Spin
-            </a>
-            <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-cog mr-3"></i> Settings
-            </a>
-            <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-sign-out-alt mr-3"></i> Logout
-            </a>
-        </nav>
-    </div>
-
-    <!-- Confirmation Dialog 
-    <div id="confirmation-dialog" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white shadow-lg rounded-lg p-6">
-            <h3 class="text-xl font-semibold mb-4">Proceed with Withdrawal Request?</h3>
-            <p class="mb-4">You are about to request your withdrawal. Are you sure you want to continue?</p>
-            <p class="mb-4 text-sm text-gray-600"><strong>Note:</strong> Transaction rates apply.</p>
-            <div class="flex justify-end">
-                <button id="continue-button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mr-2">
-                    Continue
-                </button>
-                <button id="cancel-button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200">
-                    Cancel
-                </button>
             </div>
+              <div class="pt-5 pb-2"></div>
+          </div>
+      </div> 
+      <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+                    <i class="ri-menu-line wrapper-menu"></i>
+                    <a href="{% url 'dashboard:dashboard' %}" class="header-logo">
+                        <h4 class="logo-title text-uppercase">Globalgrowth</h4>
+    
+                    </a>
+                </div>
+                <div class="navbar-breadcrumb">
+                    <h5>Dashboard</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-label="Toggle navigation">
+                        <i class="ri-menu-3-line"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                            <li>
+                                <div class="iq-search-bar device-search">
+                                    <form action="#" class="searchbox">
+                                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                        <input type="text" class="text search-input" placeholder="Search here...">
+                                    </form>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
+    </div>    
+    <div class="content">
+        <div class="loader"></div>
+        <h1>Updating the UI</h1>
+        <p>We are currently upgrading the user interface for <span class="highlight">GlobalGrowth</span>. Some operations are on hold until the migration is complete. Please bear with us, as this process will be completed in less than <span class="highlight">12 hours</span>.</p>
+        <p>Thank you for your patience!</p>
     </div>
-    -->
+
     <script>
       document.addEventListener('DOMContentLoaded', function() {
     const agentButtons = document.querySelectorAll('.select-agent');
@@ -366,6 +307,27 @@
         confirmationDialog.classList.add('hidden');
     });
 });
-    </script>
+
+</script>
+<script src="{% static 'js/backend-bundle.min.js' %}"></script>
+
+<!-- Table Treeview JavaScript -->
+<script src="{% static 'js/table-treeview.js' %}"></script>
+
+<!-- Customizer JavaScript -->
+<script src="{% static 'js/customizer.js' %}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script async src="{% static 'js/chart-custom.js' %}"></script>
+
+<!-- Slider JavaScript -->
+<script async src="{% static 'js/slider.js' %}"></script>
+
+<!-- App JavaScript -->
+<script src="{% static 'js/app.js' %}"></script>
+
+<!-- Moment.js -->
+<script src="{% static 'vendor/moment.min.js' %}"></script>
+
 </body>
 </html>

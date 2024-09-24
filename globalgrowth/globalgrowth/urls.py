@@ -31,7 +31,7 @@ urlpatterns = [
     path('account/', include('user_account.urls')),
     path('', include('referrals.urls')),
     path('views_earn/', include('whatsapp_rewards.urls')),
-    path('globalspin/', include('globalspin.urls')),
+    
 
 ]
 

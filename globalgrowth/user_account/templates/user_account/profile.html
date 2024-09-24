@@ -1,829 +1,395 @@
+
 {% load static %}
-{% load gravatar_filters %}
-{% load custom_filters %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile - Global Growth</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-            backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
-            -webkit-backdrop-filter: blur(10px); /* For Safari */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-            border-radius: 50px;
-            color: black;
-        }
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Globalgrowth | Profile</title>
 
-        .custom-alert {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/logo1.png' %}" />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/backend-plugin.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
     
-        .custom-alert.hidden {
-            display: none;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-        }
-        
-        .hover-gradient:hover {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        }
-        
-        .card-shadow {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-        }
-        
-        .transition-all {
-            transition: all 0.3<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-            s ease;
-        }
+    <!-- TUI Calendar CSS Files -->
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-calendar/dist/tui-calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css' %}">
 
-        #button {
-            color: black;
-        }
+    <!--scripts for javascript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 
-        @keyframes ring {
-            0% { transform: rotate(0); }
-            5% { transform: rotate(15deg); }
-            10% { transform: rotate(-15deg); }
-            15% { transform: rotate(15deg); }
-            20% { transform: rotate(-15deg); }
-            25% { transform: rotate(0); }
-            100% { transform: rotate(0); }
-        }
-
-        .ringing-bell {
-            display: inline-block;
-            animation: ring 2s infinite;
-            transform-origin: 50% 0;
-        }
-
-        .glass {
-            border-radius: 36px;
-            background: #e0e0e0;
-            box-shadow:  41px 41px 100px #5a5a5a,
-                         -41px -41px 100px #ffffff;
-        }
-
-        .hover-glass:hover {
-            background: rgba(255, 255, 255, 0.2); /* Slightly more opaque on hover */
-            transform: translateY(-5px); /* Moves the card up on hover */
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
-        }
-
-        .dark body {
-            background-color: #1a202c;
-            color: #e2e8f0;
-        }
-
-        .dark .bg-white {
-            background-color: #2d3748;
-        }
-
-        .dark .text-gray-600,
-        .dark .text-gray-700,
-        .dark .text-gray-800 {
-            color: #e2e8f0;
-        }
-
-        .dark .border-gray-200,
-        .dark .border-gray-300 {
-            border-color: #4a5568;
-        }
-
-        .dark .glass {
-            background: rgba(44, 55, 72, 0.5);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        #countdown-message {
-            font-size: 18px;
-            color: #000; /* Default color for the message */
-        }
-
-        #countdown-number {
-            font-size: 24px; /* Larger font size for visibility */
-            color: #ff0000;  /* Red color for emphasis */
-            font-weight: bold; /* Make the text bold */
-        }
-
-        .loader {
-            width: 100px;
-            height: 100px;
-            box-sizing: border-box;
-            border-radius: 50%;
-            border-top: 2px solid #e74c3c;
-            position: relative;
-            animation: load 2s linear infinite;
-        }
-
-        .loader::before, .loader::after {
-            content: '';
-            width: 100px;
-            height: 100px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            box-sizing: border-box;
-            border-radius: 50%;
-        }
-
-        .loader::before {
-            border-top: 5px solid #e67e22;
-            transform: rotate(120deg);
-        }
-
-        .loader::after {
-            border-top: 5px solid #3498db;
-            transform: rotate(240deg);
-        }
-
-        .loader span {
-            position: absolute;
-            font-size: small;
-            width: 100px;
-            height: 100px;
-            color: #0c0a0a;
-            text-align: center;
-            line-height: 100px;
-            animation: a2 2s linear infinite;
-        }
-
-        @keyframes load {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes a2 {
-            to {
-                transform: rotate(-360deg);
-            }
-        }
-    </style>
-</head>
-<body class="bg-gray-100 font-sans">
-    <div class="flex h-screen bg-gray-100">
-        <!-- Sidebar for large screens -->
-        <aside class="hidden md:flex md:flex-col w-64 gradient-bg text-white">
-            <div class="p-6">
-                <h2 class="text-3xl font-bold">Global Growth</h2>
-            </div>
-            <nav class="flex-1 px-4 py-4">
-                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class='bx bx-tachometer mr-3'></i> Dashboard
-                </a>
-                <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class='bx bx-user mr-3'></i> Profile
-                </a>
-                <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class='bx bx-credit-card mr-3'></i> Payment Agents
-                </a>
-                <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class='bx bx-user-plus mr-3'></i> Referral
-                </a>
-                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class='bx bx-error-circle mr-3'></i> Complaints
-                </a>
-                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class='bx bx-book mr-3'></i> Guide
-                </a>
-                <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class='bx bx-video mr-3'></i> Global views
-                </a>
-                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class='bx bx-cog mr-3'></i> Settings
-                </a>
-                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                    <i class='bx bx-log-out mr-3'></i> Logout
-                </a>
-            </nav>
-            <div class="p-4">
-                <div class="flex justify-center mt-4 space-x-4">
-                    <a href="https://whatsapp.com/channel/0029VafuQfFInlqXI5SxDS0Y" target="_blank" class="text-white hover:text-gray-300">
-                        <i class='bx bxl-whatsapp text-2xl'></i>
-                    </a>
-                    <a href="https://discord.com/invite/xQhq27Z" target="_blank" class="text-white hover:text-gray-300">
-                        <i class='bx bxl-discord text-2xl'></i>
-                    </a>
-                    <a href="#" class="text-white hover:text-gray-300">
-                        <i class='bx bxl-youtube text-2xl'></i>
-                    </a>
-                </div>
-                <p class="text-sm opacity-75">© 2024 Global Growth</p>
-            </div>
-        </aside>
-
-        <!-- Main content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top bar -->
-            <header class="header">
-                <div class="flex items-center">
-                    <div class="md:hidden mr-4">
-                        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+  <body class="  ">
+    <!-- loader Start -->
+    <div id="loading">
+          <div id="loading-center">
+          </div>
+    </div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+      <div class="iq-sidebar  sidebar-default ">
+          <div class="iq-sidebar-logo d-flex align-items-center">
+              <a href="{% url 'dashboard:dashboard' %}" class="header-logo">
+                  <h3 class="logo-title light-logo">Globalgrowth</h3>
+              </a>
+              <div class="iq-menu-bt-sidebar ml-0">
+                  <i class="las la-bars wrapper-menu"></i>
+              </div>
+          </div>
+          <div class="data-scrollbar" data-scroll="1">
+            <nav class="iq-sidebar-menu">
+                <ul id="iq-sidebar-toggle" class="iq-menu">
+                    <li class="active">
+                        <a href="{% url 'dashboard:dashboard' %}" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
                             </svg>
-                        </button>
-                    </div>
-                    
-                                </div>
-                <div class="flex items-center space-x-4">
-                    <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800 dark:text-gray-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" class="hidden dark:inline-flex"/>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" class="inline-flex dark:hidden"/>
-                        </svg>
-                    </button>
-                    <div class="relative">
-                        <img src="{{ gravatar_url }}" alt="Profile" class="h-10 w-10 rounded-full border-2 border-blue-500">
-                        <span class="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-400 ring-2 ring-white dark:ring-gray-800"></span>
-                    </div>
-                </div>
-            </header>
-            
-            <!-- Main content area -->
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-                <div class="container mx-auto">
-                    <!-- Messages -->
-                    {% if messages %}
-                    <div class="mb-8">
-                        {% for message in messages %}
-                        <div class="bg-{{ message.tags }}-100 border-l-4 border-{{ message.tags }}-500 text-{{ message.tags }}-700 p-4 mb-4 rounded-r-lg" role="alert">
-                            <p class="font-medium">{{ message }}</p>
+                            <span class="ml-4">Home</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:dashboard1' %}" class="svg-icon">
+                            <img src="{% static 'icons/dashboard.png' %}" alt="Packages Icon" width="25" height="25">
+                            <span class="ml-4">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'user_account:account_balance' %}" class="svg-icon">
+                          <img src="{% static 'icons/profile.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">My account</span>
+                      </a>
+                  </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:payment_agents' %}" class="svg-icon">
+                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Payment Agents</span>
+                      </a>
+                  </li>
+                    <li class="">
+                        <a href="{% url 'referrals:referrals' %}" class="svg-icon">
+                            <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
+                            <span class="ml-4">Refer</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'my_profile:complaints' %}" class="svg-icon">
+                            <img src="{% static 'icons/support.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Enquiries</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:guide' %}" class="svg-icon">
+                          <img src="{% static 'icons/guide.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Guide</span>
+                      </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'my_profile:user' %}" class="svg-icon">
+                            <img src="{% static 'icons/settings.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">settings</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'auth_app:login' %}" class="svg-icon">
+                            <img src="{% static 'icons/logout.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Log out</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span class="ml-4">Coming Soon</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+              <div id="sidebar-bottom" class="position-relative sidebar-bottom">
+                <div class="card border-none mb-0 shadow-none">
+                    <div class="card-body p-4">
+                        <div class="sidebarbottom-content text-center">
+                            <h5 class="mb-4">Connect with us</h5>
+                            <div class="d-flex justify-content-center mb-4">
+                                <a href="https://whatsapp.com/channel/0029Vap6nHhLdQeWL1hlJW1Z" target="_blank" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-info" style="font-size: 2rem;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-danger" style="font-size: 2rem;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </div>
+                            <p class="text-muted">Stay updated with our latest news and offers!</p>
                         </div>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                    
-                </div>
-                
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div id="account-balance" class="glass card-shadow p-6 hover-glass transition-all">
-                        <h3 class="text-lg font-semibold mb-2 text-yellow-800">Account Balance 💵</h3>
-                        {% if user_profile.approved %}
-                        <p class="text-3xl font-bold text-white-600">Ksh <span id="balance-amount">{{ user_profile.balance }}</span></p>
-                        {% else %}
-                        <p class="text-3xl font-bold text-yellow-600">Ksh <span id="balance-amount">0.00</span></p>
-                        {% endif %}
-                    </div>
-                    
-                    <div id="total-deposits" class="glass card-shadow p-6 hover-glass transition-all">
-                        <h3 class="text-lg font-semibold mb-2 text-white-800">Total Deposits</h3>
-                        <p class="text-3xl font-bold text-green-600">Ksh <span id="total-deposits-amount">{{ total_deposits }}</span></p>
-                    </div>
-                    
-                    <div id="total-investments" class="glass card-shadow p-6 hover-glass transition-all">
-                        <h3 class="text-lg font-semibold mb-2 text-blue-800">Total Investments</h3>
-                        <p class="text-3xl font-bold text-blue-600">Ksh <span id="investment-earnings">{{ total_investments }}</span></p>
                     </div>
                 </div>
-                
-                
-                <div class="glass card-shadow p-6 mb-8 hover-glass transition-all">
-                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Investment</h2>
-                    <form action="{% url 'user_account:package' %}" method="post" class="space-y-4">
-                            {% csrf_token %}
-                            <div class="relative inline-block text-left w-full">
-                                <div>
-                                    <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="options-menu" aria-haspopup="true" aria-expanded="true">
-                                        Select a Package
-                                        <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
+            </div>
+              <div class="pt-5 pb-2"></div>
+          </div>
+      </div> 
+      <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+                    <i class="ri-menu-line wrapper-menu"></i>
+                    <a href="{% url 'dashboard:dashboard' %}" class="header-logo">
+                        <h4 class="logo-title text-uppercase">Globalgrowth</h4>
+    
+                    </a>
+                </div>
+                <div class="navbar-breadcrumb">
+                    <h5>Dashboard</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-label="Toggle navigation">
+                        <i class="ri-menu-3-line"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                            <li>
+                                <div class="iq-search-bar device-search">
+                                    <form action="#" class="searchbox">
+                                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                        <input type="text" class="text search-input" placeholder="Search here...">
+                                    </form>
                                 </div>
-                                <div class="hidden origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" id="dropdown-menu">
-                                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" data-package="Silver" data-amount="1000">
-                                            <span class="flex justify-between items-center">
-                                                <span>Silver Package</span>
-                                                <span class="bg-gray-200 text-gray-800 px-2 py-1 rounded">Ksh 1,000</span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" data-package="Iron" data-amount="3000">
-                                            <span class="flex justify-between items-center">
-                                                <span>Iron Package</span>
-                                                <span class="bg-gray-300 text-gray-800 px-2 py-1 rounded">Ksh 3,000</span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" data-package="Bronze" data-amount="5000">
-                                            <span class="flex justify-between items-center">
-                                                <span>Bronze Package</span>
-                                                <span class="bg-gray-200 text-gray-800 px-2 py-1 rounded">Ksh 5,000</span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" data-package="Gold" data-amount="10000">
-                                            <span class="flex justify-between items-center">
-                                                <span>Gold Package</span>
-                                                <span class="bg-yellow-400 text-gray-800 px-2 py-1 rounded">Ksh 10,000</span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" data-package="Bronze Pro" data-amount="20000">
-                                            <span class="flex justify-between items-center">
-                                                <span>Bronze Pro Package</span>
-                                                <span class="bg-gray-400 text-gray-800 px-2 py-1 rounded">Ksh 20,000</span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" data-package="Gold Pro" data-amount="50000">
-                                            <span class="flex justify-between items-center">
-                                                <span>Gold Pro Package</span>
-                                                <span class="bg-gray-500 text-gray-800 px-2 py-1 rounded">Ksh 50,000</span>
-                                            </span>
-                                        </a>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem" data-package="Exceptional" data-amount="100000">
-                                            <span class="flex justify-between items-center">
-                                                <span>Exceptional Package</span>
-                                                <span class="bg-gray-600 text-gray-800 px-2 py-1 rounded">Ksh 100,000</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                            </li>
                             
-                            <label for="amount" class="block text-sm font-medium text-gray-700">Amount:</label>
-                            <input type="text" id="amount" name="amount" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                            
-                            <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white gradient-bg hover-gradient focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Invest
-                            </button>
-                        </form>
+                        </ul>
                     </div>
-                    <div class="grid grid-cols-1 gap-6 mb-8">
-                        <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-8 shadow-lg">
-                            <h2 class="text-3xl font-bold mb-6 text-indigo-800">Maturity Countdown 🎉💰</h2>
-                            <div id="investment-timer" class="mb-6">
-                                <p class="text-lg font-medium text-gray-700 mb-2">Time to Maturity:</p>
-                                <div class="flex items-center space-x-2">
-                                    <div class="animate-pulse">
-                                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                                    </div>
-                                    <p id="countdown" class="text-4xl font-bold text-indigo-600 font-mono tracking-tight">07:00:00:00</p>
-                                </div>
-                                <div class="flex justify-between text-sm text-gray-500 mt-2">
-                                    <span>Days</span>
-                                    <span>Hours</span>
-                                    <span>Minutes</span>
-                                    <span>Seconds</span>
-                                </div>
+                </div>
+            </nav>
+        </div>
+    </div>      
+      <div class="content-page">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Account Balance Card -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-block card-stretch card-height">
+                        <div class="card-body">
+                            <div class="top-block d-flex align-items-center justify-content-between">
+                                <h5>Account Balance</h5>
+                                <span class="badge badge-primary">Balance</span>
                             </div>
-                            <div id="maturity-info" class="mb-6 hidden">
-                                <p class="text-2xl font-bold text-green-600 mb-2">Investment Matured! 🎉</p>
-                                <p class="text-lg text-gray-700">After maturity, request withdrawal from one of our agents and get paid instantly! 💰</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="fas fa-wallet fa-2x mr-3" style="color: #ffc107;"></i>
+                                <h3>Ksh <span id="balance-amount" class="counter">{{ user_profile.balance }}</span></h3>
                             </div>
-                            <button id="start-investment" class="w-full bg-gradient-to-r from-red-600 to-blue-900 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:from-green-500 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <p class="text-muted mt-2">Current Balance</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Total Deposits Card -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-block card-stretch card-height">
+                        <div class="card-body">
+                            <div class="top-block d-flex align-items-center justify-content-between">
+                                <h5>Total Deposits</h5>
+                                <span class="badge badge-success">Deposits</span>
+                            </div>
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="fas fa-money-bill-wave fa-2x mr-3" style="color: #28a745;"></i>
+                                <h3>Ksh <span id="total-deposits-amount" class="counter">{{ total_deposits }}</span></h3>
+                            </div>
+                            <p class="text-muted mt-2">Total Amount Deposited</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Total Investments Card -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-block card-stretch card-height">
+                        <div class="card-body">
+                            <div class="top-block d-flex align-items-center justify-content-between">
+                                <h5>Total Investments</h5>
+                                <span class="badge badge-info">Investments</span>
+                            </div>
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="fas fa-chart-line fa-2x mr-3" style="color: #17a2b8;"></i>
+                                <h3>Ksh <span id="investment-earnings" class="counter">{{ total_investments }}</span></h3>
+                            </div>
+                            <p class="text-muted mt-2">Total Amount Invested</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Maturity Countdown Card -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-block card-stretch card-height">
+                        <div class="card-body">
+                            <div class="top-block d-flex align-items-center justify-content-between">
+                                <h5>Maturity Countdown</h5>
+                                <span class="badge badge-warning">Time Left</span>
+                            </div>
+                            <div class="d-flex align-items-center mt-3">
+                                <i class="fas fa-hourglass-half fa-2x mr-3" style="color: #ffc107;"></i>
+                                <h3><span id="countdown" class="counter">07:00:00:00</span></h3>
+                            </div>
+                            <p class="text-muted mt-2">Time to Investment Maturity</p>
+                            <button id="start-investment" class="btn btn-outline-primary btn-block mt-3">
                                 Start Investment
                             </button>
                         </div>
                     </div>
-                    
-                    
-                    
-
-                    <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-8 shadow-lg">
-                        <h2 class="text-3xl font-bold mb-6 text-indigo-800 dark:text-white">Deposit Verification</h2>
-                        <form action="{% url 'user_account:deposit_money' %}" method="post" class="space-y-6">
-                            {% csrf_token %}
-                            <div class="relative">
-                                <label for="mpesa_message" class="block text-sm font-medium text-indigo-800 dark:text-gray-300 mb-2">
-                                    Paste M-Pesa message here for verification:
-                                </label>
-                                <textarea 
-                                    id="mpesa_message" 
-                                    name="mpesa_message" 
-                                    rows="4" 
-                                    class="block w-full px-4 py-3 border-2 border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                                    placeholder="e.g., AGTBXH7T9H Confirmed. Ksh5,000.00 sent to GLOBAL GROWTH PLATFORM..."
-                                    required
-                                ></textarea>
-                                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
-                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                    </svg>
+                </div>
+            </div>
+    
+            <div class="row mt-4">
+                <!-- Investment Package Selection Card -->
+                <div class="col-md-6">
+                    <div class="card card-block card-stretch card-height">
+                        <div class="card-body">
+                            <h5 class="card-title">Investment Packages</h5>
+                            <form action="{% url 'user_account:package' %}" method="post" class="mt-3">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="package-select">Select a Package</label>
+                                    <select id="package-select" class="form-control" name="package">
+                                        <option value="Silver" data-amount="1000">Silver Package - Ksh 1,000</option>
+                                        <option value="Iron" data-amount="3000">Iron Package - Ksh 3,000</option>
+                                        <option value="Bronze" data-amount="5000">Bronze Package - Ksh 5,000</option>
+                                        <option value="Gold" data-amount="10000">Gold Package - Ksh 10,000</option>
+                                        <option value="Bronze Pro" data-amount="20000">Bronze Pro Package - Ksh 20,000</option>
+                                        <option value="Gold Pro" data-amount="50000">Gold Pro Package - Ksh 50,000</option>
+                                        <option value="Exceptional" data-amount="100000">Exceptional Package - Ksh 100,000</option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <button 
-                                    type="submit" 
-                                    class="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
-                                >
-                                    <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    Verify Deposit
-                                </button>
-                            </div>
-                        </form>
-                        <div class="mt-6">
-                            <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">How to verify your deposit:</h3>
-                            <ol class="list-decimal list-inside text-indigo-800 text-indigo-800 space-y-2">
-                                <li>Paste you Mpesa Message</li>
-                                <li>Wait for Admin Approval<strong> Takes less than 1 minute</strong></li>
-                                <li>Check status in your transactions table</li>
-                                <li>If there is an issue raise complain in the complains section</li>
-                                <li>🎉 Invest with us</li>
-                            </ol>
-                        </div>
-                    </div>
-                    <div class="bg-white card-shadow rounded-lg p-6">
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-800">Recent Transactions</h2>
-                        <div class="overflow-x-auto">
-                            <table class="w-full table-auto">
-                                <thead>
-                                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                        <th class="py-3 px-6 text-left">Date</th>
-                                        <th class="py-3 px-6 text-left">Description</th>
-                                        <th class="py-3 px-6 text-right">Amount</th>
-                                        <th class="py-3 px-6 text-center">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-600 text-sm font-light">
-                                    {% for transaction in transactions %}
-                                    <tr class="border-b border-gray-200 hover:bg-gray-100 transition-colors">
-                                        <td class="py-3 px-6 text-left whitespace-nowrap">
-                                            {{ transaction.timestamp|date:"M d, Y" }}
-                                        </td>
-                                        <td class="py-3 px-6 text-left">
-                                            {{ transaction.transaction_type }}
-                                        </td>
-                                        <td class="py-3 px-6 text-right">
-                                            {% if transaction.amount < 0 %}
-                                                <span class="text-red-600">-Ksh {{ transaction.amount|floatformat:"-2"|slice:"1:" }}</span>
-                                            {% else %}
-                                                <span class="text-green-600">Ksh {{ transaction.amount|floatformat:"-2" }}</span>
-                                            {% endif %}
-                                        </td>
-                                        <td class="py-3 px-6 text-center">
-                                            <span class="px-2 py-1 font-semibold leading-tight rounded-full 
-                                            {% if transaction.approved %}
-                                                text-green-700 bg-green-100
-                                            {% elif transaction.verified %}
-                                                text-blue-700 bg-blue-100
-                                            {% else %}
-                                                text-gray-700 bg-gray-100
-                                            {% endif %}">
-                                                {% if transaction.approved %}
-                                                    Approved
-                                                {% elif transaction.verified %}
-                                                    Verified
-                                                {% else %}
-                                                    Pending
-                                                {% endif %}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    {% empty %}
-                                    <tr>
-                                        <td colspan="4" class="py-3 px-6 text-center">No recent transactions</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                                <div class="form-group">
+                                    <label for="amount">Amount:</label>
+                                    <input type="text" id="amount" name="amount" class="form-control" readonly>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Invest</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
-    </div>
-            <!-- Mobile sidebar -->
-            <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 gradient-bg text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col">
-                <div class="flex justify-between items-center p-6">
-                    <h2 class="text-2xl font-bold">Global Growth</h2>
-                    <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
-                        <i class='bx bx-x'></i>
-                    </button>
-                </div>
-                <nav class="px-4 py-4 flex-grow">
-                    <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                        <i class='bx bx-tachometer mr-3'></i> Dashboard
-                    </a>
-                    <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                        <i class='bx bx-user mr-3'></i> My Profile
-                    </a>
-                    <a href="{% url 'withdrawals:request_withdrawal' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                        <i class='bx bx-credit-card mr-3'></i> Payment Agents
-                    </a>
-                    <a href="{% url 'referrals:referrals' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                        <i class='bx bx-user-plus mr-3'></i> Referral
-                    </a>
-                    <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                        <i class='bx bx-error-circle mr-3'></i> Complaints
-                    </a>
-                    <a href="{% url 'my_profile:guide' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                        <i class='bx bx-book mr-3'></i> Guide
-                    </a>
-                    <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                        <i class='bx bx-video mr-3'></i> Global views
-                    </a>
-                    <a href="{% url 'my_profile:user' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                        <i class='bx bx-cog mr-3'></i> Settings
-                    </a>
-                    <a href="{% url 'auth_app:login' %}" class="block px-4 py-3 mb-3 hover-gradient rounded-lg transition-all">
-                        <i class='bx bx-log-out mr-3'></i> Logout
-                    </a>
-                </nav>
-                <div class="mt-auto p-6 border-t border-blue-800 bg-gray-800 text-white">
-                    <div class="text-center mb-4">
-                        <p class="text-sm opacity-75">Connect with us</p>
-                    </div>
-                    <div class="flex justify-center space-x-6">
-                        <a href="https://whatsapp.com/channel/0029VafuQfFInlqXI5SxDS0Y" target="_blank" class="transition-transform transform hover:scale-110">
-                            <i class='bx bxl-whatsapp text-3xl text-green-400 hover:text-green-500'></i>
-                        </a>
-                        <a href="https://discord.com/invite/xQhq27Z" target="_blank" class="transition-transform transform hover:scale-110">
-                            <i class='bx bxl-discord text-3xl text-indigo-400 hover:text-indigo-500'></i>
-                        </a>
-                        <a href="https://youtube.com" target="_blank" class="transition-transform transform hover:scale-110">
-                            <i class='bx bxl-youtube text-3xl text-red-400 hover:text-red-500'></i>
-                        </a>
+    
+                <!-- Deposit Verification Card -->
+                <div class="col-md-6">
+                    <div class="card card-block card-stretch card-height">
+                        <div class="card-body">
+                            <h5 class="card-title">Deposit Verification</h5>
+                            <form action="{% url 'user_account:deposit_money' %}" method="post" class="mt-3">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="mpesa_message">Paste M-Pesa message here for verification:</label>
+                                    <textarea id="mpesa_message" name="mpesa_message" rows="4" class="form-control" placeholder="e.g., AGTBXH7T9H Confirmed. Ksh5,000.00 sent to GLOBAL GROWTH PLATFORM..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Verify Deposit</button>
+                            </form>
+                            <div class="mt-3">
+                                <h6>How to verify your deposit:</h6>
+                                <ol class="pl-3">
+                                    <li>Paste your Mpesa Message</li>
+                                    <li>Wait for Admin Approval (Takes less than 1 minute)</li>
+                                    <li>Check status in your transactions table</li>
+                                    <li>If there is an issue, raise a complaint in the complaints section</li>
+                                    <li>🎉 Invest with us</li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-    <div id="customAlert" class="custom-alert hidden">
-        <div class="alert-content bg-white rounded-lg shadow-xl p-6 max-w-sm mx-auto">
-            <h2 class="text-xl font-semibold mb-4">Notification</h2>
-            <p id="alertMessage" class="text-gray-700 mb-6"></p>
-            <button id="finishButton" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-200">
-                Finish
-            </button>
+    
+            <!-- Recent Transactions Card -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card card-block card-stretch card-height">
+                        <div class="card-body">
+                            <h5 class="card-title">Recent Transactions</h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for transaction in transactions %}
+                                        <tr>
+                                            <td>{{ transaction.timestamp|date:"M d, Y" }}</td>
+                                            <td>{{ transaction.transaction_type }}</td>
+                                            <td>
+                                                {% if transaction.amount < 0 %}
+                                                    <span class="text-danger">-Ksh {{ transaction.amount|floatformat:"-2"|slice:"1:" }}</span>
+                                                {% else %}
+                                                    <span class="text-success">Ksh {{ transaction.amount|floatformat:"-2" }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <span class="badge {% if transaction.approved %}badge-success{% elif transaction.verified %}badge-info{% else %}badge-secondary{% endif %}">
+                                                    {% if transaction.approved %}
+                                                        Approved
+                                                    {% elif transaction.verified %}
+                                                        Verified
+                                                    {% else %}
+                                                        Pending
+                                                    {% endif %}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="4" class="text-center">No recent transactions</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
-        // JavaScript to handle dropdown behavior
-        document.addEventListener('DOMContentLoaded', function () {
-            const dropdownMenu = document.getElementById('dropdown-menu');
-            const optionsMenu = document.getElementById('options-menu');
-    
-            optionsMenu.addEventListener('click', function () {
-                dropdownMenu.classList.toggle('hidden');
-            });
-    
-            // Close the dropdown when clicking outside
-            document.addEventListener('click', function (event) {
-                if (!event.target.closest('#options-menu')) {
-                    dropdownMenu.classList.add('hidden');
-                }
-            });
-    
-            // Handle click on menu items
-            dropdownMenu.querySelectorAll('a').forEach(item => {
-                item.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const package = this.getAttribute('data-package');
-                    const amount = this.getAttribute('data-amount');
-                    document.getElementById('amount').value = amount;
-                    dropdownMenu.classList.add('hidden');
-                });
-            });
-
-            // Mobile sidebar toggle
-            const sidebarToggle = document.getElementById('sidebar-toggle');
-            const mobileSidebar = document.getElementById('mobile-sidebar');
-            const closeSidebar = document.getElementById('close-sidebar');
-
-            sidebarToggle.addEventListener('click', function() {
-                mobileSidebar.classList.toggle('-translate-x-full');
-            });
-
-            closeSidebar.addEventListener('click', function() {
-                mobileSidebar.classList.add('-translate-x-full');
-            });
-        });
-        //additional code for the timer?? still uses local storage hahah 
-        const startButton = document.getElementById('start-investment');
-    const countdownElement = document.getElementById('countdown');
-    const maturityInfo = document.getElementById('maturity-info');
-    let countdown;
-
-    function getEndTime() {
-        return localStorage.getItem('investmentEndTime');
-    }
-
-    function setEndTime(time) {
-        localStorage.setItem('investmentEndTime', time);
-    }
-
-    function clearEndTime() {
-        localStorage.removeItem('investmentEndTime');
-    }
-
-    function updateTimerDisplay(timeLeft) {
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        countdownElement.textContent = `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-
-    function startInvestmentTimer() {
-        const endTime = new Date().getTime() + (7 * 24 * 60 * 60 * 1000); // 7 days from now
-        setEndTime(endTime);
-
-        countdown = setInterval(function() {
-            const now = new Date().getTime();
-            const timeLeft = endTime - now;
-
-            if (timeLeft < 0) {
-                clearInterval(countdown);
-                countdownElement.textContent = "00:00:00:00";
-                maturityInfo.classList.remove('hidden');
-                clearEndTime();
-                return;
-            }
-
-            updateTimerDisplay(timeLeft);
-        }, 1000);
-    }
-
-    function resumeInvestmentTimer(endTime) {
-        countdown = setInterval(function() {
-            const now = new Date().getTime();
-            const timeLeft = endTime - now;
-
-            if (timeLeft < 0) {
-                clearInterval(countdown);
-                countdownElement.textContent = "00:00:00:00";
-                maturityInfo.classList.remove('hidden');
-                clearEndTime();
-                return;
-            }
-
-            updateTimerDisplay(timeLeft);
-        }, 1000);
-    }
-
-    startButton.addEventListener('click', function() {
-        startButton.disabled = true;
-        startButton.classList.add('opacity-50', 'cursor-not-allowed');
-        startInvestmentTimer();
-    });
-
-    // Check if there's an existing timer
-    const existingEndTime = getEndTime();
-    if (existingEndTime) {
-        const endTime = parseInt(existingEndTime);
-        const now = new Date().getTime();
-        if (endTime > now) {
-            startButton.disabled = true;
-            startButton.classList.add('opacity-50', 'cursor-not-allowed');
-            resumeInvestmentTimer(endTime);
-        } else {
-            clearEndTime();
-            maturityInfo.classList.remove('hidden');
-        }
-    }
-    // dark theme feature functionality
-   // Get the theme toggle button and the HTML element
-const themeToggle = document.getElementById('theme-toggle');
-const html = document.documentElement;
-
-// Check for saved theme preference or default to 'light'
-const currentTheme = localStorage.getItem('theme') || 'light';
-html.classList.add(currentTheme);
-
-/**
- * Toggles the theme between 'light' and 'dark'
- */
-function toggleTheme() {
-  // Toggle the 'dark' class on the HTML element
-  html.classList.toggle('dark');
-
-  // Get the current theme
-  const isDark = html.classList.contains('dark');
-
-  // Save the new theme preference to localStorage
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-
-  // Update the theme toggle icon
-  updateThemeIcon(isDark);
-
-  // Apply the theme to specific elements
-  applyTheme();
-}
-
-/**
- * Updates the theme toggle icon to either a moon or sun icon
- * @param {boolean} isDark - Indicates if the current theme is 'dark'
- */
-function updateThemeIcon(isDark) {
-  const moonIcon = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />`;
-  const sunIcon = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />`;
-  themeToggle.querySelector('svg').innerHTML = isDark ? sunIcon : moonIcon;
-}
-
-/**
- * Applies the current theme to specific elements on the page
- */
-function applyTheme() {
-  const isDark = html.classList.contains('dark');
-
-  // Update background colors
-  document.body.style.backgroundColor = isDark ? '#1a202c' : '#f7fafc';
-  document.querySelectorAll('.bg-white, .bg-gray-100').forEach(el => {
-    el.style.backgroundColor = isDark ? '#2d3748' : '';
-    el.style.color = isDark ? '#e2e8f0' : '';
-  });
-
-  // Update text colors
-  document.querySelectorAll('.text-gray-600, .text-gray-700, .text-gray-800').forEach(el => {
-    el.style.color = isDark ? '#e2e8f0' : '';
-  });
-
-  // Update border colors
-  document.querySelectorAll('.border-gray-200, .border-gray-300').forEach(el => {
-    el.style.borderColor = isDark ? '#4a5568' : '';
-  });
-
-  // Update glass effect
-  document.querySelectorAll('.glass').forEach(el => {
-    if (isDark) {
-      el.style.background = 'rgba(44, 55, 72, 0.5)';
-      el.style.boxShadow = '0 8px 32px 0 rgba(0, 0, 0, 0.37)';
-    } else {
-      el.style.background = '';
-      el.style.boxShadow = '';
-    }
-  });
-}
-
-// Set initial icon state
-updateThemeIcon(currentTheme === 'dark');
-
-// Apply theme on load and whenever it changes
-applyTheme();
-themeToggle.addEventListener('click', toggleTheme);
-//timer
-// Set the date we're counting down to (4 days from now)
-// Calculate the end date (4 days from now)
-// Function to get the target date from local storage or set it if not present
-function getTargetDate() {
-            let targetDate = localStorage.getItem('targetDate');
-            if (!targetDate) {
-                // If no target date in local storage, set it to 4 days from now
-                targetDate = new Date();
-                targetDate.setDate(targetDate.getDate() + 4);
-                localStorage.setItem('targetDate', targetDate.toISOString());
-            } else {
-                // Convert target date back to a Date object
-                targetDate = new Date(targetDate);
-            }
-            return targetDate;
-        }
-
-        // Function to update the countdown display
-        function updateCountdown() {
-            const targetDate = getTargetDate(); // Retrieve target date
-            const now = new Date();
-            const timeLeft = targetDate - now;
-
-            if (timeLeft <= 0) {
-                document.getElementById('countdown-number').textContent = "Expired";
-                clearInterval(countdownInterval); // Stop the countdown when expired
-                localStorage.removeItem('targetDate'); // Optionally remove target date
-                return;
-            }
-
-            // Calculate days, hours, minutes, and seconds left
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            // Construct the countdown text
-            const countdownText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            // Update the content of the <span> tag
-            document.getElementById('countdown-number').textContent = countdownText;
-        }
-
-        // Initialize countdown and set interval
-        updateCountdown();
-        const countdownInterval = setInterval(updateCountdown, 1000);
 </script>
-    </script>
-</body>
+    <!-- Backend Bundle JavaScript -->
+<script src="{% static 'js/backend-bundle.min.js' %}"></script>
+
+<!-- Table Treeview JavaScript -->
+<script src="{% static 'js/table-treeview.js' %}"></script>
+
+<!-- Customizer JavaScript -->
+<script src="{% static 'js/customizer.js' %}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script async src="{% static 'js/chart-custom.js' %}"></script>
+
+<!-- Slider JavaScript -->
+<script async src="{% static 'js/slider.js' %}"></script>
+
+<!-- App JavaScript -->
+<script src="{% static 'js/app.js' %}"></script>
+
+<!-- Moment.js -->
+<script src="{% static 'vendor/moment.min.js' %}"></script>
+
+  </body>
 </html>

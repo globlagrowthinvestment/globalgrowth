@@ -1,225 +1,333 @@
+
 {% load static %}
-{% load gravatar_filters %}
-{% load custom_filters %}
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Referral Program - Global Growth</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Globalgrowth | Profile</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/logo1.png' %}" />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/backend-plugin.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
+    
+    <!-- TUI Calendar CSS Files -->
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-calendar/dist/tui-calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css' %}">
+
+    <!--scripts for javascript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #644fdf 0%, #c56adb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
         }
-        .content-area {
-            background-color: rgba(255, 255, 255, 0.9);
+
+        .content {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1.5s ease-in-out;
         }
-        .btn-copy {
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
         }
-        .btn-copy:hover {
-            background-color: #6B46C1;
+
+        p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            font-weight: 500;
+            color: #ffeb3b;
+            text-shadow: 0px 0px 10px rgba(255, 235, 59, 0.8);
+        }
+
+        .loader {
+            margin: 0 auto 30px auto;
+            width: 80px;
+            height: 80px;
+            border: 10px solid rgba(255, 255, 255, 0.2);
+            border-top: 10px solid #ffeb3b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.4);
+            }
+            100% {
+                text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
-</head>
-<body class="bg-gray-100">
-    <div class="flex h-screen bg-gray-100">
-        <!-- Sidebar for large screens -->
-        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
-            <div class="p-4">
-                <h2 class="text-2xl font-semibold">Global Growth</h2>
-            </div>
-            <nav class="flex-1 px-2 py-4">
-                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
-                </a>
-                <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-user-tie mr-3"></i>Profile
-                </a>
-                <a href="{% url 'my_profile:payment_agents' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
-                </a>
-                <a href="{% url 'referrals:referrals' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-user-plus mr-3"></i> Referral
-                </a>
-                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-exclamation-circle mr-3"></i> Complaints
-                </a>
-                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-book mr-3"></i> Guide
-                </a>
-                <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-exclamation-circle mr-3"></i> Global views
-                </a>
-                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-cog mr-3"></i> Settings
-                </a>
-                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="fas fa-sign-out-alt mr-3"></i> Logout
-                </a>
-            </nav>
-            <div class="p-4">
-                <p class="text-sm">© 2024 Global Growth</p>
-            </div>
-        </aside>
-
-        <!-- Main content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top bar -->
-            <header class="flex justify-between items-center p-4 bg-white shadow-md">
-                <div class="flex items-center">
-                    <div class="md:hidden mr-4">
-                        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+  <body class="  ">
+    <!-- loader Start -->
+    <div id="loading">
+          <div id="loading-center">
+          </div>
+    </div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+      <div class="iq-sidebar  sidebar-default ">
+          <div class="iq-sidebar-logo d-flex align-items-center">
+              <a href="{% url 'dashboard:dashboard' %}" class="header-logo">
+                  <h3 class="logo-title light-logo">Globalgrowth</h3>
+              </a>
+              <div class="iq-menu-bt-sidebar ml-0">
+                  <i class="las la-bars wrapper-menu"></i>
+              </div>
+          </div>
+          <div class="data-scrollbar" data-scroll="1">
+            <nav class="iq-sidebar-menu">
+                <ul id="iq-sidebar-toggle" class="iq-menu">
+                    <li class="active">
+                        <a href="{% url 'dashboard:dashboard' %}" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
                             </svg>
-                        </button>
+                            <span class="ml-4">Home</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:dashboard1' %}" class="svg-icon">
+                            <img src="{% static 'icons/dashboard.png' %}" alt="Packages Icon" width="25" height="25">
+                            <span class="ml-4">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'user_account:account_balance' %}" class="svg-icon">
+                          <img src="{% static 'icons/profile.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">My account</span>
+                      </a>
+                  </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:payment_agents' %}" class="svg-icon">
+                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Payment Agents</span>
+                      </a>
+                  </li>
+                    <li class="">
+                        <a href="{% url 'referrals:referrals' %}" class="svg-icon">
+                            <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
+                            <span class="ml-4">Refer</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'my_profile:complaints' %}" class="svg-icon">
+                            <img src="{% static 'icons/support.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Enquiries</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:guide' %}" class="svg-icon">
+                          <img src="{% static 'icons/guide.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Guide</span>
+                      </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'my_profile:user' %}" class="svg-icon">
+                            <img src="{% static 'icons/settings.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">settings</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'auth_app:login' %}" class="svg-icon">
+                            <img src="{% static 'icons/logout.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Log out</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span class="ml-4">Coming Soon</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+              <div id="sidebar-bottom" class="position-relative sidebar-bottom">
+                <div class="card border-none mb-0 shadow-none">
+                    <div class="card-body p-4">
+                        <div class="sidebarbottom-content text-center">
+                            <h5 class="mb-4">Connect with us</h5>
+                            <div class="d-flex justify-content-center mb-4">
+                                <a href="https://whatsapp.com/channel/0029Vap6nHhLdQeWL1hlJW1Z" target="_blank" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-info" style="font-size: 2rem;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-danger" style="font-size: 2rem;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </div>
+                            <p class="text-muted">Stay updated with our latest news and offers!</p>
+                        </div>
                     </div>
-                    <h1 class="text-xl font-semibold">Welcome, {{ user.username }}!</h1>
                 </div>
-                <div class="flex items-center">
-                    <span class="mr-4 text-sm text-gray-600">Last login: {{ user.last_login|date:"F j, Y, g:i a" }}</span>
-                    <div class="relative">
-                        <img src="{{ gravatar_url }}" alt="Profile" class="h-8 w-8 rounded-full">
-                        <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
+            </div>
+              <div class="pt-5 pb-2"></div>
+          </div>
+      </div> 
+      <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+                    <i class="ri-menu-line wrapper-menu"></i>
+                    <a href="{% url 'dashboard:dashboard' %}" class="header-logo">
+                        <h4 class="logo-title text-uppercase">Globalgrowth</h4>
+    
+                    </a>
+                </div>
+                <div class="navbar-breadcrumb">
+                    <h5>Dashboard</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-label="Toggle navigation">
+                        <i class="ri-menu-3-line"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                            <li>
+                                <div class="iq-search-bar device-search">
+                                    <form action="#" class="searchbox">
+                                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                        <input type="text" class="text search-input" placeholder="Search here...">
+                                    </form>
+                                </div>
+                            </li>
+                            
+                        </ul>
                     </div>
                 </div>
-            </header>
-
-            <!-- Main content area -->
-            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
-                <div class="container mx-auto">
-                    <div class="content-area rounded-lg shadow-xl p-8 mb-8">
-                        <h2 class="text-3xl font-bold mb-6 text-purple-800">Your Referral Link</h2>
-                        <div class="mb-6 flex">
-                            <input type="text" id="referralLink" value="{{ referral_link }}" class="w-full p-3 border rounded-lg bg-white shadow-inner text-gray-800" readonly>
-                            <button onclick="copyReferralLink()" class="ml-2 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Copy</button>
-                        </div>
-                        <p class="text-gray-700 mb-6">Share this link with your friends and earn rewards when they <strong>Buy</strong> a package</p>
-                        <h3 class="text-2xl font-semibold mb-4 text-purple-800">Share on Social Media</h3>
-                        <div class="flex space-x-6">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ referral_link|urlencode }}" target="_blank" class="text-blue-600 hover:text-blue-800 transition duration-200">
-                                <i class="fab fa-facebook-f text-4xl"></i>
-                            </a>
-                            <a href="https://twitter.com/intent/tweet?text=Join%20me%20on%20Global%20Growth!%20Use%20my%20referral%20link:&url={{ referral_link|urlencode }}" target="_blank" class="text-blue-400 hover:text-blue-600 transition duration-200">
-                                <i class="fab fa-twitter text-4xl"></i>
-                            </a>
-                            <a href="https://wa.me/?text=Join%20me%20on%20Global%20Growth!%20Use%20my%20referral%20link:%20{{ referral_link|urlencode }}" target="_blank" class="text-green-500 hover:text-green-700 transition duration-200">
-                                <i class="fab fa-whatsapp text-4xl"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="content-area rounded-lg shadow-xl p-8 mb-8">
-                        <h2 class="text-3xl font-bold mb-6 text-purple-800">Your Total Referral Bonus</h2>
-                        <div class="mb-6 flex">
-                            <p class="w-full p-3 border rounded-lg bg-white shadow-inner text-gray-800">
-                                
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="content-area rounded-lg shadow-xl p-8">
-                        <h2 class="text-3xl font-bold mb-6 text-purple-800">Your Referrals</h2>
-                        <div class="overflow-x-auto">
-                            <table class="w-full table-auto">
-                                <thead>
-                                    <tr class="bg-purple-200 text-purple-800 uppercase text-sm leading-normal">
-                                        <th class="py-3 px-6 text-left">Username</th>
-                                        <th class="py-3 px-6 text-left">Date Joined</th>
-                                        <th class="py-3 px-6 text-left">Status</th>
-                                        <th class="py-3 px-6 text-right">Reward Earned</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-700 text-sm">
-                                    {% for referral in referrals %}
-                                    <tr class="border-b border-purple-100 hover:bg-purple-50">
-                                        <td class="py-3 px-6 text-left whitespace-nowrap">
-                                            {{ referral.referred_username }}
-                                        </td>
-                                        <td class="py-3 px-6 text-left">
-                                            {{ referral.date_joined|date:"M d, Y" }}
-                                        </td>
-                                        <td class="py-3 px-6 text-left">
-                                            {{ referral.status }}
-                                        </td>
-                                        <td class="py-3 px-6 text-right">
-                                            Ksh {{ referral.reward_earned }}
-                                        </td>
-                                    </tr>
-                                    {% empty %}
-                                    <tr>
-                                        <td colspan="4" class="py-3 px-6 text-center">No referrals yet</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </main>
-
-    <!-- Mobile sidebar -->
-    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
-        <div class="flex justify-between items-center p-4">
-            <h2 class="text-2xl font-semibold">Global Growth</h2>
-            <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
-                <i class="fas fa-times"></i>
-            </button>
+            </nav>
         </div>
-        <nav class="px-2 py-4">
-            <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
-            </a>
-            <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-user-tie mr-3"></i> My Profile
-            </a>
-            <a href="{% url 'my_profile:payment_agents' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
-            </a>
-            <a href="{% url 'referrals:referrals' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-user-plus mr-3"></i> Referral
-            </a>
-            <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-exclamation-circle mr-3"></i> Complaints
-            </a>
-            <a href="{% url 'my_profile:guide' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-book mr-3"></i> Guide
-            </a>
-            <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-video mr-3"></i> Global views
-            </a>
-            <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-cog mr-3"></i> Settings
-            </a>
-            <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-sign-out-alt mr-3"></i> Logout
-            </a>
-        </nav>
+    </div>    
+    <div class="content">
+        <div class="loader"></div>
+        <h1>Updating the UI</h1>
+        <p>We are currently upgrading the user interface for <span class="highlight">GlobalGrowth</span>. Some operations are on hold until the migration is complete. Please bear with us, as this process will be completed in less than <span class="highlight">12 hours</span>.</p>
+        <p>Thank you for your patience!</p>
     </div>
 
     <script>
-        const sidebarToggle = document.getElementById('sidebar-toggle');
-        const mobileSidebar = document.getElementById('mobile-sidebar');
-        const closeSidebar = document.getElementById('close-sidebar');
+      document.addEventListener('DOMContentLoaded', function() {
+    const agentButtons = document.querySelectorAll('.select-agent');
+    const withdrawalForm = document.getElementById('withdrawal-form');
+    const submitButton = document.getElementById('submit-button');
+    const confirmationDialog = document.getElementById('confirmation-dialog');
+    const continueButton = document.getElementById('continue-button');
+    const cancelButton = document.getElementById('cancel-button');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.querySelector('aside');
 
-        sidebarToggle.addEventListener('click', () => {
-            mobileSidebar.classList.toggle('-translate-x-full');
+    sidebarToggle.addEventListener('click', function() {
+        sidebar.classList.toggle('hidden');
+    });
+
+    agentButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            withdrawalForm.classList.remove('hidden');
+            withdrawalForm.scrollIntoView({ behavior: 'smooth' });
         });
+    });
 
-        closeSidebar.addEventListener('click', () => {
-            mobileSidebar.classList.add('-translate-x-full');
-        });
+    submitButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        confirmationDialog.classList.remove('hidden');
+    });
 
-        function copyReferralLink() {
-    var copyText = document.getElementById("referralLink");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999);
-    document.execCommand("copy");
-    alert("Copied the referral link: " + copyText.value);
-}
-    </script>
+    continueButton.addEventListener('click', function() {
+        confirmationDialog.classList.add('hidden');
+        document.querySelector('#withdrawal-form form').submit();
+    });
+
+    cancelButton.addEventListener('click', function() {
+        confirmationDialog.classList.add('hidden');
+    });
+});
+
+</script>
+<script src="{% static 'js/backend-bundle.min.js' %}"></script>
+
+<!-- Table Treeview JavaScript -->
+<script src="{% static 'js/table-treeview.js' %}"></script>
+
+<!-- Customizer JavaScript -->
+<script src="{% static 'js/customizer.js' %}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script async src="{% static 'js/chart-custom.js' %}"></script>
+
+<!-- Slider JavaScript -->
+<script async src="{% static 'js/slider.js' %}"></script>
+
+<!-- App JavaScript -->
+<script src="{% static 'js/app.js' %}"></script>
+
+<!-- Moment.js -->
+<script src="{% static 'vendor/moment.min.js' %}"></script>
+
 </body>
 </html>
