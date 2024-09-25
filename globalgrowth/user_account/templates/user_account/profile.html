@@ -271,10 +271,7 @@
                                         <option value="Exceptional" data-amount="100000">Exceptional Package - Ksh 100,000</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="amount">Amount:</label>
-                                    <input type="text" id="amount" name="amount" class="form-control" readonly>
-                                </div>
+                               
                                 <button type="submit" class="btn btn-primary btn-block">Invest</button>
                             </form>
                         </div>
@@ -363,6 +360,109 @@
             </div>
         </div>
     </div>
+    <script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        const balanceAmount = document.getElementById('balance-amount');
+        const totalInvestments = document.getElementById('investment-earnings');
+        const packageSelect = document.getElementById('package-select');
+        const investButton = document.querySelector('button[type="submit"]');
+
+        // Load initial values from localStorage or set default values
+        function loadValues() {
+            const storedBalance = localStorage.getItem('balance') || "10000"; // Default balance
+            const storedInvestments = localStorage.getItem('totalInvestments') || "0"; // Default investments
+
+            balanceAmount.textContent = storedBalance;
+            totalInvestments.textContent = storedInvestments;
+        }
+
+        // Save updated values to localStorage
+        function saveValues(balance, investments) {
+            localStorage.setItem('balance', balance);
+            localStorage.setItem('totalInvestments', investments);
+        }
+
+        // Load values when the page is loaded
+        loadValues();
+
+        investButton.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent form submission
+
+            const selectedPackage = packageSelect.options[packageSelect.selectedIndex];
+            const investmentAmount = parseInt(selectedPackage.dataset.amount);
+            let currentBalance = parseInt(balanceAmount.textContent);
+            let currentInvestments = parseInt(totalInvestments.textContent);
+
+            if (currentBalance >= investmentAmount) {
+                // Sufficient balance, proceed with investment
+                currentBalance -= investmentAmount;
+                currentInvestments += investmentAmount;
+
+                // Update displayed values
+                balanceAmount.textContent = currentBalance;
+                totalInvestments.textContent = currentInvestments;
+
+                // Save updated values to localStorage
+                saveValues(currentBalance, currentInvestments);
+
+                alert(`Investment of Ksh ${investmentAmount} successful!`);
+            } else {
+                // Insufficient balance
+                alert("Insufficient balance for this investment package.");
+            }
+        });
+    });
+        // Set the countdown duration (in seconds)
+        const countdownDuration = 7 * 24 * 60 * 60; // 7 days
+    
+        // Get the countdown element and button
+        const countdownElement = document.getElementById('countdown');
+        const startButton = document.getElementById('start-investment');
+    
+        // Function to format time
+        function formatTime(seconds) {
+            const days = Math.floor(seconds / (24 * 60 * 60));
+            const hours = Math.floor((seconds % (24 * 60 * 60)) / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            return `${String(days).padStart(2, '0')}:${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        }
+    
+        // Function to update the countdown
+        function updateCountdown() {
+            const now = Math.floor(Date.now() / 1000);
+            const endTime = localStorage.getItem('endTime');
+    
+            if (endTime) {
+                const remainingTime = endTime - now;
+                if (remainingTime >= 0) {
+                    countdownElement.textContent = formatTime(remainingTime);
+                } else {
+                    countdownElement.textContent = "00:00:00:00"; // Timer finished
+                    clearInterval(timerInterval);
+                    localStorage.removeItem('endTime'); // Clear stored end time
+                    startButton.disabled = false; // Re-enable button
+                    alert("Investment Matured!"); // Display message
+                }
+            }
+        }
+    
+        // Start the countdown when the button is clicked
+        startButton.addEventListener('click', function () {
+            const now = Math.floor(Date.now() / 1000);
+            const endTime = now + countdownDuration;
+    
+            localStorage.setItem('endTime', endTime); // Store the end time
+            updateCountdown(); // Update immediately
+            timerInterval = setInterval(updateCountdown, 1000); // Update every second
+            startButton.disabled = true; // Disable the button
+        });
+    
+        // Initialize countdown on page load
+        updateCountdown();
+    </script>
+    
 
 </script>
     <!-- Backend Bundle JavaScript -->
