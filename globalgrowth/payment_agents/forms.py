@@ -1,9 +1,7 @@
-# forms.py
-
 from django import forms
 from .models import WithdrawalRequest
 
 class WithdrawalRequestForm(forms.ModelForm):
     class Meta:
         model = WithdrawalRequest
-        fields = ['amount']
+        fields = ['phone_number', 'amount']

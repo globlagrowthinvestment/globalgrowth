@@ -25,90 +25,7 @@
 
     <!--scripts for javascript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #644fdf 0%, #c56adb 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #fff;
-            overflow: hidden;
-        }
 
-        .content {
-            text-align: center;
-            max-width: 600px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-            animation: slideIn 1.5s ease-in-out;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        p {
-            font-size: 1.2rem;
-            font-weight: 400;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .highlight {
-            font-weight: 500;
-            color: #ffeb3b;
-            text-shadow: 0px 0px 10px rgba(255, 235, 59, 0.8);
-        }
-
-        .loader {
-            margin: 0 auto 30px auto;
-            width: 80px;
-            height: 80px;
-            border: 10px solid rgba(255, 255, 255, 0.2);
-            border-top: 10px solid #ffeb3b;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes glow {
-            0% {
-                text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.4);
-            }
-            100% {
-                text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.8);
-            }
-        }
-
-        @keyframes slideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
   <body class="  ">
     <!-- loader Start -->
     <div id="loading">
@@ -120,7 +37,7 @@
     <div class="wrapper">
       <div class="iq-sidebar  sidebar-default ">
           <div class="iq-sidebar-logo d-flex align-items-center">
-              <a href="{% url 'dashboard:dashboard' %}" class="header-logo">
+              <a href="{% url 'my_profile:dashboard' %}" class="header-logo">
                   <h3 class="logo-title light-logo">Globalgrowth</h3>
               </a>
               <div class="iq-menu-bt-sidebar ml-0">
@@ -131,7 +48,7 @@
             <nav class="iq-sidebar-menu">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
                     <li class="active">
-                        <a href="{% url 'dashboard:dashboard' %}" class="svg-icon">                        
+                        <a href="{% url 'my_profile:dashboard' %}" class="svg-icon">                        
                             <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="3" width="7" height="7"></rect>
                                 <rect x="14" y="3" width="7" height="7"></rect>
@@ -142,7 +59,7 @@
                         </a>
                     </li>
                     <li class="">
-                      <a href="{% url 'my_profile:dashboard1' %}" class="svg-icon">
+                      <a href="{% url 'my_profile:dashboard' %}" class="svg-icon">
                             <img src="{% static 'icons/dashboard.png' %}" alt="Packages Icon" width="25" height="25">
                             <span class="ml-4">Dashboard</span>
                         </a>
@@ -153,30 +70,25 @@
                           <span class="ml-4">My account</span>
                       </a>
                   </li>
-                  <li class="">
-                    <a href="{% url 'payment_agents:payment_agent_view' %}" class="svg-icon">
-                      <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
-                      <span class="ml-4">Payment Agents</span>
-                  </a>
-              </li>
                     <li class="">
-                        <a href="{% url 'referrals:referrals' %}" class="svg-icon">
+                        <a href="{% url 'payment_agents:withdrawal_request' %}"" class="svg-icon">
+                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Payment Agents</span>
+                      </a>
+                  </li>
+                    <li class="">
+                        <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
                             <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
                             <span class="ml-4">Refer</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="{% url 'my_profile:complaints' %}" class="svg-icon">
-                            <img src="{% static 'icons/support.png' %}" alt="Guide Icon" width="25" height="25">
-                            <span class="ml-4">Enquiries</span>
+                        <a href="{% url 'complains' %}" class="svg-icon">
+                            <img src="{% static 'icons/complains.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Support</span>
                         </a>
-                    </li>
-                    <li class="">
-                      <a href="{% url 'my_profile:guide' %}" class="svg-icon">
-                          <img src="{% static 'icons/guide.png' %}" alt="Guide Icon" width="25" height="25">
-                          <span class="ml-4">Guide</span>
-                      </a>
-                    </li>
+                      </li>
+                    
                     <li class="">
                         <a href="{% url 'my_profile:user' %}" class="svg-icon">
                             <img src="{% static 'icons/settings.png' %}" alt="Guide Icon" width="25" height="25">
@@ -233,7 +145,7 @@
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                     <i class="ri-menu-line wrapper-menu"></i>
-                    <a href="{% url 'dashboard:dashboard' %}" class="header-logo">
+                    <a href="{% url 'my_profile:dashboard' %}" class="header-logo">
                         <h4 class="logo-title text-uppercase">Globalgrowth</h4>
     
                     </a>
@@ -263,8 +175,7 @@
                 </div>
             </nav>
         </div>
-    </div>   
-
+    </div>  
         <!-- Main content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Top bar -->

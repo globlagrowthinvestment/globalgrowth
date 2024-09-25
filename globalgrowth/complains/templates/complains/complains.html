@@ -1,0 +1,367 @@
+
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Globalgrowth | Profile</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/logo1.png' %}" />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/backend-plugin.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
+    
+    <!-- TUI Calendar CSS Files -->
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-calendar/dist/tui-calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css' %}">
+
+    <!--scripts for javascript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+  <body class="  ">
+    <!-- loader Start -->
+    <div id="loading">
+          <div id="loading-center">
+          </div>
+    </div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+      <div class="iq-sidebar  sidebar-default ">
+          <div class="iq-sidebar-logo d-flex align-items-center">
+              <a href="{% url 'my_profile:dashboard' %}" class="header-logo">
+                  <h3 class="logo-title light-logo">Globalgrowth</h3>
+              </a>
+              <div class="iq-menu-bt-sidebar ml-0">
+                  <i class="las la-bars wrapper-menu"></i>
+              </div>
+          </div>
+          <div class="data-scrollbar" data-scroll="1">
+            <nav class="iq-sidebar-menu">
+                <ul id="iq-sidebar-toggle" class="iq-menu">
+                    <li class="active">
+                        <a href="{% url 'my_profile:dashboard' %}" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <span class="ml-4">Home</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:dashboard' %}" class="svg-icon">
+                            <img src="{% static 'icons/dashboard.png' %}" alt="Packages Icon" width="25" height="25">
+                            <span class="ml-4">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'user_account:account_balance' %}" class="svg-icon">
+                          <img src="{% static 'icons/profile.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">My account</span>
+                      </a>
+                  </li>
+                    <li class="">
+                        <a href="{% url 'payment_agents:withdrawal_request' %}"" class="svg-icon">
+                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Payment Agents</span>
+                      </a>
+                  </li>
+                    <li class="">
+                        <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
+                            <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
+                            <span class="ml-4">Refer</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'complains' %}" class="svg-icon">
+                            <img src="{% static 'icons/complains.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Support</span>
+                        </a>
+                      </li>
+                    
+                    <li class="">
+                        <a href="{% url 'my_profile:user' %}" class="svg-icon">
+                            <img src="{% static 'icons/settings.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">settings</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'auth_app:login' %}" class="svg-icon">
+                            <img src="{% static 'icons/logout.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Log out</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span class="ml-4">Coming Soon</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+              <div id="sidebar-bottom" class="position-relative sidebar-bottom">
+                <div class="card border-none mb-0 shadow-none">
+                    <div class="card-body p-4">
+                        <div class="sidebarbottom-content text-center">
+                            <h5 class="mb-4">Connect with us</h5>
+                            <div class="d-flex justify-content-center mb-4">
+                                <a href="https://whatsapp.com/channel/0029Vap6nHhLdQeWL1hlJW1Z" target="_blank" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-info" style="font-size: 2rem;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-danger" style="font-size: 2rem;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </div>
+                            <p class="text-muted">Stay updated with our latest news and offers!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <div class="pt-5 pb-2"></div>
+          </div>
+      </div> 
+      <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+                    <i class="ri-menu-line wrapper-menu"></i>
+                    <a href="{% url 'my_profile:dashboard' %}" class="header-logo">
+                        <h4 class="logo-title text-uppercase">Globalgrowth</h4>
+    
+                    </a>
+                </div>
+                <div class="navbar-breadcrumb">
+                    <h5>Dashboard</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-label="Toggle navigation">
+                        <i class="ri-menu-3-line"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                            <li>
+                                <div class="iq-search-bar device-search">
+                                    <form action="#" class="searchbox">
+                                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                        <input type="text" class="text search-input" placeholder="Search here...">
+                                    </form>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>    
+            <!-- Main content area -->
+<div class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Complaint Submission Card -->
+            <div class="col-md-6 mb-4">
+                <div class="card card-block card-stretch card-height shadow-lg rounded" style="background-color: #f9f9f9; border: none;">
+                    <div class="card-body">
+                        <div class="top-block d-flex align-items-center justify-content-between mb-4">
+                            <h5 class="font-weight-bold" style="color: #333;">Submit Your Complaint</h5>
+                            <span class="badge badge-primary" style="background: linear-gradient(45deg, #007bff, #0056b3); font-size: 14px;">Customer Support</span>
+                        </div>
+                        <div class="text-center mb-4">
+                            <i class="fas fa-comments fa-3x" style="color: #007bff;"></i>
+                        </div>
+
+                        <form id="complaintForm" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="complaintType" class="font-weight-bold">Select Your Complaint:</label>
+                                <select class="form-control rounded-pill shadow-sm p-3" id="complaintType" name="complaint_type" required style="border: 1px solid #ddd;">
+                                    <option value="" disabled selected>Choose a complaint type</option>
+                                    <option value="login_credentials">Login credentials not sent yet</option>
+                                    <option value="sell_account">I want to sell my account</option>
+                                    <option value="referral_expired">My referral QR code expired</option>
+                                    <option value="login_new_device">Unable to login my account on a new device</option>
+                                    <option value="payment_issue">Payment not reflected in my account</option>
+                                    <option value="account_suspended">My account has been suspended</option>
+                                    <option value="technical_error">Experiencing technical errors</option>
+                                    <option value="other">Other enquiry</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="complaintDescription" class="font-weight-bold">Complaint Description:</label>
+                                <textarea class="form-control rounded shadow-sm p-3" id="complaintDescription" name="description" rows="5" required style="border: 1px solid #ddd;" placeholder="Please describe your complaint or enquiry in detail..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="screenshotUpload" class="font-weight-bold d-flex align-items-center">
+                                    <i class="fas fa-image mr-2" style="font-size: 1.5em; color: #007bff;"></i>
+                                    Upload Screenshot (if applicable):
+                                </label>
+                                <input type="file" class="form-control-file" id="screenshotUpload" name="screenshot" accept="image/*" style="border: 1px solid #ddd; padding: 10px;">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block rounded-pill mt-4 shadow-sm" style="background: linear-gradient(45deg, #007bff, #0056b3); font-size: 16px;">
+                                <i class="fas fa-paper-plane mr-2"></i>Send Complaint
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Complaints Card -->
+            <div class="col-md-6 mb-4">
+                <div class="card card-block card-stretch card-height shadow-lg rounded" style="background-color: #f9f9f9; border: none;">
+                    <div class="card-body">
+                        <h5 class="font-weight-bold mb-4" style="color: #333;">Recent Complaints</h5>
+                        <div class="mb-3">
+                            <form method="get">
+                                <label for="status-filter" class="font-weight-bold">Filter by status:</label>
+                                <select name="status" id="status-filter" class="form-control rounded-pill shadow-sm" onchange="this.form.submit()" style="border: 1px solid #ddd;">
+                                    <option value="">All</option>
+                                    <option value="open" {% if status_filter == 'open' %}selected{% endif %}>Open</option>
+                                    <option value="in_progress" {% if status_filter == 'in_progress' %}selected{% endif %}>In Progress</option>
+                                    <option value="closed" {% if status_filter == 'closed' %}selected{% endif %}>Closed</option>
+                                </select>
+                            </form>
+                        </div>
+                        {% for complaint in complaints %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="card-title">{{ complaint.get_complaint_type_display }}</h6>
+                                <p class="card-text">{{ complaint.description|truncatewords:20 }}</p>
+                                <p><strong>Status:</strong> <span class="badge badge-{% if complaint.status == 'open' %}warning{% elif complaint.status == 'in_progress' %}info{% else %}success{% endif %}">{{ complaint.get_status_display }}</span></p>
+                                <p><strong>Submitted:</strong> {{ complaint.created_at|date:"F d, Y" }}</p>
+                                {% if complaint.screenshot %}
+                                <img src="{{ complaint.screenshot.url }}" alt="Complaint Screenshot" class="img-fluid mt-2 mb-2">
+                                {% endif %}
+                                {% if complaint.comments.all %}
+                                <h6 class="mt-3">Support responses:</h6>
+                                {% for comment in complaint.comments.all %}
+                                <div class="card bg-light mb-2">
+                                    <div class="card-body py-2">
+                                        <p class="mb-1">{{ comment.comment }}</p>
+                                        <small class="text-muted">{{ comment.created_at|date:"F d, Y H:i" }}</small>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p>No complaints found.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- FAQ Section -->
+            <div class="col-md-4 col-lg-4 mb-4">
+                <div class="card card-block card-stretch card-height shadow-lg rounded" style="background-color: #f9f9f9; border: none;">
+                    <div class="card-body">
+                        <h5 class="font-weight-bold mb-4" style="color: #333;">Frequently Asked Questions</h5>
+                        <div class="accordion" id="faqAccordion">
+                            <div class="card mb-2">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            How long does it take to process a complaint?
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                                    <div class="card-body">
+                                        We aim to respond to all complaints within 1- 2 Hours. Complex issues may take longer to resolve.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2">
+                                <div class="card-header" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Can I track the status of my complaint?
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                                    <div class="card-body">
+                                        Yes, you can track the status of your complaint by logging into your account and checking the 'My Complaints' section.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add more FAQ items as needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  <footer class="iq-footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                    <li class="list-inline-item"><a href="#">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-6 text-right">
+                <span class="mr-1"><script>document.write(new Date().getFullYear())</script>©</span> <a href="#" class="">Ascend</a>.
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    function toggleInstructions() {
+        var details = document.getElementById('paymentInstructionsDetails');
+        if (details.style.display === 'none') {
+            details.style.display = 'block';
+        } else {
+            details.style.display = 'none';
+        }
+    }
+    </script>
+<!-- Backend Bundle JavaScript -->
+<script src="{% static 'js/backend-bundle.min.js' %}"></script>
+
+<!-- Table Treeview JavaScript -->
+<script src="{% static 'js/table-treeview.js' %}"></script>
+
+<!-- Customizer JavaScript -->
+<script src="{% static 'js/customizer.js' %}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script async src="{% static 'js/chart-custom.js' %}"></script>
+
+<!-- Slider JavaScript -->
+<script async src="{% static 'js/slider.js' %}"></script>
+
+<!-- App JavaScript -->
+<script src="{% static 'js/app.js' %}"></script>
+
+<!-- Moment.js -->
+<script src="{% static 'vendor/moment.min.js' %}"></script>
+
+</body>
+</html>

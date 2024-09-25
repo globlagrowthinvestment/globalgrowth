@@ -70,12 +70,12 @@
                           <span class="ml-4">My account</span>
                       </a>
                   </li>
-                  <li class="">
-                    <a href="{% url 'payment_agents:payment_agent_view' %}" class="svg-icon">
-                      <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
-                      <span class="ml-4">Payment Agents</span>
-                  </a>
-              </li>
+                    <li class="">
+                        <a href="{% url 'payment_agents:withdrawal_request' %}"" class="svg-icon">
+                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Payment Agents</span>
+                      </a>
+                  </li>
                     <li class="">
                         <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
                             <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
@@ -83,17 +83,12 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="{% url 'my_profile:complaints' %}" class="svg-icon">
-                            <img src="{% static 'icons/support.png' %}" alt="Guide Icon" width="25" height="25">
-                            <span class="ml-4">Enquiries</span>
+                        <a href="{% url 'complains' %}" class="svg-icon">
+                            <img src="{% static 'icons/complains.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Support</span>
                         </a>
-                    </li>
-                    <li class="">
-                      <a href="{% url 'my_profile:guide' %}" class="svg-icon">
-                          <img src="{% static 'icons/guide.png' %}" alt="Guide Icon" width="25" height="25">
-                          <span class="ml-4">Guide</span>
-                      </a>
-                    </li>
+                      </li>
+                    
                     <li class="">
                         <a href="{% url 'my_profile:user' %}" class="svg-icon">
                             <img src="{% static 'icons/settings.png' %}" alt="Guide Icon" width="25" height="25">
@@ -180,7 +175,7 @@
                 </div>
             </nav>
         </div>
-    </div>
+    </div>    
     <div class="content-page">
         <div class="container-fluid">
             <div class="row">
@@ -191,25 +186,9 @@
                                 <h5>Payment Agent</h5>
                             </div>
     
-                            <form method="post" class="mt-4">
+                            <form method="post">
                                 {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="payment_agent">Choose a Payment Agent</label>
-                                    <select class="form-control" id="payment_agent" name="payment_agent" required>
-                                        <option value="">Select a payment agent</option>
-                                        {% for agent in payment_agents %}
-                                        <option value="{{ agent.id }}">{{ agent.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone_number">Phone Number</label>
-                                    <input type="text" class="form-control" id="phone_number" name="phone_number" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="amount">Amount</label>
-                                    <input type="number" class="form-control" id="amount" name="amount" required>
-                                </div>
+                                {{ form.as_p }}
                                 <button type="submit" class="btn btn-primary">Submit Withdrawal Request</button>
                             </form>
     

@@ -69,20 +69,3 @@ class MpesaTransaction(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.transaction_id} - {self.status}"
-
-class Complaint(models.Model):
-    STATUS_CHOICES = [
-        ('Open', 'Open'),
-        ('In Progress', 'In Progress'),
-        ('Resolved', 'Resolved'),
-        ('Closed', 'Closed')
-    ]
-    
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    subject = models.CharField(max_length=200)
-    description = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, default='Open', choices=STATUS_CHOICES)
-
-    def __str__(self):
-        return f"{self.subject} - {self.status}"

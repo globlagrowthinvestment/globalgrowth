@@ -25,7 +25,7 @@ urlpatterns = [
     path('auth_app/', include('auth_app.urls')),
     path('refer/', include('refer.urls')),
     path('checkout/', include('checkout.urls')),
-    path('guide/', include('guide.urls')),
+    path('complains/', include('complains.urls')),
     path('profile/', include('my_profile.urls')),
     path('withdraw/', include('withdrawals.urls')),
     path('account/', include('user_account.urls')),

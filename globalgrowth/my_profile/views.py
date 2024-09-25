@@ -8,12 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Sum
 
-from .forms import ComplaintForm, WithdrawalRequestForm
+from .forms import WithdrawalRequestForm
 from .models import UserProfile, Transaction, MpesaMessage, MpesaTransaction
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Complaint
-#from .forms import WithdrawalRequestForm
 from .models import WithdrawalRequest
 from django.utils import timezone
 from withdrawals.models import Withdrawals
@@ -79,31 +77,7 @@ def profile(request):
     }
     return render(request, 'my_profile/profile.html', context)
 
-@login_required
-def request_withdrawal(request):
-    if request.method == 'POST':
-        form = WithdrawalRequestForm(request.POST)
-        if form.is_valid():
-            withdrawal_request = form.save(commit=False)
-            withdrawal_request.user = request.user
-            withdrawal_request.status = 'pending'
 
-            user_profile = UserProfile.objects.get(user=request.user)
-            if user_profile.balance >= withdrawal_request.amount:
-                withdrawal_request.save()
-                messages.success(request, 'Withdrawal request submitted successfully. Awaiting admin approval.')
-                return redirect('my_profile/profile')  # Make sure 'profile' is the correct name for your profile URL
-            else:
-                messages.error(request, 'Insufficient balance for this withdrawal.')
-        else:
-            messages.error(request, 'Invalid form submission. Please check the form and try again.')
-    else:
-        form = WithdrawalRequestForm()
-
-    return render(request, 'my_profile/request_withdrawal.html', {'form': form})
-'''
-
-'''
 def extract_amount_from_mpesa(message):
     match = re.search(r'Ksh([\d,]+\.\d{2})', message)
     if match:
@@ -114,9 +88,6 @@ def extract_amount_from_mpesa(message):
 def dashboard(request):
     return render(request, 'my_profile/dashboard.html')
 
-@login_required
-def payment_agents(request):
-    return render(request, 'my_profile/payment_agents.html')
 
 @login_required
 def user(request):
@@ -132,62 +103,19 @@ def delete_transaction(request, transaction_id):
     return redirect('profile')
 
 @login_required
-def complaints(request):
-    if request.method == 'POST':
-        subject = request.POST.get('subject')
-        description = request.POST.get('description')
-        Complaint.objects.create(user=request.user, subject=subject, description=description)
-        return redirect('my_profile/complaints.html')
-
-    complaints = Complaint.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, 'my_profile/complaints.html', {'complaints': complaints})
-
-# complains section:
-@login_required
-def complaints(request):
-    if request.method == 'POST':
-        form = ComplaintForm(request.POST)
-        if form.is_valid():
-            complaint = form.save(commit=False)
-            complaint.user = request.user
-            complaint.status = 'Pending'  # Set initial status to Pending
-            complaint.save()
-            messages.success(request, 'Your complaint has been submitted successfully.')
-            return redirect(reverse('my_profile:complaints'))
-    else:
-        form = ComplaintForm()
-
-    user_complaints = Complaint.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, 'my_profile/complaints.html', {'form': form, 'complaints': user_complaints})
-
-
-@login_required
 def submit_complaint(request):
     # Your submit complaint view logic here
     pass
-@login_required
-def guide(request):
-    return render(request, 'my_profile/guide.html')
 
-@login_required
-def dashboard1(request):
-    return render(request, 'my_profile/dashboard.html')
 
 @login_required
 def instructions(request):
     return render(request, 'my_profile/instructions.html')
 
 @login_required
-def invest(request):
-    return render(request, 'my_profile/invest.html')
-
-@login_required
 def refer(request):
     return render(request, 'refer/refer.html')
 
-@login_required
-def payment_agent(request):
-    return render(request, 'my_profile/payment_agent.html')
 
 @login_required
 def instructions(request):

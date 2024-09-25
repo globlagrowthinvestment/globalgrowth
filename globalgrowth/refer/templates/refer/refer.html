@@ -70,12 +70,12 @@
                           <span class="ml-4">My account</span>
                       </a>
                   </li>
-                  <li class="">
-                    <a href="{% url 'payment_agents:payment_agent_view' %}" class="svg-icon">
-                      <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
-                      <span class="ml-4">Payment Agents</span>
-                  </a>
-              </li>
+                    <li class="">
+                        <a href="{% url 'payment_agents:withdrawal_request' %}"" class="svg-icon">
+                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Payment Agents</span>
+                      </a>
+                  </li>
                     <li class="">
                         <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
                             <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
@@ -83,17 +83,12 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="{% url 'my_profile:complaints' %}" class="svg-icon">
-                            <img src="{% static 'icons/support.png' %}" alt="Guide Icon" width="25" height="25">
-                            <span class="ml-4">Enquiries</span>
+                        <a href="{% url 'complains' %}" class="svg-icon">
+                            <img src="{% static 'icons/complains.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Support</span>
                         </a>
-                    </li>
-                    <li class="">
-                      <a href="{% url 'my_profile:guide' %}" class="svg-icon">
-                          <img src="{% static 'icons/guide.png' %}" alt="Guide Icon" width="25" height="25">
-                          <span class="ml-4">Guide</span>
-                      </a>
-                    </li>
+                      </li>
+                    
                     <li class="">
                         <a href="{% url 'my_profile:user' %}" class="svg-icon">
                             <img src="{% static 'icons/settings.png' %}" alt="Guide Icon" width="25" height="25">
@@ -180,7 +175,7 @@
                 </div>
             </nav>
         </div>
-    </div>        
+    </div>          
       <div class="content-page">
         <div class="container-fluid">
             <div class="row">

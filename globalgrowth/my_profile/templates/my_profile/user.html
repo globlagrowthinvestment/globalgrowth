@@ -70,12 +70,12 @@
                           <span class="ml-4">My account</span>
                       </a>
                   </li>
-                  <li class="">
-                    <a href="{% url 'payment_agents:payment_agent_view' %}" class="svg-icon">
-                      <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
-                      <span class="ml-4">Payment Agents</span>
-                  </a>
-              </li>
+                    <li class="">
+                        <a href="{% url 'payment_agents:withdrawal_request' %}"" class="svg-icon">
+                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Payment Agents</span>
+                      </a>
+                  </li>
                     <li class="">
                         <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
                             <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
@@ -83,17 +83,12 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="{% url 'my_profile:complaints' %}" class="svg-icon">
-                            <img src="{% static 'icons/support.png' %}" alt="Guide Icon" width="25" height="25">
-                            <span class="ml-4">Enquiries</span>
+                        <a href="{% url 'complains' %}" class="svg-icon">
+                            <img src="{% static 'icons/complains.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Support</span>
                         </a>
-                    </li>
-                    <li class="">
-                      <a href="{% url 'my_profile:guide' %}" class="svg-icon">
-                          <img src="{% static 'icons/guide.png' %}" alt="Guide Icon" width="25" height="25">
-                          <span class="ml-4">Guide</span>
-                      </a>
-                    </li>
+                      </li>
+                    
                     <li class="">
                         <a href="{% url 'my_profile:user' %}" class="svg-icon">
                             <img src="{% static 'icons/settings.png' %}" alt="Guide Icon" width="25" height="25">
@@ -180,51 +175,7 @@
                 </div>
             </nav>
         </div>
-    </div>       
-    <div class="content">
-        <div class="loader"></div>
-        <h1>Updating the UI</h1>
-        <p>We are currently upgrading the user interface for <span class="highlight">GlobalGrowth</span>. Some operations are on hold until the migration is complete. Please bear with us, as this process will be completed in less than <span class="highlight">12 hours</span>.</p>
-        <p>Thank you for your patience!</p>
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-    const agentButtons = document.querySelectorAll('.select-agent');
-    const withdrawalForm = document.getElementById('withdrawal-form');
-    const submitButton = document.getElementById('submit-button');
-    const confirmationDialog = document.getElementById('confirmation-dialog');
-    const continueButton = document.getElementById('continue-button');
-    const cancelButton = document.getElementById('cancel-button');
-    const sidebarToggle = document.getElementById('sidebar-toggle');
-    const sidebar = document.querySelector('aside');
-
-    sidebarToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('hidden');
-    });
-
-    agentButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            withdrawalForm.classList.remove('hidden');
-            withdrawalForm.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    submitButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        confirmationDialog.classList.remove('hidden');
-    });
-
-    continueButton.addEventListener('click', function() {
-        confirmationDialog.classList.add('hidden');
-        document.querySelector('#withdrawal-form form').submit();
-    });
-
-    cancelButton.addEventListener('click', function() {
-        confirmationDialog.classList.add('hidden');
-    });
-});
-
+    </div>  
 </script>
 <script src="{% static 'js/backend-bundle.min.js' %}"></script>
 
