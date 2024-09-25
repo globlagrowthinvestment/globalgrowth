@@ -83,18 +83,19 @@
                         </a>
                     </li>
                     <li class="">
+                        <a href="{% url 'whatsapp_status' %}" class="svg-icon">
+                            <img src="{% static 'icons/whatsapp.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Whatsapp views</span>
+                        </a>
+                    </li>
+                    <li class="">
                         <a href="{% url 'complains' %}" class="svg-icon">
                             <img src="{% static 'icons/complains.png' %}" alt="Guide Icon" width="25" height="25">
                             <span class="ml-4">Support</span>
                         </a>
                       </li>
                     
-                    <li class="">
-                        <a href="{% url 'my_profile:user' %}" class="svg-icon">
-                            <img src="{% static 'icons/settings.png' %}" alt="Guide Icon" width="25" height="25">
-                            <span class="ml-4">settings</span>
-                        </a>
-                    </li>
+                   
                     <li class="">
                         <a href="{% url 'auth_app:login' %}" class="svg-icon">
                             <img src="{% static 'icons/logout.png' %}" alt="Guide Icon" width="25" height="25">

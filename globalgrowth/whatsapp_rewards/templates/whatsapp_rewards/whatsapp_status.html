@@ -1,429 +1,358 @@
-<!DOCTYPE html>
+
+{% load static %}
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Data Management - Global Growth</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Globalgrowth | Profile</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-      body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #333; /* Fallback color for text */
-}
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/logo1.png' %}" />
 
-.content-area {
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-    backdrop-filter: blur(10px); /* Frosted glass effect */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for better visibility */
-}
-
-.container {
-    background: rgba(255, 255, 255, 0.1); /* Container with a slight transparency */
-    border-radius: 10px; /* Rounded corners for the container */
-    padding: 20px; /* Spacing inside the container */
-}
-
-h2 {
-    color: #6b46c1; /* Purple color for headings */
-}
-
-p {
-    color: #4a5568; /* Darker gray color for paragraphs */
-}
-
-table {
-    background: rgba(255, 255, 255, 0.1); /* Table with a slight transparency */
-    border-radius: 8px; /* Rounded corners for the table */
-}
-
-thead {
-    background: rgba(107, 33, 168, 0.1); /* Slightly transparent purple header */
-}
-
-tbody tr {
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
-}
-
-tbody tr:hover {
-    background-color: rgba(107, 33, 168, 0.05); /* Light purple hover effect */
-}
-
-.upload-status-screenshot {
-    background: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
-    backdrop-filter: blur(10px); /* Frosted glass effect */
-    border-radius: 12px; /* Rounded corners */
-    padding: 24px; /* Spacing inside the container */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Elevated shadow */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for definition */
-}
-
-.upload-status-screenshot h2 {
-    color: #6b46c1; /* Purple color for headings */
-}
-
-.upload-status-screenshot p {
-    color: #4a5568; /* Dark gray color for paragraphs */
-    margin-bottom: 16px; /* Space below the paragraph */
-}
-
-.upload-status-screenshot form {
-    margin-bottom: 24px; /* Space below the form */
-}
-
-.upload-status-screenshot button {
-    background-color: #3182ce; /* Blue background */
-    border: none; /* Remove default border */
-    color: #ffffff; /* White text */
-    padding: 12px 24px; /* Padding around the button */
-    border-radius: 6px; /* Rounded corners */
-    font-weight: bold; /* Bold text */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth transition for hover */
-}
-
-.upload-status-screenshot button:hover {
-    background-color: #2b6cb0; /* Darker blue on hover */
-}
-
-.upload-status-screenshot .alert-note {
-    background: rgba(255, 255, 0, 0.2); /* Semi-transparent yellow background */
-    border-left: 4px solid #f6e05e; /* Yellow left border */
-    color: #d69e2e; /* Dark yellow text color */
-    padding: 12px; /* Padding inside the alert */
-    border-radius: 6px; /* Rounded corners */
-}
-
-.download-button {
-    background-color: #3182ce; /* Blue background */
-    border: none; /* Remove default border */
-    color: #ffffff; /* White text */
-    padding: 12px 24px; /* Padding around the button */
-    border-radius: 6px; /* Rounded corners */
-    font-weight: bold; /* Bold text */
-    cursor: pointer; /* Pointer cursor on hover */
-    text-align: center; /* Center text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Inline-block for proper spacing */
-    transition: background-color 0.3s ease; /* Smooth transition for hover */
-}
-
-.download-button:hover {
-    background-color: #2b6cb0; /* Darker blue on hover */
-}
-
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/backend-plugin.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/backend.css' %}">
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/remixicon/fonts/remixicon.css' %}">
     
-  </style>
-  
-</head>
-<body class="bg-gray-100">
-    <div class="flex h-screen bg-gray-100">
-        <!-- Sidebar for large screens -->
-        <aside class="hidden md:flex md:flex-col w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white">
-            <div class="p-4">
-                <h2 class="text-2xl font-semibold">Global Growth</h2>
-            </div>
-            <nav class="flex-1 px-2 py-4">
-                <a href="{% url 'my_profile:dashboard1' %}" class="flex items-center px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="bx bx-tachometer mr-3"></i> Dashboard
-                </a>
-                <a href="{% url 'user_account:account_balance' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="bx bx-user-circle mr-3"></i> Profile
-                </a>
-                <a href="{% url 'withdrawals:request_withdrawal' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="bx bx-credit-card mr-3"></i> Payment Agents
-                </a>
-                <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
-                    <i class="bx bx-user-plus mr-3"></i> Referral
-                </a>
-                <a href="{% url 'my_profile:complaints' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="bx bx-error-circle mr-3"></i> Complaints
-                </a>
-                <a href="{% url 'my_profile:guide' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="bx bx-book mr-3"></i> Guide
-                </a>
-                <a href="#" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="bx bx-video mr-3"></i> Global views
-                </a>
-                <a href="{% url 'my_profile:user' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="bx bx-cog mr-3"></i> Settings
-                </a>
-                <a href="{% url 'auth_app:login' %}" class="flex items-center px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                    <i class="bx bx-log-out mr-3"></i> Logout
-                </a>
-            </nav>
-            <div class="p-4">
-                <p class="text-sm">© 2024 Global Growth</p>
-            </div>
-        </aside>
+    <!-- TUI Calendar CSS Files -->
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-calendar/dist/tui-calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-date-picker/dist/tui-date-picker.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/tui-calendar/tui-time-picker/dist/tui-time-picker.css' %}">
 
+    <!--scripts for javascript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+  <body class="  ">
+    <!-- loader Start -->
+    <div id="loading">
+          <div id="loading-center">
+          </div>
+    </div>
+    <!-- loader END -->
+    <!-- Wrapper Start -->
+    <div class="wrapper">
+      <div class="iq-sidebar  sidebar-default ">
+          <div class="iq-sidebar-logo d-flex align-items-center">
+              <a href="{% url 'my_profile:dashboard' %}" class="header-logo">
+                  <h3 class="logo-title light-logo">Globalgrowth</h3>
+              </a>
+              <div class="iq-menu-bt-sidebar ml-0">
+                  <i class="las la-bars wrapper-menu"></i>
+              </div>
+          </div>
+          <div class="data-scrollbar" data-scroll="1">
+            <nav class="iq-sidebar-menu">
+                <ul id="iq-sidebar-toggle" class="iq-menu">
+                    <li class="active">
+                        <a href="{% url 'my_profile:dashboard' %}" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <span class="ml-4">Home</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'my_profile:dashboard' %}" class="svg-icon">
+                            <img src="{% static 'icons/dashboard.png' %}" alt="Packages Icon" width="25" height="25">
+                            <span class="ml-4">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="">
+                      <a href="{% url 'user_account:account_balance' %}" class="svg-icon">
+                          <img src="{% static 'icons/profile.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">My account</span>
+                      </a>
+                  </li>
+                    <li class="">
+                        <a href="{% url 'payment_agents:withdrawal_request' %}"" class="svg-icon">
+                          <img src="{% static 'icons/paymentag.png' %}" alt="Guide Icon" width="25" height="25">
+                          <span class="ml-4">Payment Agents</span>
+                      </a>
+                  </li>
+                    <li class="">
+                        <a href="{% url 'refer:referral_dashboard' %}" class="svg-icon">
+                            <img src="{% static 'icons/link.png' %}" alt="Market Analysis Icon" width="25" height="25">
+                            <span class="ml-4">Refer</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'complains' %}" class="svg-icon">
+                            <img src="{% static 'icons/complains.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Support</span>
+                        </a>
+                      </li>
+                    
+                      <li class="">
+                        <a href="{% url 'whatsapp_status' %}" class="svg-icon">
+                            <img src="{% static 'icons/whatsapp.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Whatsapp views</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'auth_app:login' %}" class="svg-icon">
+                            <img src="{% static 'icons/logout.png' %}" alt="Guide Icon" width="25" height="25">
+                            <span class="ml-4">Log out</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="svg-icon">                        
+                            <svg class="svg-icon" width="25" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span class="ml-4">Coming Soon</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+              <div id="sidebar-bottom" class="position-relative sidebar-bottom">
+                <div class="card border-none mb-0 shadow-none">
+                    <div class="card-body p-4">
+                        <div class="sidebarbottom-content text-center">
+                            <h5 class="mb-4">Connect with us</h5>
+                            <div class="d-flex justify-content-center mb-4">
+                                <a href="https://whatsapp.com/channel/0029Vap6nHhLdQeWL1hlJW1Z" target="_blank" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-info" style="font-size: 2rem;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-danger" style="font-size: 2rem;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                                <a href="#" class="mx-2 text-primary" style="font-size: 2rem;">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </div>
+                            <p class="text-muted">Stay updated with our latest news and offers!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <div class="pt-5 pb-2"></div>
+          </div>
+      </div> 
+      <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
+                    <i class="ri-menu-line wrapper-menu"></i>
+                    <a href="{% url 'my_profile:dashboard' %}" class="header-logo">
+                        <h4 class="logo-title text-uppercase">Globalgrowth</h4>
+    
+                    </a>
+                </div>
+                <div class="navbar-breadcrumb">
+                    <h5>Dashboard</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-label="Toggle navigation">
+                        <i class="ri-menu-3-line"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                            <li>
+                                <div class="iq-search-bar device-search">
+                                    <form action="#" class="searchbox">
+                                        <a class="search-link" href="#"><i class="ri-search-line"></i></a>
+                                        <input type="text" class="text search-input" placeholder="Search here...">
+                                    </form>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div> 
 
         <!-- Main content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top bar -->
-            <header class="flex justify-between items-center p-4 bg-white shadow-md">
-                <div class="flex items-center">
-                    <div class="md:hidden mr-4">
-                        <button id="sidebar-toggle" class="text-gray-500 hover:text-gray-600">
-                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <h1 id="#" class="text-xl font-semibold">{{ user.username }}!</h1>
-                </div>
-                <div class="flex items-center">
-                    <span class="mr-4 text-sm text-gray-600"></span>
-                    <div class="relative">
-                        <img src="{{ gravatar_url }}" alt="Profile" class="h-8 w-8 rounded-full">
-                        <span class="absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-green-400 ring-2 ring-white"></span>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Main content area -->
-            <main class="flex-1 overflow-x-hidden overflow-y-auto p-6">
-                <div class="container mx-auto">
-                    <!-- Display messages -->
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-4" role="alert">
-                                <p>{{ message }}</p>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-
-
-                    <!-- Tailwind CSS styling for package status and expiry messages -->
-<!-- Inside your HTML body where appropriate -->
-<!-- Display package status and remaining days -->
-<!-- Include Font Awesome CDN in the head of your HTML -->
-
-
-  
-<!-- Display Active Package -->
-<div>
-    {% if can_upload_image %}
-        <!-- Show the active package details -->
-        <div class="border p-4 mb-4 rounded-lg shadow-md bg-white">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-certificate text-green-500 text-xl"></i>
-                <strong class="text-lg text-gray-800">Active Package:</strong>
-            </div>
-            <br>
-            <hr>
-            <br>
-            <div class="mt-2 flex items-center space-x-2">
-                <!-- Icon for the package name -->
-                <i class="fas fa-box text-blue-500 text-lg"></i>
-                <h1 class="text-gray-700 text-xl font-semibold">{{  active_package }}</h1>
-            </div>
-            <br>
-           
-        </div>
-    {% else %}
-        <!-- No active package -->
-        <div class="border p-4 mb-4 rounded-lg shadow-md bg-white">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-info-circle text-red-500 text-xl"></i>
-                <strong class="text-lg text-gray-800">No Active Package</strong>
-            </div>
-            <p class="mt-2 text-gray-600">Please buy a package to enable status uploads.</p>
-        </div>
-    {% endif %}
-</div>
-
-
-<div class="flex items-center space-x-3 my-4">
-    {% if can_upload_image %}
-        <i class="fas fa-check-circle text-green-500 text-2xl"></i>
-        <p class="text-lg font-semibold">You can upload whatsapp status  screenshot now. {{ remaining_days }} days remaining before package expiry.</p>
-    {% else %}
-        {% if package_expiry %}
-            <i class="fas fa-exclamation-circle text-red-500 text-2xl"></i>
-            <p class="text-lg font-semibold">Your package has expired. Please buy a new package to continue. Your current package expired {{ remaining_days }} days ago.</p>
-        {% else %}
-      
-            <i class="fas fa-info-circle text-gray-500 text-2xl"></i>
-            <p class="text-lg font-semibold">You need to buy a new package to upload images.</p>
-        {% endif %}
-    {% endif %}
-</div>
-
-
-
-
-{% if can_upload_image %}
-     <!-- Upload Status Section -->
-     <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 class="text-3xl font-bold text-purple-800 mb-6">Upload Status Screenshot</h2>
-        <p class="text-lg text-gray-700 mb-4">Account Balance: KSH. {{ balance }}</p>
-        <form method="post" enctype="multipart/form-data" action="{% url 'whatsapp_status' %}" class="space-y-4">
-            {% csrf_token %}
-            {{ status_form.as_p }}
-            <button type="submit" name="upload_status" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-300">Upload</button>
-        </form>
-        <div class="mt-6 p-4 bg-yellow-50 border border-yellow-300 rounded-lg">
-            <p class="text-yellow-700"><strong>Note:</strong> The number of views for each status should not exceed 200. Please ensure you adhere to this limit to avoid any issues.</p>
-        </div>
-    </div>
-
-{% else %}
-<div class="bg-white rounded-lg shadow-md p-6 mb-8">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Buy New Package</h2>
-    <p class="text-lg text-gray-600 mb-6">Current Balance: KSH. {{ balance }}</p>
-    <form method="post" action="{% url 'whatsapp_status' %}" class="space-y-4"><!--{% url 'whatsapp_status' %}-->
-        {% csrf_token %}
-        {{ package_form.as_p }}
-        <button type="submit" name="buy_package" class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition duration-300">Buy Package</button>
-    </form>
-</div>
-{% endif%}
-                    <div class="product-images-section rounded-lg shadow-xl p-8 mb-8">
-                      <h2 class="text-3xl font-bold mb-6 text-purple-800">Product Images</h2>
-                      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-                        {% if can_upload_image %}
-                            {% for image in images %}
-                                <div class="image-card">
-                                    <img src="{{ image.image.url }}" alt="{{ image.name }}" class="w-full h-auto rounded-md">
-                                    {% if image.description %}
-                                        <div class="content mt-4">
-                                            <p class="description text-gray-700 mb-4">{{ image.description }}</p>
-                                            <a href="{{ image.image.url }}" download="{{ image.name }}" class="download-button bg-blue-500 text-white py-2 px-4 rounded inline-block hover:bg-blue-700 transition">
-                                                Download
-                                            </a>
+        <div class="content-page">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-block card-stretch card-height">
+                            <div class="card-body">
+                                <div class="top-block d-flex align-items-center justify-content-between">
+                                    <h5>Your Dashboard</h5>
+                                    <span class="badge badge-primary">Status</span>
+                                </div>
+                                
+                                <!-- Messages Section -->
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-info mt-3" role="alert">
+                                            <p>{{ message }}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+        
+                                <!-- Active Package Section -->
+                                <div class="mt-4">
+                                    <h6>Active Package</h6>
+                                    {% if can_upload_image %}
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <i class="fas fa-certificate text-success mr-2"></i>
+                                                <strong>{{ active_package }}</strong>
+                                                <p class="mt-2">
+                                                    <i class="fas fa-check-circle text-success mr-2"></i>
+                                                    You can upload WhatsApp status screenshot now. {{ remaining_days }} days remaining.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <i class="fas fa-info-circle text-danger mr-2"></i>
+                                                <strong>No Active Package</strong>
+                                                <p class="mt-2">Please buy a package to enable status uploads.</p>
+                                            </div>
                                         </div>
                                     {% endif %}
                                 </div>
-                                {% empty %}
-                                <p class="no-images text-gray-600">No product images available.</p>
-                            {% endfor %}
-                            {% else %}
-                            <div class="border p-4 mb-4 rounded-lg shadow-md bg-white">
-                                <div class="flex items-center space-x-2">
-                                    <i class="fas fa-info-circle text-red-500 text-xl"></i>
-                                    <strong class="text-lg text-gray-800">No Active Package:</strong>
+        
+                                <!-- Upload Status or Buy Package Section -->
+                                <div class="mt-4">
+                                    <h6>{% if can_upload_image %}Upload Status{% else %}Buy Package{% endif %}</h6>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <p>Account Balance: KSH. {{ balance }}</p>
+                                            {% if can_upload_image %}
+                                                <form method="post" enctype="multipart/form-data" action="{% url 'whatsapp_status' %}">
+                                                    {% csrf_token %}
+                                                    {{ status_form.as_p }}
+                                                    <button type="submit" name="upload_status" class="btn btn-primary">Upload</button>
+                                                </form>
+                                                <div class="alert alert-warning mt-3">
+                                                    <p><strong>Note:</strong> The number of views for each status should not exceed 200.</p>
+                                                </div>
+                                            {% else %}
+                                                <form method="post" action="{% url 'whatsapp_status' %}">
+                                                    {% csrf_token %}
+                                                    {{ package_form.as_p }}
+                                                    <button type="submit" name="buy_package" class="btn btn-primary">Buy Package</button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="mt-2 text-gray-600">Please buy a package to download image.</p>
+        
+                                <!-- Product Images Section -->
+                                <div class="mt-4">
+                                    <h6>Product Images</h6>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                {% if can_upload_image %}
+                                                    {% for image in images %}
+                                                        <div class="col-md-4 mb-3">
+                                                            <img src="{{ image.image.url }}" alt="{{ image.name }}" class="img-fluid">
+                                                            {% if image.description %}
+                                                                <p class="mt-2">{{ image.description }}</p>
+                                                                <a href="{{ image.image.url }}" download="{{ image.name }}" class="btn btn-sm btn-primary">Download</a>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% empty %}
+                                                        <p class="col-12">No product images available.</p>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <p class="col-12">Please buy a package to download images.</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <!-- Earnings Section -->
+                                <div class="mt-4">
+                                    <h6>Earnings</h6>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <p>Total Earnings - KSH {{ total_earnings }}</p>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Package</th>
+                                                            <th>Views</th>
+                                                            <th>Earnings</th>
+                                                            <th>Approved</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for status in statuses %}
+                                                        <tr>
+                                                            <td>{{ status.package.name }}</td>
+                                                            <td>{{ status.views }}</td>
+                                                            <td>{{ status.earnings }}</td>
+                                                            <td>
+                                                                <span class="badge {% if status.approved %}badge-success{% else %}badge-danger{% endif %}">
+                                                                    {% if status.approved %}Yes{% else %}No{% endif %}
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <!-- History Section -->
+                                <div class="mt-4">
+                                    <h6>History</h6>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Status</th>
+                                                            <th>Approved At</th>
+                                                            <th>Approved By</th>
+                                                            <th>Rejected</th>
+                                                            <th>Rejection Reason</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for history in user_history %}
+                                                        <tr>
+                                                            <td>{{ history.status.package.name }}</td>
+                                                            <td>{{ history.approved_at }}</td>
+                                                            <td>{% if history.approved_by %}GlobalGrowth{% else %}N/A{% endif %}</td>
+                                                            <td>
+                                                                <span class="badge {% if history.rejected %}badge-danger{% else %}badge-success{% endif %}">
+                                                                    {% if history.rejected %}Yes{% else %}No{% endif %}
+                                                                </span>
+                                                            </td>
+                                                            <td>{{ history.rejection_reason }}</td>
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        {% endif %}
-                          
-                      </div>
-                  </div>
-                  
-                  </div>
-                  
-
-                    <div class="content-area rounded-lg shadow-xl p-8 mb-8">
-                        <h2 class="text-3xl font-bold mb-6 text-purple-800">Earnings</h2>
-                        <p class="mb-4">Total Earnings - KSH {{ total_earnings }}</p>
-                        <div class="overflow-x-auto">
-                            <table class="w-full table-auto">
-                                <thead>
-                                    <tr class="bg-purple-200 text-purple-800 uppercase text-sm leading-normal">
-                                        <th class="py-3 px-6 text-left">Package</th>
-                                        <th class="py-3 px-6 text-left">Views</th>
-                                        <th class="py-3 px-6 text-left">Earnings</th>
-                                        <th class="py-3 px-6 text-left">Approved</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-700 text-sm">
-                                    {% for status in statuses %}
-                                    <tr class="border-b border-purple-100 hover:bg-purple-50">
-                                        <td class="py-3 px-6 text-left whitespace-nowrap">{{ status.package.name }}</td>
-                                        <td class="py-3 px-6 text-left">{{ status.views }}</td>
-                                        <td class="py-3 px-6 text-left">{{ status.earnings }}</td>
-                                        <td class="py-3 px-6 text-left">
-                                            <span class="{% if status.approved %}bg-green-200 text-green-800{% else %}bg-red-200 text-red-800{% endif %} py-1 px-3 rounded-full text-xs">
-                                                {% if status.approved %}Yes{% else %}No{% endif %}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="content-area rounded-lg shadow-xl p-8">
-                        <h2 class="text-3xl font-bold mb-6 text-purple-800">History</h2>
-                        <div class="overflow-x-auto">
-                            <table class="w-full table-auto">
-                                <thead>
-                                    <tr class="bg-purple-200 text-purple-800 uppercase text-sm leading-normal">
-                                        <th class="py-3 px-6 text-left">Status</th>
-                                        <th class="py-3 px-6 text-left">Approved At</th>
-                                        <th class="py-3 px-6 text-left">Approved By</th>
-                                        <th class="py-3 px-6 text-left">Rejected</th>
-                                        <th class="py-3 px-6 text-left">Rejection Reason</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-700 text-sm">
-                                    {% for history in user_history %}
-                                    <tr class="border-b border-purple-100 hover:bg-purple-50">
-                                        <td class="py-3 px-6 text-left whitespace-nowrap">{{ history.status.package.name }}</td>
-                                        <td class="py-3 px-6 text-left">{{ history.approved_at }}</td>
-                                        <td class="py-3 px-6 text-left">{% if history.approved_by %}<span>GlobalGrowth</span>{% else %}N/A{% endif %}</td>
-                                        <td class="py-3 px-6 text-left">
-                                            <span class="{% if history.rejected %}bg-red-200 text-red-800{% else %}bg-green-200 text-green-800{% endif %} py-1 px-3 rounded-full text-xs">
-                                                {% if history.rejected %}Yes{% else %}No{% endif %}
-                                            </span>
-                                        </td>
-                                        <td class="py-3 px-6 text-left">{{ history.rejection_reason }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
-    </div>
-
-    <!-- Mobile sidebar -->
-    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-64 bg-gradient-to-b from-blue-800 to-blue-600 text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden">
-        <div class="flex justify-between items-center p-4">
-            <h2 class="text-2xl font-semibold">Global Growth</h2>
-            <button id="close-sidebar" class="text-gray-200 hover:text-gray-300">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <nav class="px-2 py-4">
-            <a href="{% url 'my_profile:dashboard1' %}" class="block px-4 py-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
-            </a>
-            <a href="{% url 'user_account:account_balance' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-user-tie mr-3"></i> Profile
-            </a>
-            <a href="{% url 'withdrawals:request_withdrawal' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-money-bill-wave mr-3"></i> Payment Agents
-            </a>
-            <a href="{% url 'referrals:referrals' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-                <i class="fas fa-user-plus mr-3"></i> Referral
-            </a>
-            <a href="{% url 'my_profile:complaints' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-              <i class="fas fa-exclamation-circle mr-3"></i> Complaints
-          </a>
-          <a href="{% url 'my_profile:guide' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-              <i class="fas fa-book mr-3"></i> Guide
-          </a>
-          <a href="{% url 'whatsapp_status' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-              <i class="fas fa-video mr-3"></i> Global views
-          </a>
-          <a href="{% url 'my_profile:user' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-              <i class="fas fa-cog mr-3"></i> Settings
-          </a>
-          <a href="{% url 'auth_app:login' %}" class="block px-4 py-2 mt-2 hover:bg-blue-700 rounded transition duration-200">
-              <i class="fas fa-sign-out-alt mr-3"></i> Logout
-          </a>
-      </nav>
-  </div>
 
   <script>
       const sidebarToggle = document.getElementById('sidebar-toggle');
@@ -459,5 +388,28 @@ tbody tr:hover {
       updateGreeting();
       setInterval(updateGreeting, 60000); // Update greeting every minute
   </script>
+      <!-- Backend Bundle JavaScript -->
+<script src="{% static 'js/backend-bundle.min.js' %}"></script>
+
+<!-- Table Treeview JavaScript -->
+<script src="{% static 'js/table-treeview.js' %}"></script>
+
+<!-- Customizer JavaScript -->
+<script src="{% static 'js/customizer.js' %}"></script>
+
+<!-- Chart Custom JavaScript -->
+<script async src="{% static 'js/chart-custom.js' %}"></script>
+
+<!-- Slider JavaScript -->
+<script async src="{% static 'js/slider.js' %}"></script>
+
+<!-- App JavaScript -->
+<script src="{% static 'js/app.js' %}"></script>
+
+<!-- Moment.js -->
+<script src="{% static 'vendor/moment.min.js' %}"></script>
+
+  </body>
+</html>
 </body>
 </html>
