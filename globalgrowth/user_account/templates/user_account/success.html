@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8f5;
+        }
+
+        .success-container {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-container h1 {
+            color: #28a745;
+            font-size: 24px;
+        }
+
+        .success-container p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .success-container .tick {
+            font-size: 60px;
+            color: #28a745;
+            animation: pop-up 0.5s ease-in-out;
+        }
+
+        .success-container a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        @keyframes pop-up {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="tick">✔️</div>
+        <h1>Deposit Submitted Successfully!</h1>
+        <p>Your deposit is pending approval. You will be notified once it is processed.</p>
+        <a href="{% url 'user_account:account_balance' %}">Go to Dashboard</a>
+    </div>
+</body>
+</html>
